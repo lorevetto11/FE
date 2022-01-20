@@ -1,0 +1,70 @@
+<div class="prerequisite-water-supply full-width">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div>
+				{{'nav.prerequisites.sub.waterSupply'|translate}}
+				<div class="inline" style="margin-left:20px">
+					<div class="btn-group dropdown" uib-dropdown="" is-open="status.isopen">
+						<button type="button" class="btn btn-default dropdown-toggle"
+								uib-dropdown-toggle="" ng-disable="disabled" aria-haspopup="true" aria-expanded="false"
+								data-ng-class="{'btn-primary' : command.action == Command.action.ADD}">
+							{{'common.button.form.add'|translate}}&nbsp;&nbsp; <i class="glyphicon glyphicon-pencil"></i>
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenuAdd">
+							<li data-ng-repeat="supplyWaterType in supplyWaterTypes">
+								<a data-ng-click="add(supplyWaterType)">{{supplyWaterType.name}}</a>
+							</li>
+							<li role="separator" class="divider"></li>
+							<li>
+								<a data-ng-click="changeState('data.waterSupplyTypes')">{{'common.button.prerequisites.newEquipment'|translate}} &nbsp;&nbsp;&nbsp; <i class="glyphicon glyphicon-plus"></i></a>
+							</li>
+						</ul>
+					</div>
+
+
+<!--
+					<div class="dropdown inline">
+						<button type="button" class="btn btn-default btn-block dropdown-toggle"
+								uib-dropdown-toggle="" ng-disable="disabled" aria-haspopup="true"
+						data-ng-class="{'btn-primary' : command.action == Command.action.ADD}">
+							Add&nbsp;&nbsp; <i class="glyphicon glyphicon-pencil"></i>
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenuAdd">
+							<li data-ng-repeat="supplyWaterType in supplyWaterTypes">
+								<a data-ng-click="add(supplyWaterType)">{{supplyWaterType.description}}</a>
+							</li>
+						</ul>
+					</div>
+					-->
+
+					<button class="btn btn-default" data-ng-class="{'btn-primary' : mode == MODE.SHOW_ANALYSIS}"
+							data-ng-click="showAnalysis()">{{'common.button.prerequisites.analysis'|translate}}&nbsp;&nbsp;
+						<i class="glyphicon glyphicon-duplicate"></i>
+					</button>
+
+					<button class="btn btn-default" data-ng-class="{'btn-primary' : mode == MODE.SHOW_PROCESS_CHECKS}"
+							data-ng-click="showProcessChecks()">{{'common.button.prerequisites.processCheck'|translate}}&nbsp;&nbsp;
+						<i class="glyphicon glyphicon-flag"></i>
+					</button>
+
+
+
+				</div>
+			</div>
+		</div>
+		<div class="panel-body">
+			<plan data-command="command" data-ng-if="mode == MODE.SHOW_PLAN"
+				  data-items="items"
+				  data-on-save="onSaveItem(item, floor)"
+				  data-on-delete="onDeleteItem(item)"></plan>
+
+			<prerequisite-analysis data-prerequisite-type="command.type" data-ng-model="items"  data-ng-if="mode == MODE.SHOW_ANALYSIS">
+			</prerequisite-analysis>
+
+			<prerequisite-process-checks data-ng-if="mode == MODE.SHOW_PROCESS_CHECKS" data-prerequisite-type="prerequisiteType">
+			</prerequisite-process-checks>
+		</div>
+	</div>
+</div>

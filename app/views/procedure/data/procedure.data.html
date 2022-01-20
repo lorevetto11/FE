@@ -1,0 +1,312 @@
+<div class="monitoring-home">
+	<div class="row">
+		<div class="col-md-6 col-lg-4">
+			<div class="panel">
+				<div class="panel-heading ng-binding"> {{'nav.data.sub.commonSub.search'|translate}}</div>
+				<div class="panel-body">
+					<div class="panel-search-section">
+						<div class="row">
+							<div class="col-xs-10">
+								<input type="text" data-ng-model="filter.keyword"
+								       class="form-control"
+								       placeholder="{{'data.panel.search.searchPlaceholder'|translate}}">
+							</div>
+							<div class="col-xs-2">
+								<div class="pull-right">
+									<div class="pull-right btn btn-primary" ng-click="add()" role="button" tabindex="0">
+										<i class="fa fa-plus"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row" style="margin-top: 10px">
+							<div class="col-xs-12">
+								<label class="control-label">{{'common.tableAndForm.roleInCharge.name'|translate}}:</label>
+								<select class="form-control" data-ng-model="filter.role"
+								        data-ng-options="role as role.name for role in userRoles track by role.id">
+									<option data-ng-selected="true" value="">
+										{{'data.panel.search.anyRoleValue'|translate}}
+									</option>
+								</select>
+							</div>
+						</div>
+						<div class="row" style="margin-top: 10px">
+							<div class="col-xs-12">
+								<label class="control-label">{{'common.tableAndForm.prerequisite.name'|translate}}:</label>
+								<select class="form-control" data-ng-model="filter.prerequisite"
+								        data-ng-options="type.name for type in prerequisiteTypes">
+									<option data-ng-selected="true" value="">
+										{{'data.panel.search.anyPrerequisiteValue'|translate}}
+									</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<hr/>
+
+					<div style="max-height: 100%">
+						<div class="slimScrollDiv"
+						     style="position: relative; overflow: hidden; width: auto; height: 100%;">
+							<div class="filterbox-vertical" data-slim-scroll=""
+							     style="overflow: hidden; width: auto; height: 100%;">
+								<section class="panel panel-default mail-categories">
+									<ul class="list-group">
+										<li class="list-group-item" ng-class="{'active': selectedItem.id == item.id}"
+										    data-ng-click="edit(item)"
+										    data-ng-repeat="item in items | filter : itemsFilter | orderBy: ['prerequisiteType','name','-prerequisiteRisk.value']">
+											<a>{{item.title }}
+												<div class="pull-right">
+													<div class="pull-right risk-class-color"
+													     data-ng-style="{'background-color': item.riskClass.color}"></div>
+													<span>{{item.prerequisiteType.name}} &nbsp;&nbsp;</span>
+												</div>
+											</a>
+										</li>
+									</ul>
+								</section>
+							</div>
+							<div class="slimScrollBar"
+							     style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 2287px;">
+							</div>
+							<div class="slimScrollRail"
+							     style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col col-md-6 col-lg-8" data-ng-if="selectedItem">
+
+			<div class="panel">
+				<div class="panel-heading">
+					<div class="media">
+						<div class="media-body media-middle">
+							<div class="media-heading">
+								<span>{{'nav.data.sub.commonSub.details'|translate}}</span>
+							</div>
+							<span style="text-transform: none">{{selectedItem.title}}</span>
+						</div>
+						<div class="media-right">
+							<div class="btn btn-default" title="{{'common.button.form.clone'|translate}}"
+							     data-ng-if="selectedItem.id != null" data-ng-click="clone(selectedItem)" role="button"
+							     tabindex="0">
+								<i class="fa fa-copy"></i>
+							</div>
+						</div>
+						<div class="media-right">
+							<div class="btn btn-default" title="{{'common.button.form.cancel'|translate}}"
+							     data-ng-click="cancel()" role="button" tabindex="0">
+								<i class="fa fa-times"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel-body">
+					<div class="monitoring-detail">
+						<form name="form" novalidate>
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3"><label>{{'common.tableAndForm.prerequisiteType.name'|translate}}:</label>
+									</div>
+									<div class="col col-sm-9">
+										<select class="form-control" data-ng-model="selectedItem.prerequisiteType"
+										        data-ng-disabled="selectedItem.id != null && selectedItem.prerequisiteType != null"
+										        data-ng-options="opt as opt.name for opt in prerequisiteTypes track by opt.id"
+										        name="prerequisiteType" required>
+										</select>
+										<small class="text-danger"
+										       data-ng-if="form.prerequisiteType.$dirty && form.prerequisiteType.$error.required">
+											This is a required field!
+										</small>
+									</div>
+								</div>
+							</div>
+							<div class="form-group"
+							     data-ng-show="selectedItem.prerequisiteType.name !== 'CCP' && selectedItem.prerequisiteType.name !== 'OPRP'">
+								<div class="row">
+									<div class="col col-sm-3"><label>{{'common.tableAndForm.relatedRiskClass.name'|translate}}:</label>
+									</div>
+									<div class="col col-sm-9">
+										<div class="btn-group btn-block dropdown" uib-dropdown=""
+										     is-open="status.isopen1">
+											<button type="button" class="btn btn-default btn-block dropdown-toggle"
+											        uib-dropdown-toggle="" ng-disable="disabled" aria-haspopup="true"
+											        aria-expanded="false"
+											        data-ng-disabled="selectedItem.id != null"
+											        data-ng-init="selectedItem.id ? null : (selectedItem.riskClass = riskOptions[0])">
+												<div data-ng-if="item.riskClass" class="pull-right risk-class-color"
+												     style="width:20px; height: 20px; background-color: {{item.risk.color}}"></div>
+												{{ selectedItem.riskClass ? selectedItem.riskClass.name :
+												('data.panel.details.anyRiskValue'|translate) }}
+												<span class="caret"></span>
+												<div class="pull-right risk-class-color"
+												     data-ng-style="{'background-color': selectedItem.riskClass.color}">
+
+												</div>
+											</button>
+											<ul class="dropdown-menu btn-block" role="menu">
+												<li data-ng-repeat="opt in riskOptions"
+												    data-ng-click="selectedItem.riskClass = opt;">
+													<a>
+														<div class="pull-right risk-class-color"
+														     data-ng-style="{'background-color': opt.color}"></div>
+														{{ opt.name }}
+													</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col col-sm-3"><label>{{'common.tableAndForm.userRoleInCharge.name'|translate}}:</label>
+								</div>
+								<div class="col col-sm-9">
+									<select class="form-control" data-ng-model="selectedItem.userRole"
+									        data-ng-options="opt as opt.name for opt in userRoles track by opt.id"
+									        name="userRole" required>
+									</select>
+									<small class="text-danger"
+									       data-ng-if="form.userRole.$dirty && form.userRole.$error.required">
+										This is a required field!
+									</small>
+								</div>
+							</div>
+							<hr/>
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3">
+										<label>{{'common.tableAndForm.title.name'|translate}}:</label></div>
+									<div class="col col-sm-9">
+										<p data-ng-click="textarea($event)">
+											<span class="procedureParagraph" style="display: block">{{selectedItem.title}}</span>
+											<small class="text-info" style="display: block">{{'common.tableAndForm.clickToModify.name' | translate}}</small>
+										</p>
+										<textarea class="form-control textarea hidden"
+										          name="title" required
+										          data-ng-model="selectedItem.title"  data-ng-blur="textarea()"></textarea>
+
+										<small class="text-danger"
+										       data-ng-if="form.title.$dirty && form.title.$error.required">
+											This is a required field!
+										</small>
+
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3">
+										<label>{{'common.tableAndForm.purpose.name'|translate}}:</label></div>
+									<div class="col col-sm-9">
+										<p data-ng-click="textarea($event)">
+											<span class="procedureParagraph" style="display: block">{{selectedItem.purpose}}</span>
+											<small class="text-info" style="display: block">{{'common.tableAndForm.clickToModify.name' | translate}}</small>
+										</p>
+										<textarea class="form-control textarea hidden"
+										          name="purpose"
+										          data-ng-model="selectedItem.purpose" data-ng-blur="textarea()"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3">
+										<label>{{'common.tableAndForm.equipments.name'|translate}}:</label>
+									</div>
+									<div class="col col-sm-9">
+										<p data-ng-click="textarea($event)">
+											<span class="procedureParagraph" style="display: block">{{selectedItem.equipments}}</span>
+											<small class="text-info" style="display: block">{{'common.tableAndForm.clickToModify.name' | translate}}</small>
+										</p>
+										<textarea class="form-control textarea hidden"
+										          name="equipments"
+										          data-ng-model="selectedItem.equipments"  data-ng-blur="textarea()"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3">
+										<label>{{'common.tableAndForm.activities.name'|translate}}:</label>
+									</div>
+									<div class="col col-sm-9">
+										<p data-ng-click="textarea($event)">
+											<span class="procedureParagraph" style="display: block">{{selectedItem.activities}}</span>
+											<small class="text-info" style="display: block">{{'common.tableAndForm.clickToModify.name' | translate}}</small>
+										</p>
+										<textarea class="form-control textarea hidden"
+										          name="activities"
+										          data-ng-model="selectedItem.activities"data-ng-blur="textarea()"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3">
+										<label>{{'common.tableAndForm.processCheck.name'|translate}}:</label>
+									</div>
+									<div class="col col-sm-9">
+										<p data-ng-click="textarea($event)">
+											<span class="procedureParagraph" style="display: block">{{selectedItem.process_check}}</span>
+											<small class="text-info" style="display: block">{{'common.tableAndForm.clickToModify.name' | translate}}</small>
+										</p>
+										<textarea class="form-control textarea hidden"
+										          name="process_check"
+										          data-ng-model="selectedItem.process_check" data-ng-blur="textarea()"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3">
+										<label>{{'common.tableAndForm.resultsCheck.name'|translate}}:</label>
+									</div>
+									<div class="col col-sm-9">
+										<p data-ng-click="textarea($event)">
+											<span class="procedureParagraph" style="display: block">{{selectedItem.results_check}}</span>
+											<small class="text-info" style="display: block">{{'common.tableAndForm.clickToModify.name' | translate}}</small>
+										</p>
+										<textarea class="form-control textarea hidden"
+										          name="results_check"
+										          data-ng-model="selectedItem.results_check" data-ng-blur="textarea()"></textarea>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3">
+										<label>{{'common.tableAndForm.revision.name'|translate}}:</label></div>
+									<div class="col col-sm-9">
+										<span>{{ selectedItem.revision / 100 | number : 2 }} </span>
+									</div>
+								</div>
+							</div>
+							<div class="text-right" data-ng-if="selectedItem.id != null">
+								<small class="help-block">
+									<label>{{'definita da'|translate}}:</label>
+									<span>{{ selectedItem.organization ? selectedItem.organization.name : '---' }} </span>
+								</small>
+							</div>
+
+						</form>
+						<div>
+							<button class="btn btn-primary pull-right" type="button" ng-click="save(selectedItem, form)"
+							        data-ng-disabled="!isValid(selectedItem)">
+								{{'common.button.form.save'|translate}} &nbsp; <i
+									class="glyphicon glyphicon-floppy-disk"></i></button>
+							<button class="btn btn-default" type="button" ng-click="delete(selectedItem)"
+							        data-ng-if="selectedItem.id != null">
+								{{'common.button.form.delete'|translate}} &nbsp; <i
+									class="glyphicon glyphicon-trash"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

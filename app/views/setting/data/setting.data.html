@@ -1,0 +1,117 @@
+<div class="setting-data">
+	<div class="row">
+	<div class="col-md-6">
+		<div class="panel">
+			<div class="panel-heading"> Local Storage Data </div>
+			<div class="panel-body">
+				<div style="max-height: 100%">
+					<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;">
+						<div class="filterbox-vertical" data-slim-scroll="" style="overflow: hidden; width: auto; height: 100%;">
+							<section class="panel panel-default mail-categories">
+								<ul class="list-group">
+
+									<li class="list-group-item" data-ng-repeat="count in exportingCounts">
+										<a><span>{{count.context}}</span>
+											<span class="pull-right">{{count.value}}</span>
+											<button class="btn-link pull-right" data-ng-click="delete(count.context)"
+												data-ng-if="count.deletable"><i class="glyphicon glyphicon-trash"></i></button>
+										</a>
+									</li>
+								</ul>
+							</section>
+						</div>
+						<div class="slimScrollBar" style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 2287px;">
+						</div>
+						<div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;">
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-6">
+		<div class="panel">
+			<div class="panel-heading"> Export </div>
+			<div class="panel-body">
+				<div style="max-height: 100%">
+					<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;">
+						<div class="filterbox-vertical" data-slim-scroll="" style="overflow: hidden; width: auto; height: 100%;">
+
+							<button class="btn btn-primary" data-ng-click="export()">Export Local Data</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="panel">
+			<div class="panel-heading"> Import </div>
+			<div class="panel-body">
+				<div style="max-height: 100%">
+					<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;">
+						<div class="filterbox-vertical" data-slim-scroll="" style="overflow: hidden; width: auto; height: 100%;">
+							<input  file-text-uploader type="file" class="form-control" file-model="importedFile"/>
+							<br/>
+
+							<div data-ng-if="showSuccessMessage">
+								<div class="alert alert-success">Data successfully updated!</div>
+							</div>
+
+							<div data-ng-if="importedFile">
+
+								<div data-ng-if="importedFileContent == null">
+									<div class="alert alert-danger">Invalid uploaded file</div>
+								</div>
+								<div data-ng-if="importedFileContent != null">
+
+									<legend>Data summary</legend>
+
+									<div>
+										<label>file size:</label>
+										<span>{{ importedFile.file.size / 1024 | number : 2 }} KB</span>
+									</div>
+									<div>
+										<label>export date:</label>
+										<span>{{ importedFileContent.date | date : 'dd/MM/yyyy HH:mm'}}</span>
+									</div>
+									<div>
+										<label>by user:</label>
+										<span>{{ importedFileContent.user.firstName }} {{content.user.lastName}}</span>
+									</div>
+
+									<div class="panel panel-primary">
+										<div class="panel-body">
+											<table class="table table-condensed">
+												<thead>
+													<tr>
+														<th>Data name</th>
+														<th>count</th>
+													</tr>
+												</thead>
+												<tbody>
+												<tr data-ng-repeat="count in importingCounts">
+													<td>{{count.context}}</td>
+													<td>{{count.value}}</td>
+												</tr>
+												</tbody>
+											</table>
+
+
+										</div>
+									</div>
+
+									<br/>
+									<button class="btn btn-primary" data-ng-disabled="!importedFile" data-ng-click="import(importedFileContent)">Import to Local Data</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	</div>
+</div>

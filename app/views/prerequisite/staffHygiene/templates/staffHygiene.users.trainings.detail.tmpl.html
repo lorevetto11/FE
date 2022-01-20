@@ -1,0 +1,35 @@
+<div class="prerequisites-audits-detail-modal">
+	<div class="modal-header">
+		<h3 class="modal-title">{{'nav.prerequisites.sub.commonSub.usersTrainingList'|translate}}</h3>
+	</div>
+	<div class="modal-body">
+		<table class="table table-condensed" wt-responsive-table>
+			<thead>
+			<th>{{'common.tableAndForm.courseTitle.name'|translate}}</th>
+			<th>{{'common.tableAndForm.trainer.name'|translate}}</th>
+			<th>{{'common.tableAndForm.result.name'|translate}}</th>
+			<th>{{'common.tableAndForm.note.name'|translate}}</th>
+			</thead>
+			<tr data-ng-if="courses != null"
+			    data-ng-repeat="item in items"
+			    data-ng-init="course = ( courses | filter : { id : item.course.id })[0];
+							 participant = ( item.participants | filter : { user : { id : user.id } } )[0] ;">
+
+				<td>{{course.name}}</td>
+				<td>{{course.trainer}}</td>
+				<td>
+					<div class="label" data-ng-class="{'label-success' : participant.passed == true}">
+						passed
+					</div>
+				</td>
+				<td>{{ participant.note }}</td>
+			</tr>
+
+		</table>
+
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-default" type="button" ng-click="close()">{{'common.button.form.close'|translate}}
+		</button>
+	</div>
+</div>

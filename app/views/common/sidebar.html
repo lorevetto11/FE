@@ -1,0 +1,141 @@
+
+<div class="nav-wrapper" data-ng-controller="SideBarCtrl">
+
+    <ul id="nav"
+        class="nav"
+        data-slim-scroll
+        data-accordion-nav
+        data-highlight-active>
+<!--
+        <li ui-sref-active="active" ui-sref="main.prerequisite" ng-click="prerequisite()">
+            <a><i class="fa  fa-2x fa-prerequisite"><span class="icon-bg bg-danger"></span></i><span data-translate="nav.prerequisite"></span></a>
+        </li>
+-->
+
+        <li ui-sref-active="active" ui-sref="organization" data-ng-if="isAdmin()">
+            <a title="{{ 'nav.organization.name' | translate}}"><i class="fa fa-3x fa-building-o">
+                <span class="icon-bg bg-info-alt"></span></i><span data-translate="nav.organization.name" class="ng-scope"></span></a>
+        </li>
+
+        <li ui-sref-active="active" ui-sref="dashboard" data-ng-if="isAdmin()">
+            <a title="{{ 'nav.dashboard.name' | translate}}"><i class="fa fa-3x fa-dashboard">
+                <span class="icon-bg bg-warning"></span></i><span data-translate="nav.dashboard.name" class="ng-scope"></span></a>
+        </li>
+
+        <li ui-sref-active="active" ui-sref="prerequisite" data-ng-if="isAdmin()">
+            <a title="{{ 'nav.prerequisites.name' | translate}}">
+                <i class="fa fa-3x fa-cubes"><span class="icon-bg bg-primary"></span></i>
+                <span data-translate="nav.prerequisites.name" class="ng-scope"></span></a>
+        </li>
+
+        <li ui-sref-active="active" ui-sref="data" data-ng-if="isAdmin()">
+            <a title="{{ 'nav.data.name' | translate}}">
+                <i class="fa fa-3x fa-university"><span class="icon-bg bg-primary-light"></span></i>
+                <span data-translate="nav.data.name" class="ng-scope"></span></a>
+        </li>
+
+        <li ui-sref-active="active" ui-sref="user"  data-ng-if="isAdmin()">
+            <a title="{{ 'nav.people.name' | translate}}">
+                <i class="fa fa-3x fa-user"><span class="icon-bg bg-dark-light"></span></i>
+                <span data-translate="nav.people.name" class="ng-scope"></span></a>
+        </li>
+
+        <li ui-sref-active="active" ui-sref="training"  data-ng-if="isAdmin()">
+            <a title="{{ 'nav.training.name' | translate}}">
+                <i class="fa fa-3x fa-graduation-cap"><span class="icon-bg bg-info-alt"></span></i>
+                <span data-translate="nav.training.name" class="ng-scope"></span></a>
+        </li>
+
+        <li ui-sref-active="active" ui-sref="task" data-ng-if="isAdmin() || isVerifier">
+            <a title="{{ 'nav.tasks.name' | translate}}">
+                <i class="fa fa-3x fa-check-square-o"><span class="icon-bg bg-warning"></span></i>
+                <span data-translate="nav.tasks.name" class="ng-scope"></span></a>
+        </li>
+
+        <li ui-sref-active="active" ui-sref="task.prerequisite" data-ng-if="!isAdmin() && !isVerifier">
+            <a title="{{ 'nav.tasks.sub.prerequisite' | translate}}"><i class="fa fa-3x fa-check-square-o">
+                <span class="icon-bg bg-warning"></span></i>
+                <span data-translate="nav.tasks.sub.prerequisiteTasks" class="ng-scope"></span></a>
+        </li>
+
+        <li ui-sref-active="active" ui-sref="task.ccp" data-ng-if="!isAdmin() && !isVerifier">
+            <a title="{{ 'nav.tasks.sub.ccp' | translate}}">
+                <i class="fa fa-3x fa-check-square-o"><span class="icon-bg bg-info"></span></i>
+                <span data-translate="nav.tasks.sub.ccpTasks" class="ng-scope"></span></a>
+        </li>
+
+        <li ui-sref-active="active" ui-sref="audit" data-ng-if="isAdmin()">
+            <a title="{{ 'nav.audit.name' | translate}}"><i class="fa fa-3x fa-calendar-check-o">
+                    <span class="icon-bg bg-success"></span>
+                </i><span data-translate="nav.audit.name"></span></a>
+        </li>
+
+        <li ui-sref-active="active" ui-sref="noncompliance" data-ng-if="isAdmin()">
+            <a title="{{ 'nav.nonCompliance.name' | translate}}">
+                <i class="fa fa-3x fa-ambulance">
+                    <span class="icon-bg bg-danger"></span>
+                </i>
+                <span>
+                    <span data-translate="nav.nonCompliance.name"></span>
+                    <div class="badge badge-danger">{{ count.opened }}</div>
+                </span>
+            </a>
+        </li>
+
+        <li ui-sref-active="active" ui-sref="riskAnalysis" data-ng-if="isAdmin()">
+            <a title="{{ 'nav.riskAnalysis.name' | translate}}"><i class="fa fa-3x fa-exclamation"><span class="icon-bg bg-warning">
+
+            </span></i><span data-translate="nav.riskAnalysis.name" class="ng-scope"></span></a>
+        </li>
+
+        <li ui-sref-active="active" ui-sref="haccp" data-ng-if="isAdmin()">
+            <a title="{{ 'nav.haccp.title' | translate}}"><i class="fa fa-3x  fa-bomb"><span class="icon-bg bg-facebook">
+            </span></i><span data-translate="nav.haccp.name" class="ng-scope"></span></a>
+        </li>
+
+        <li ui-sref-active="active" ui-sref="setting"  data-ng-if="isAdmin()">
+            <a title="{{ 'nav.settings.name' | translate}}"><i class="fa fa-3x fa-cogs">
+                <span class="icon-bg"></span></i><span data-translate="nav.settings.name" class="ng-scope"></span>
+            </a>
+        </li>
+
+        <li ui-sref-active="active" ui-sref="print"  data-ng-if="isAdmin()">
+            <a title="{{ 'nav.prints.name' | translate}}"><i class="fa fa-3x fa-print">
+                <span class="icon-bg bg-primary"></span></i><span data-translate="nav.prints.name" class="ng-scope"></span>
+            </a>
+        </li>
+
+
+        <!--
+
+        <li ui-sref-active="active" ui-sref="place.list" data-ng-if="isAdmin()">
+            <a><i class="fa fa-2x fa-globe"><span class="icon-bg bg-primary-light"></span></i><span data-translate="nav.places" class="ng-scope"></span></a>
+        </li>
+
+
+        <li ui-sref-active="active" data-ng-if="isConsultant() && isPurchaser()">
+            <a>
+                <i class="fa fa-2x fa-list-alt"><span class="icon-bg bg-primary"></span></i>
+                <span data-translate="nav.labels" class="ng-scope"></span>
+            </a>
+            <ul>
+                <li ui-sref-active="active" ui-sref="label.type.list">
+                    <a><i class="fa fa-circle"></i><span data-translate="nav.labels.types"></span></a>
+                </li>
+
+
+                <li ui-sref-active="active" ui-sref="order.list" data-ng-if="isPurchaser()">
+                    <a><i class="fa fa-circle"><span class="icon-bg bg-success"></span></i><span data-translate="nav.orders"></span></a>
+                </li>
+            </ul>
+        </li>
+
+        <li ui-sref-active="active" ui-sref="trace.list" data-ng-if="isSimple()">
+            <a><i class="fa fa-2x fa-bar-chart-o"><span class="icon-bg bg-violet"></span></i><span data-translate="nav.traces" class="ng-scope"></span></a>
+        </li>
+        -->
+    </ul>
+
+    <div class="version-info">v {{ version }}</div>
+
+</div>

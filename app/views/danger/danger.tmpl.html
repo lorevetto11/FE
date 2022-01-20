@@ -1,0 +1,39 @@
+<div class="page noncompliance">
+
+    <organization-selector data-page="'nav.riskAnalysis.sub.name'"></organization-selector>
+
+    <div class="alert alert-info" data-ng-if="!selectedOrganization">
+        {{'common.tableAndForm.selectAnOrganizationToManageDataOnIt.name'|translate}}
+    </div>
+
+    <div class="row" data-ng-if="selectedOrganization">
+        <div class="col col-xs-12">
+            <div class="panel panel-default" style="margin-top: -20px">
+                <!--<div class="panel-heading">-->
+                    <!--<span>{{'nav.riskAnalysis.sub.name'|translate}}</span>-->
+                <!--</div>-->
+<!--
+                <div class="panel-body">
+                    <div class="nav-wrapper">
+                        <ul class="nav nav-pills"
+                            data-slim-scroll
+                            data-accordion-nav
+                            data-highlight-active>
+                            <span>
+                                opened: <div class="badge badge-danger"> {{ count.opened }} </div>
+                            </span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span>
+                                closed: <div class="badge badge-info"> {{ count.closed }} </div>
+                            </span>
+                        </ul>
+                    </div>
+                </div>
+                -->
+            </div>
+        </div>
+        <div class="col col-xs-12">
+            <div ui-view></div>
+        </div>
+    </div>
+</div>

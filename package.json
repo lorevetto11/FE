@@ -1,0 +1,53 @@
+{
+  "name": "APP",
+  "private": true,
+  "devDependencies": {
+    "bower": "^1.8.13",
+    "grunt": "^1.4.1",
+    "grunt-angular-templates": "^1.2.0",
+    "grunt-autoprefixer": "^2.0.0",
+    "grunt-bower-install-simple": "~1.1.4",
+    "grunt-build-number": "^1.0.0",
+    "grunt-concurrent": "^1.0.0",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-compass": "^1.0.4",
+    "grunt-contrib-compress": "^2.0.0",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-copy": "^0.7.0",
+    "grunt-contrib-cssmin": "^4.0.0",
+    "grunt-contrib-htmlmin": "^3.1.0",
+    "grunt-contrib-imagemin": "^4.0.0",
+    "grunt-contrib-jshint": "^3.1.1",
+    "grunt-contrib-rename": "^0.2.0",
+    "grunt-contrib-uglify": "^5.0.1",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-filerev": "^2.1.2",
+    "grunt-google-cdn": "^0.4.3",
+    "grunt-karma": "^4.0.2",
+    "grunt-newer": "^1.1.0",
+    "grunt-ng-annotate": "^0.9.2",
+    "grunt-ng-constant": "^2.0.3",
+    "grunt-svgmin": "^6.0.1",
+    "grunt-usemin": "^3.0.0",
+    "grunt-wiredep": "^3.0.1",
+    "jit-grunt": "^0.9.1",
+    "jshint-stylish": "^1.0.0",
+    "ng-mock-e2e": "^0.1.1",
+    "phantomjs-prebuilt": "^2.1.4",
+    "protractor": "^7.0.0",
+    "serve-static": "^1.10.2",
+    "time-grunt": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "natives": "^1.1.6",
+    "print-headers-and-footers": "git+https://github.com/byuarchdi/print-headers-and-footers.git"
+  },
+  "build": "26"
+}

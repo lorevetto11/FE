@@ -1,0 +1,117 @@
+<div class="panel panel-default">
+    <div class="panel-body" data-ng-if="element && element.selected">
+        <button data-ng-if="element.id != null" class="btn-link pull-right" data-ng-click="onDelete({item: element})">
+            <i class="glyphicon glyphicon-trash"></i>
+        </button>
+
+        <span>{{element.id}} - <strong>{{element.type}}</strong> Detail</span>
+        <hr/>
+
+        <uib-tabset active="active" justified="true">
+
+            <uib-tab>
+                <uib-tab-heading>
+                    <small>{{'prerequisites.panel.details.content'|translate}}</small>
+                </uib-tab-heading>
+                <br/>
+                <label>{{'common.tableAndForm.name.name'|translate}}:</label>
+                <input class="form-control" data-ng-model="element.name" placeholder="{{'common.tableAndForm.name.name'|translate}}" />
+                <br/>
+                <label>{{'common.tableAndForm.description.name'|translate}}:</label>
+                <textarea row="2" class="form-control" data-ng-model="element.description" placeholder="{{'common.tableAndForm.description.name'|translate}}"></textarea>
+                <br/>
+
+                <layout-element-detail data-element="element"></layout-element-detail>
+
+                <air-conditioning-element-detail data-element="element"></air-conditioning-element-detail>
+
+                <cleaning-element-detail data-element="element"></cleaning-element-detail>
+
+                <equipment-element-detail data-element="element"></equipment-element-detail>
+
+                <br/>
+                <div>
+                    <button class="btn btn-block btn-primary" data-ng-click="save()">{{'common.button.form.save'|translate}}&nbsp;&nbsp; <i class="fa fa-save"></i></button>
+                </div>
+
+            </uib-tab>
+
+            <!-- nascondi la scheda in mancanca del context -->
+            <uib-tab data-ng-if="element.context">
+                <uib-tab-heading>
+                    <small>{{'prerequisites.panel.details.monitoring'|translate}}</small>
+                </uib-tab-heading>
+
+                <prerequisite-monitorings data-element="element"></prerequisite-monitorings>
+
+
+
+                <!--
+                    <water-supply-detail-sampling data-element="element"></water-supply-detail-sampling>
+                -->
+
+            </uib-tab>
+            <uib-tab>
+                <uib-tab-heading>
+                    <small>{{'prerequisites.panel.details.design'|translate}}</small>
+                </uib-tab-heading>
+                <br/>
+
+                <label>{{'common.tableAndForm.order.name'|translate}}:</label>
+                <div class="row">
+                    <div class="col col-xs-4">
+                        <input class="form-control" data-ng-model="element.shape.order" type="number" />
+                    </div>
+                    <div class="col col-xs-8 text-right">
+                        <div class="btn-group btn-group-sm full-width" role="group">
+                            <button type="button" class="btn btn-default half-width" data-ng-click="toBackground()">{{'common.button.prerequisites.background'|translate}}</button>
+                            <button type="button" class="btn btn-default half-width" data-ng-click="toForeground()">{{'common.button.prerequisites.foreground'|translate}}</button>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <label>{{'common.tableAndForm.position.name'|translate}}:</label>
+                <div class="row" style="position: relative">
+                    <div class="text-center" style="position: absolute; width: 100%; line-height: 32px">:</div>
+                    <div class="col col-xs-6">
+                        <input type="number" step="0.01" data-ng-model="element.shape.startX" class="form-control">
+                    </div>
+                    <div class="col col-xs-6">
+                        <input type="number" step="0.01" data-ng-model="element.shape.startY" class="form-control">
+                    </div>
+                </div>
+                <br/>
+                <div data-ng-if="element.shape.type == '1'">
+                    <label>{{'common.tableAndForm.dimension.name'|translate}}:</label>
+                    <div class="row" style="position: relative">
+                        <div class="text-center" style="position: absolute; width: 100%; line-height: 32px">x</div>
+                        <div class="col col-xs-6">
+                            <input type="number" step="0.01" data-ng-model="element.shape.sizeX" class="form-control"></div>
+                        <div class="col col-xs-6">
+                            <input type="number" step="0.01" data-ng-model="element.shape.sizeY" class="form-control"></div>
+                    </div>
+                </div>
+                <div data-ng-if="element.shape.type == '2'">
+                    <label>{{'common.tableAndForm.radius.name'|translate}}:</label>
+                    <div class="row" style="position: relative">
+                        <div class="col col-xs-6">
+                            <input type="number" step="0.01" data-ng-model="element.shape.radius" class="form-control"></div>
+                    </div>
+                </div>
+
+                <br/>
+                <div>
+                    <button class="btn btn-block btn-primary" data-ng-click="save()">{{'common.button.form.save'|translate}}&nbsp;&nbsp; <i class="fa fa-save"></i></button>
+                </div>
+
+            </uib-tab>
+        </uib-tabset>
+
+
+
+
+        <air-conditioning-element-detail data-item="element" data-ng-if="PrerequisiteType.isAirConditioning(element)"></air-conditioning-element-detail>
+
+
+    </div>
+</div>

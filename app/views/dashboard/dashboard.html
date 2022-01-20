@@ -1,0 +1,292 @@
+<div class="page dashboard">
+    <organization-selector data-page="'nav.dashboard.sub.nonCompliances'"></organization-selector>
+
+    <div class="alert alert-info" data-ng-if="!selectedOrganization">
+        Seleziona una organizzazione per gestire i dati su di essa
+    </div>
+
+    <div class="row" data-ng-if="selectedOrganization">
+        <div class="col col-xs-12">
+            <div class="panel panel-default">
+
+        <!-- div class="panel panel-default">
+            <div class="panel-body">
+                <h2>{{'nav.dashboard.sub.name'|translate}}<br/></h2>
+            </div>
+        </div -->
+
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3 class="text-primary text-center">{{'nav.dashboard.sub.nonCompliances'|translate}}<br/><hr/></h3>
+
+                <div class="row" data-ng-if="organizations.length > 1">
+                    <div class="col col-sm-6 col-lg-4" data-ng-repeat="organization in organizations">
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                {{ organization.name }}
+                            </div>
+                            <div class="panel-body">
+
+                                <dashboard-non-compliances organization="organization"></dashboard-non-compliances>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div data-ng-if="organizations.length == 1">
+                    <dashboard-non-compliances organization="organizations[0]"></dashboard-non-compliances>
+                </div>
+
+            </div>
+        </div>
+
+        <!--
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3 class="text-primary text-center">{{'nav.dashboard.sub.nonCompliances'|translate}}<br/><hr/></h3>
+
+                <div data-ng-if="loader.nonCompliances">
+                    <br/><br/><br/>
+                    <h3 class="text-primary text-center">
+                        <i class="fa fa-2x fa-circle-o-notch fa-spin"></i><br/>
+                    </h3>
+                    <br/><br/><br/>
+                </div>
+
+                <div class="row" data-ng-if="!loader.nonCompliances">
+                    <div class="col col-sm-12 col-md-6">
+                        <div data-ng-if="(prerequisites.concat(haccps) | filter : gt('ncCount', 0)).length == 0">
+                            <br/><br/><br/><br/>
+                            <div class="text-success text-center">
+                                <i class="fa fa-5x fa-thumbs-o-up" aria-hidden="true" style="font-size: 12em"></i>
+                                <h1 style="font-size: 6em">{{'dashboard.message.good'|translate}}</h1>
+                            </div>
+                        </div>
+
+                        <div data-ng-if="(prerequisites.concat(haccps) | filter : gt('ncCount', 0)).length > 0">
+                            <center>
+                                <highchart id="noncomplianceChar" config="noncomplianceChartOptions"></highchart>
+                            </center>
+                        </div>
+                    </div>
+                    <div class="col col-sm-6 col-md-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <span>{{'dashboard.table.prerequisites'|translate}}</span>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-condensed">
+                                    <thead>
+                                <th title="{{'common.tableAndForm.name.title'|translate}}">{{'common.tableAndForm.name.name'|translate}}</th>
+                                <th title="{{'common.tableAndForm.nonCompliance.title'|translate}}">{{'common.tableAndForm.nonCompliance.name'|translate}}</th>
+                                </thead>
+                                    <tbody>
+                                        <tr data-ng-repeat="item in prerequisiteTypes">
+                                            <td data-ng-class="{'text-danger' : item.ncCount}">
+                                                <strong>{{ 'dashboard.preRequisites.' + item.name | translate }}</strong>
+                                            </td>
+                                            <td>
+                                                <div data-ng-if="item.ncCount > 0" class="btn badge badge-danger"
+                                                     data-ui-sref="noncompliance.home" title="view non compliances">
+                                                    {{ item.ncCount }}
+                                                </div>
+                                                <div data-ng-if="item.ncCount == 0">
+                                                    <i class="text-success glyphicon glyphicon-ok"></i>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-sm-6 col-md-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <span>{{'dashboard.table.haccp'|translate}}</span>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-condensed">
+                                    <thead>
+                                    <th title="{{'common.tableAndForm.name.title'|translate}}">{{'common.tableAndForm.name.name'|translate}}</th>
+                                    <th title="{{'common.tableAndForm.nonCompliance.title'|translate}}">{{'common.tableAndForm.nonCompliance.name'|translate}}</th>
+                                    </thead>
+                                    <tbody>
+                                    <tr data-ng-repeat="item in haccps">
+                                        <td data-ng-class="{'text-danger' : item.ncCount}">
+                                            {{ item.name }}
+                                        </td>
+                                        <td>
+                                            <div data-ng-if="item.ncCount > 0" class="btn badge badge-danger"
+                                                 data-ui-sref="noncompliance.home" title="view non compliances">
+                                                {{ item.ncCount }}
+                                            </div>
+                                            <div data-ng-if="item.ncCount == 0">
+                                                <i class="text-success glyphicon glyphicon-ok"></i>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        -->
+
+
+        <!--
+                 <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3 class="text-primary text-center">{{'nav.dashboard.sub.monitorings'|translate}}<br/><hr/></h3>
+                    <div class="row">
+                        <div class="col col-sm-12 col-md-6">
+
+                            <div data-ng-if__="(prerequisites.concat(haccps) | filter : gt('ncCount', 0)).length > 0">
+                                <center>
+                                    <highchart id="monitoringsChart" config="monitoringsChartOptions"></highchart>
+                                </center>
+                            </div>
+                        </div>
+                        <div class="col col-sm-6 col-md-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <span>{{'dashboard.table.prerequisites'|translate}}</span>
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table table-condensed">
+                                        <thead>
+                                        <th title="{{ 'common.tableAndForm.name.title' | translate }}">{{ 'common.tableAndForm.name.name' | translate }}</th>
+                                        <th title="{{ 'common.tableAndForm.positive.title' | translate }}">{{ 'common.tableAndForm.positive.name' | translate }}</th>
+                                        <th title="{{ 'common.tableAndForm.negative.title' | translate }}">{{ 'common.tableAndForm.negative.name' | translate }}</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr data-ng-repeat="item in prerequisiteTypes" data-ng-if="item.outcomes">
+                                            <td>
+                                                {{ 'dashboard.preRequisites.' + item.name | translate }}
+                                            </td>
+                                            <td>
+                                                <div class="text-success">
+                                                    <strong>{{ item.outcomes.positive  }}</strong>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="text-danger">
+                                                    <strong>{{ item.outcomes.negative  }}</strong>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-sm-6 col-md-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <span>{{'dashboard.table.haccp'|translate}}</span>
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table table-condensed">
+                                        <thead>
+                                        <th title="{{ 'common.tableAndForm.name.title' | translate }}">{{ 'common.tableAndForm.name.name' | translate }}</th>
+                                        <th title="{{ 'common.tableAndForm.positive.title' | translate }}">{{ 'common.tableAndForm.positive.name' | translate }}</th>
+                                        <th title="{{ 'common.tableAndForm.negative.title' | translate }}">{{ 'common.tableAndForm.negative.name' | translate }}</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr data-ng-repeat="item in haccps" data-ng-if="item.outcomes">
+                                            <td>
+                                                {{item.name}}
+                                            </td>
+                                            <td>
+                                                <div class="text-success">
+                                                    <strong>{{ item.outcomes.positive  }}</strong>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="text-danger">
+                                                    <strong>{{ item.outcomes.negative  }}</strong>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    -->
+
+        <!--
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3 class="text-primary text-center">{{'nav.dashboard.sub.dataAnalysis'|translate}}<br/><hr/></h3>
+                <div class="row">
+                    <div class="col col-sm-12 col-md-6">
+
+
+                    </div>
+                    <div class="col col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <span>{{'dashboard.table.prerequisites'|translate}}</span>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-condensed">
+                                    <thead>
+                                    <th title="{{ 'common.tableAndForm.name.title' | translate }}">{{ 'common.tableAndForm.name.name' | translate }}</th>
+                                    <th title="{{ 'common.tableAndForm.parameter.title' | translate }}">{{ 'common.tableAndForm.parameter.name' | translate }}</th>
+                                    <th title="{{ 'common.tableAndForm.threshold.title' | translate }}">{{ 'common.tableAndForm.threshold.name' | translate }}</th>
+                                    <th title="{{ 'common.tableAndForm.sampledValue.title' | translate }}">{{ 'common.tableAndForm.sampledValue.name' | translate }}</th>
+                                    <th title="{{ 'common.tableAndForm.samplingLastDate.title' | translate }}">{{ 'common.tableAndForm.samplingLastDate.name' | translate }}</th>
+                                    </thead>
+                                    <tbody data-ng-repeat="item in prerequisiteTypes" data-ng-if="item.overThreshodParameterValues">
+                                    <tr>
+                                        <td>
+                                            <h4>{{ item.name }}</h4>
+                                        </td>
+                                    </tr>
+                                    <tr data-ng-repeat="value in item.overThreshodParameterValues"
+                                        data-ng-init="prerequisite = ( prerequisites | filter : { id : value.prerequisiteId , type : value.prerequisiteType } : true )[0]">
+                                        <td>
+                                            &nbsp;&nbsp;&nbsp;&nbsp; {{ prerequisite.name }}
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <strong>{{ value.parameter.name }}</em></strong>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            {{value.parameter.thresholdValue}}
+                                        </td>
+                                        <td>
+                                            <div class="text-danger">
+                                                <strong>{{ value.value   }}</strong>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <strong>{{ value.date | date: 'dd/MM/yyyy'   }}</strong>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+    </div>
+
+</div>

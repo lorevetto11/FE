@@ -1,0 +1,109 @@
+
+<div>
+    <!--
+    <div ng-hide="user" class="panel panel-default">
+        <div class="panel-body">
+            Utente non valido.
+            <button class="btn btn-link" ng-click="backToUserList()">Torna alla lista</button>
+        </div>
+    </div>
+    -->
+    <div ng-if="user" class="panel"
+         ng-class="user.status == 'DISABLED' ? 'panel-danger' : 'panel-default' ">
+        <div class="panel-heading">
+        <span ng-if="user.status == 'DISABLED'" class="label label-danger pull-right " data-translate="user.disabled"></span>
+
+            <h3>&nbsp;&nbsp;
+                <small ng-if="user.id == null">{{ 'user.add'|translate }}</small>
+                <small ng-if="user.id != null">{{ 'user.change' | translate }}</small>
+                <button class="btn btn-default pull-left" title="torna alla lista utenti" ng-click="backToUserList()">
+                    <i class="fa fa-angle-left"></i>
+                </button>
+            </h3>
+        </div>
+        <div class="panel-body">
+
+            <form class="form-horizontal ng-pristine ng-valid">
+
+                <fieldset>
+                    <legend data-translate="user.account"></legend>
+                    <div class="form-group">
+                        <label class="col-sm-2" for="username" data-translate="user.email"></label>
+                        <div class="col-sm-10">
+                            <input ng-if="!selectedUser.id" type="text" id="username" class="form-control" ng-model="user.email" >
+                            <input ng-if="selectedUser.id" type="text" id="username" class="form-control" ng-model="user.email" readonly>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend data-translate="user.data"></legend>
+                    <div class="form-group">
+                        <label class="col-sm-2" for="firstName" data-translate="user.name"></label>
+                        <div class="col-sm-10">
+                            <input type="text" id="firstName" class="form-control" data-ng-model="user.firstName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2" for="lastName" data-translate="user.surname"></label>
+                        <div class="col-sm-10">
+                            <input type="text" id="lastName" class="form-control" data-ng-model="user.lastName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2" for="userType" data-translate="user.role"></label>
+                        <div class="col-sm-10">
+                            <select id="userType" class="form-control" required
+                                    data-ng-disabled="isMe(user)"
+                                    data-ng-model="user.userType"
+                                    data-ng-options="type.value as type.label for type in filteredUserTypeOptions">
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend data-translate="user.contacts"></legend>
+                    <!--
+                      <div class="form-group">
+                          <label class="col-sm-2" for="email">Email</label>
+                          <div class="col-sm-10">
+                              <input type="email" id="email" class="form-control" ng-model="selectedUser.email">
+                          </div>
+                      </div>
+                    -->
+                    <div class="form-group">
+                        <label class="col-sm-2" for="phone" data-translate="user.phone"></label>
+                        <div class="col-sm-10">
+                            <input type="text" id="phone" class="form-control" ng-model="user.phone">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend data-translate="user.visualization"></legend>
+                    <div class="form-group">
+                        <label class="col-sm-2" for="language" data-translate="preferred.language"></label>
+                        <div class="col-sm-10">
+                            <select id="language" class="form-control" required
+                                    data-ng-model="user.language.code"
+                                    data-ng-options="lang.code as ('language.'+ lang.code | translate) for lang in languageOptions">
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+
+
+
+            </form>
+
+            <div class="buttons text-right">
+                <button class="btn btn-default" ng-click="backToUserList()" data-translate="cancel"></button>
+                <button class="btn btn-primary" ng-click="saveUser()">
+                    <i class="fa fa-floppy-o"></i>&nbsp;&nbsp; {{ 'save' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

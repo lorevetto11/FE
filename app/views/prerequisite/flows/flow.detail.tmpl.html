@@ -1,0 +1,127 @@
+<div>
+
+	<div data-ng-if="loading">
+		<br/><br/><br/><br/><br/>
+		<h3 class="text-primary text-center">
+			<i class="fa fa-2x fa-circle-o-notch fa-spin"></i><br/>
+			{{'common.tableAndForm.loading.name'|translate}}...
+		</h3>
+		<br/><br/><br/><br/><br/>
+	</div>
+
+	<div data-ng-if="!loading" class="panel panel-default">
+
+		<div class="panel-body">
+			<button data-ng-if="selectedShape.id != null" class="btn-link pull-right" data-ng-click="onDelete({item: selectedShape})">
+				<i class="glyphicon glyphicon-trash"></i>
+			</button>
+
+			<span>{{entity.id}} - <strong>{{entity.name}}</strong> Detail</span>
+			<hr/>
+
+			<uib-tabset active="active" justified="true">
+
+				<uib-tab>
+					<uib-tab-heading>
+						<small>{{'prerequisites.panel.details.content'|translate}}</small>
+					</uib-tab-heading>
+					<br/>
+
+					<form name="form" novalidate>
+						<label>{{'common.tableAndForm.name.name'|translate}}:</label>
+						<input class="form-control" data-ng-model="entity.name" data-ng-change="dataChange()" placeholder="{{'common.tableAndForm.name.name'|translate}}" name="name" required />
+						<small class="text-danger" data-ng-if="form.name.$dirty && form.name.$error.required" >
+							{{'common.tableAndForm.requiredField.name'|translate}}
+						</small>
+						<br/>
+						<label>{{'common.tableAndForm.description.name'|translate}}:</label>
+						<textarea row="2" class="form-control" data-ng-model="entity.description" data-ng-change="dataChange()" placeholder="{{'common.tableAndForm.description.name'|translate}}"></textarea>
+
+						<div data-ng-if="selectedShape.type == 'PARALLELOGRAM'" >
+
+							<hr>
+
+							<label>{{'entity.material'|translate}}:</label>
+							<select data-ng-options="material as material.name for material in materials track by material.id" data-ng-model="entity.material" class="form-control"></select>
+
+						</div>
+					</form>
+
+				</uib-tab>
+
+
+				<uib-tab data-ng-if="selectedShape.centerX != null">
+					<uib-tab-heading>
+						<small>{{'prerequisites.panel.details.design'|translate}}</small>
+					</uib-tab-heading>
+
+					<form name="form" novalidate>
+						<br/>
+
+						<label>{{'common.tableAndForm.position.name'|translate}}:</label>
+						<div class="row" style="position: relative">
+							<div class="text-center" style="position: absolute; width: 100%; line-height: 32px">:</div>
+							<div class="col col-xs-6">
+								<input type="number" step="0.001" min="0" max="1" data-ng-model="selectedShape.centerX" data-ng-change="dataChange()" class="form-control" name="x" required>
+								<small class="text-danger" data-ng-if="form.x.$dirty && form.x.$error.required" >
+									{{'common.tableAndForm.requiredField.name'|translate}}
+								</small>
+							</div>
+							<div class="col col-xs-6">
+								<input type="number" step="0.001" min="0" max="1" data-ng-model="selectedShape.centerY" data-ng-change="dataChange()" class="form-control" name="y" required>
+								<small class="text-danger" data-ng-if="form.y.$dirty && form.y.$error.required" >
+									{{'common.tableAndForm.requiredField.name'|translate}}
+								</small>
+							</div>
+						</div>
+
+						<br/>
+
+						<label>{{'common.tableAndForm.dimension.name'|translate}}:</label>
+						<div class="row" style="position: relative">
+							<div class="text-center" style="position: absolute; width: 100%; line-height: 32px">:</div>
+							<div class="col col-xs-6">
+								<input type="number" step="0.001" min="0" max="1" data-ng-model="selectedShape.width" data-ng-change="dataChange()" class="form-control" name="width" required>
+								<small class="text-danger" data-ng-if="form.width.$dirty && form.width.$error.required" >
+									{{'common.tableAndForm.requiredField.name'|translate}}
+								</small>
+							</div>
+							<div class="col col-xs-6">
+								<input type="number" step="0.001" min="0" max="1" data-ng-model="selectedShape.height" data-ng-change="dataChange()" class="form-control" name="height" required>
+								<small class="text-danger" data-ng-if="form.height.$dirty && form.height.$error.required" >
+									{{'common.tableAndForm.requiredField.name'|translate}}
+								</small>
+							</div>
+						</div>
+
+						<br/>
+
+						<div>
+							<label>{{'common.tableAndForm.color.name'|translate}}:</label>
+							<div class="row" style="position: relative">
+								<div class="col col-xs-12">
+									<input type="color" data-ng-model="selectedShape.fillColor" data-ng-change="dataChange()" class="form-control" name="color" required>
+									<small class="text-danger" data-ng-if="form.color.$dirty && form.color.$error.required" >
+										{{'common.tableAndForm.requiredField.name'|translate}}
+									</small>
+								</div>
+							</div>
+						</div>
+
+					</form>
+
+				</uib-tab>
+			</uib-tabset>
+
+			<br>
+
+			<div>
+				<button class="btn btn-block btn-primary" data-ng-click="onSave({item: selectedShape})">
+					{{'common.button.form.save'|translate}}&nbsp;&nbsp; <i class="fa fa-disk"></i>
+				</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+

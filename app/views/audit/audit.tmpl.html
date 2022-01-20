@@ -1,0 +1,52 @@
+<div class="page monitoring">
+    <organization-selector data-page="'nav.audit.sub.name'"></organization-selector>
+
+    <div class="alert alert-info" data-ng-if="!selectedOrganization">
+        Seleziona una organizzazione per gestire i dati su di essa
+    </div>
+
+    <div class="row" data-ng-if="selectedOrganization">
+        <div class="col col-xs-12">
+            <div class="panel panel-default" style="margin-top: -20px">
+                <!--<div class="panel-heading">-->
+                    <!--<span>{{'nav.audit.sub.name'|translate}}</span>-->
+                <!--</div>-->
+                <div class="panel-body">
+                    <div class="nav-wrapper">
+                        <ul class="nav nav-pills"
+                            data-slim-scroll
+                            data-accordion-nav
+                            data-highlight-active>
+                            <li ui-sref-active="active" data-ui-sref="audit.system">
+                                <a>{{'nav.audit.sub.systemChecks'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="audit.process">
+                                <a>{{'nav.audit.sub.processChecks'|translate}}</a>
+                            </li>
+
+                            <li ui-sref-active="active" data-ui-sref="noncompliance">
+                                <a>{{'nav.audit.sub.nonCompliances'|translate}}
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span>
+                                        {{'nav.audit.sub.open'|translate}}: <div class="badge badge-danger"> {{ count.opened }} </div>
+                                    </span>
+                                    &nbsp;&nbsp;
+                                    <span>
+                                        {{'nav.audit.sub.closed'|translate}}: <div class="badge badge-info"> {{ count.closed }} </div>
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li ui-sref-active="active" class="pull-right btn-line-primary" style="border-style: solid; border-width: 1px;" data-ui-sref="audit.planning">
+                                <a>{{'nav.audit.sub.planning'|translate}} &nbsp;&nbsp;&nbsp;<i class="glyphicon glyphicon-calendar"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-xs-12">
+            <div ui-view></div>
+        </div>
+    </div>
+</div>

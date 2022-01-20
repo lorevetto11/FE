@@ -1,0 +1,60 @@
+<div class="prerequisite-water-supply full-width">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div>
+				{{'nav.prerequisites.sub.equipmentMaintenance'|translate}}
+				<div class="inline" style="margin-left:20px">
+					<div class="dropdown inline">
+						<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuAdd"
+								data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
+								data-ng-class="{'btn-primary' : command.action == Command.action.ADD}">
+							{{'common.button.form.add'|translate}}&nbsp;&nbsp; <i class="glyphicon glyphicon-pencil"></i>
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenuAdd">
+							<li data-ng-repeat="equipmentType in equipmentTypes | orderBy: 'name' ">
+								<a data-ng-click="add(equipmentType)">{{equipmentType.name}}</a>
+							</li>
+							<li role="separator" class="divider"></li>
+							<li>
+								<a data-ng-click="changeState('data.equipmentTypes')">{{'common.button.prerequisites.newEquipment'|translate}} &nbsp;&nbsp;&nbsp; <i class="glyphicon glyphicon-plus"></i></a>
+							</li>
+						</ul>
+					</div>
+
+					<button class="btn btn-default" data-ng-class="{'btn-primary' : mode == MODE.SHOW_EQUIPMENTS}"
+							data-ng-click="showEquipments()">{{'common.button.prerequisites.equipments'|translate}}&nbsp;&nbsp;
+						<i class="glyphicon glyphicon-duplicate"></i>
+					</button>
+
+					<button class="btn btn-default" data-ng-class="{'btn-primary' : mode == MODE.SHOW_PROCESS_CHECKS}"
+							data-ng-click="showProcessChecks()">{{'common.button.prerequisites.processCheck'|translate}}&nbsp;
+						<i class="glyphicon glyphicon-flag"></i>
+					</button>
+
+					<button class="btn btn-default" data-ng-class="{'btn-primary' : mode == MODE.SHOW_ANALYSIS}"
+							data-ng-click="showAnalysis()">{{'common.button.prerequisites.analysis'|translate}}&nbsp;&nbsp;
+						<i class="glyphicon glyphicon-duplicate"></i>
+					</button>
+
+				</div>
+			</div>
+		</div>
+		<div class="panel-body">
+			<plan data-command="command" data-ng-if="mode == MODE.SHOW_PLAN"
+				  data-items="items"
+				  data-on-save="onSaveItem(item, floor)"
+				  data-on-delete="onDeleteItem(item)"></plan>
+
+			<equipment-equipments data-ng-if="mode == MODE.SHOW_EQUIPMENTS">
+			</equipment-equipments>
+
+			<prerequisite-process-checks data-ng-if="mode == MODE.SHOW_PROCESS_CHECKS" data-prerequisite-type="prerequisiteType">
+			</prerequisite-process-checks>
+
+			<prerequisite-analysis data-prerequisite-type="command.type" data-ng-model="items"  data-ng-if="mode == MODE.SHOW_ANALYSIS">
+			</prerequisite-analysis>
+
+		</div>
+	</div>
+</div>

@@ -1,0 +1,29 @@
+<div data-ng-show="PrerequisiteType.isAirConditioning(element)">
+    <label>{{'common.tableAndForm.equipment.name'|translate}}:</label> {{item.equipment.name}} <br/>
+    <span>{{element.equipment.description}}</span>
+    <br/><br/>
+
+
+    <label>{{'common.tableAndForm.place.name'|translate}}:</label>
+    <input type="text" class="form-control" data-ng-model="element.place" placeholder="place description">
+    <br/>
+
+    <label>{{'common.tableAndForm.maintenance.name'|translate}}:</label> ({{'common.tableAndForm.every.name'|translate}})
+    <div class="row">
+        <div class="col col-xs-6 text-right">
+            <input type="number" class="form-control" data-ng-model="element.maintenance.period" placeholder="0">
+        </div>
+        <div class="col col-xs-6 text-right">
+            <select class="form-control" data-ng-model="element.maintenance.periodType"
+                data-ng-options="opt for opt in ['days','weeks','months']"></select>
+        </div>
+    </div>
+    <br/>
+    <label>{{'common.tableAndForm.entrustedCompany.name'|translate}}:</label>
+    <input type="text" class="form-control" data-ng-model="element.maintenance.company">
+    <br/>
+
+    <label>{{'common.tableAndForm.personInCharge.name'|translate}}:</label>
+    <input type="text" class="form-control" data-ng-model="element.maintenance.personInCharge">
+    <br/>
+</div>

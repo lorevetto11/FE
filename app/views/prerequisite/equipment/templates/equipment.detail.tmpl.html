@@ -1,0 +1,103 @@
+<div class="prerequisites-audits-detail-modal">
+	<div class="modal-header">
+		<h3 class="modal-title">{{'nav.prerequisites.sub.commonSub.equipment'|translate}}</h3>
+	</div>
+	<div class="modal-body">
+
+		<form name="form" novalidate>
+
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.name.name'|translate}}:</label></div>
+					<div class="col col-sm-10">
+						<input class="form-control"  data-ng-model="item.name" name="name" required>
+						<small class="text-danger" data-ng-if="form.name.$dirty && form.name.$error.required" >
+							{{'common.tableAndForm.requiredField.name'|translate}}
+						</small>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.description.name'|translate}}:</label>
+					</div>
+					<div class="col col-sm-10">
+						<input class="form-control" data-ng-model="item.description" name="description">
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.supplier.name'|translate}}:</label>
+					</div>
+					<div class="col col-sm-10">
+						<select class="form-control" data-ng-model="item.supplier" name="supplier"
+							data-ng-options="supplier as supplier.name for supplier in suppliers track by supplier.id"></select>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.maintainer.name'|translate}}:</label>
+					</div>
+					<div class="col col-sm-10">
+						<input class="form-control" data-ng-model="item.maintainer" name="maintainer">
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.frequency.name'|translate}}:</label> ({{'common.tableAndForm.every.name'|translate}})</div>
+					<div class="col col-sm-2">
+						<input type="number" placeholder="Quantity" class="form-control"
+						       data-ng-disabled="item.frequency.asNeeded || item.frequency.justOnce"
+						       data-ng-model="item.frequency.value"/>
+					</div>
+					<div class="col col-sm-2">
+						<select class="form-control" data-ng-model="item.frequency.period"
+						        data-ng-disabled="item.frequency.asNeeded || item.frequency.justOnce"
+						        data-ng-options="period as period for period in frequencyPeriods">
+						</select>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.equipmentType.name'|translate}}:</label>
+					</div>
+					<div class="col col-sm-10">
+						<select class="form-control" data-ng-model="item.equipmentType" name="equipmentType"
+						        data-ng-options="equipmentType as equipmentType.name for equipmentType in equipmentTypes track by equipmentType.id" required></select>
+						<small class="text-danger" data-ng-if="form.equipmentType.$dirty && form.equipmentType.$error.required" >
+							{{'common.tableAndForm.requiredField.name'|translate}}
+						</small>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.attachment.name'|translate}}:</label>
+					</div>
+					<div class="col col-sm-10">
+						<attachment data-ng-model="item.attachment"></attachment>
+					</div>
+				</div>
+			</div>
+
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary pull-right" type="button" ng-click="save(form)">
+			{{'common.button.form.save'|translate}}
+		</button>
+		<button class="btn btn-default pull-left" type="button" ng-click="close()">
+			{{'common.button.form.cancel'|translate}}
+		</button>
+	</div>
+</div>

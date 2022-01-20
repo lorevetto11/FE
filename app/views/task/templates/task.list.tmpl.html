@@ -1,0 +1,474 @@
+<div class="task-home">
+
+    <div data-ng-if="loader">
+        <h3 class="text-primary text-center">
+            <br><br><br><br>
+            <i class="fa fa-2x fa-circle-o-notch fa-spin"></i><br>
+            {{ 'loading' | translate }}
+        </h3>
+    </div>
+
+    <div class="alert alert-info" data-ng-if="(items.length == 0) && !loader">
+        {{'common.message.tasks.empty'|translate}}
+    </div>
+
+
+
+    <div data-ng-if="!loader">
+
+        <div class="panel panel-success"
+             data-ng-if__="(tasks | filter : { frequency : { justOnce : true }} : true).length > 0">
+        <div class="panel-heading">
+                {{'nav.tasks.sub.commonSub.monitorings.justOnce'|translate}} -
+                {{'nav.tasks.sub.commonSub.monitorings.name'|translate}}
+
+
+                <div class="pull-right">
+                    <label class="ui-checkbox">
+                        <input name="viewJustOnceHistory" type="checkbox" data-ng-model="history.justOnce" >
+                        <span>{{'vedi storico'|translate}}</span>
+                    </label>
+
+                </div>
+            </div>
+            <div class="panel-body">
+
+                <table class="table table-condensed" wt-responsive-table data-ng-if="!history.justOnce">
+                    <thead>
+                    <tr>
+                        <th>{{'common.tableAndForm.id.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.title.name'|translate}}</th>
+                        <th data-ng-if="isAdmin">{{'common.tableAndForm.roleInCharge.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.prerequisite.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.subject.name'|translate}}</th>
+                        <th class="text-right">{{'common.tableAndForm.action.name'|translate}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr data-ng-repeat="item in tasks | filter : justOnceFilter | filter : emptyOutcomesFilter | orderBy: -id"
+                        data-ng-init="outcome = item.outcomes[0]">
+                        <td>{{item.id}} <!--{{ monitoring }} {{ outcome }}--></td>
+                        <td>{{item.procedure.title}}</td>
+                        <td data-ng-if="isAdmin">{{ item.procedure.userRole.name}}</td>
+                        <td>{{item.procedure.prerequisiteType.name}}</td>
+                        <td>{{ item.prerequisite.name }}</td>
+                        <td class="text-right">
+                            <button class="btn btn-sm btn-info" data-ng-click="viewProcedure(item.procedure)"
+                                    data-ng-if__="!isccp" title="View procedure">
+                            <span class="visible-lg visible-sm visible-xs">{{'common.button.task.viewProcedure'|translate}} &nbsp;<i
+                                    class="fa fa-eye" aria-hidden="true"></i></span>
+                                <i class="fa fa-eye hidden-lg hidden-sm hidden-xs" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-sm btn-warning text-nowrap" data-ng-click="perform(item, outcome)"
+                                    title="Perform" data-ng-disabled="outcome.result != null">
+                            <span class="visible-lg visible-sm visible-xs">{{'common.button.task.perform'|translate}} &nbsp;<i
+                                    class="fa fa-check" aria-hidden="true"></i></span>
+                                <i class="fa fa-check hidden-lg hidden-sm hidden-xs" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+                <table class="table table-condensed" wt-responsive-table data-ng-if="history.justOnce">
+                    <thead>
+                    <tr>
+                        <th>{{'common.tableAndForm.id.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.title.name'|translate}}</th>
+                        <th data-ng-if="isAdmin">{{'common.tableAndForm.roleInCharge.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.prerequisite.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.subject.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.lastMonitored.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.lastOutcome.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.examiner.name'|translate}}</th>
+                        <!--<th>{{'common.tableAndForm.attachment.name'|translate}}</th>-->
+                        <th class="text-right">{{'common.tableAndForm.action.name'|translate}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr data-ng-repeat="item in tasks | filter : justOnceFilter | filter : { outcomes : {}} | orderBy: id"
+                        data-ng-init="outcome = item.outcomes[0]">
+                        <td>{{item.id}} <!--{{ monitoring }} {{ outcome }}--></td>
+                        <td>{{item.procedure.title}}</td>
+                        <td data-ng-if="isAdmin">{{ item.procedure.userRole.name}}</td>
+                        <td>{{item.procedure.prerequisiteType.name}}</td>
+                        <td>{{ item.prerequisite.name }}</td>
+                        <td>
+                            <span data-ng-if="outcome">
+                                {{ outcome.insertTime | date : 'dd/MM/yyyy H:mm:ss' }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <div data-ng-if="outcome">
+                            <span data-ng-if="outcome.result" class="label label-success" title="view notes"
+                                  data-ng-click="viewOutcome(item, outcome)">{{'common.button.task.positive'|translate}} &nbsp;<i
+                                    class="fa fa-eye" aria-hidden="true"></i></span>
+
+                            <span data-ng-if="!outcome.result" class="label label-danger" title="view notes"
+                                  data-ng-click="viewOutcome(item, outcome)">{{'common.button.task.negative'|translate}} &nbsp;<i
+                                    class="fa fa-eye" aria-hidden="true"></i></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div data-ng-if="outcome">
+                                {{ outcome.user.getFullName() }}
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <button class="btn btn-sm btn-info" data-ng-click="viewProcedure(item.procedure)"
+                                    data-ng-if__="!isccp" title="View procedure">
+                            <span class="visible-lg visible-sm visible-xs">{{'common.button.task.viewProcedure'|translate}} &nbsp;<i
+                                    class="fa fa-eye" aria-hidden="true"></i></span>
+                                <i class="fa fa-eye hidden-lg hidden-sm hidden-xs" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        <div class="panel panel-info"
+             data-ng-if="(tasks | filter : { frequency : { asNeeded : true }}: true).length > 0">
+            <div class="panel-heading">
+                {{'nav.tasks.sub.commonSub.monitorings.asNeeded'|translate}} -
+                {{'nav.tasks.sub.commonSub.monitorings.name'|translate}}
+            </div>
+            <div class="panel-body">
+
+                <table class="table table-condensed" wt-responsive-table>
+                    <thead>
+                    <tr>
+                        <th>{{'common.tableAndForm.id.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.title.name'|translate}}</th>
+                        <th data-ng-if="isAdmin">{{'common.tableAndForm.roleInCharge.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.prerequisite.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.subject.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.lastMonitored.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.lastOutcome.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.examiner.name'|translate}}</th>
+                        <!--<th>{{'common.tableAndForm.attachment.name'|translate}}</th>-->
+                        <th class="text-right">{{'common.tableAndForm.action.name'|translate}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr data-ng-repeat="item in tasks | filter : { frequency : { asNeeded : true }}: true | orderBy: -id"
+                        data-ng-init="outcome = item.outcomes[0]">
+                        <td>{{item.id}} <!--{{ monitoring }} {{ outcome }}--></td>
+                        <td>{{item.procedure.title}}</td>
+                        <td data-ng-if="isAdmin">{{ item.procedure.userRole.name}}</td>
+                        <td>{{item.procedure.prerequisiteType.name}}</td>
+                        <td>{{ item.prerequisite.name }}</td>
+                        <td>
+                            <span data-ng-if="outcome">
+                                {{ outcome.insertTime | date : 'dd/MM/yyyy H:mm:ss' }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <div data-ng-if="outcome">
+                            <span data-ng-if="outcome.result" class="label label-success" title="view notes"
+                                  data-ng-click="viewOutcome(item, outcome)">{{'common.button.task.positive'|translate}} &nbsp;<i
+                                    class="fa fa-eye" aria-hidden="true"></i></span>
+
+                            <span data-ng-if="!outcome.result" class="label label-danger" title="view notes"
+                                  data-ng-click="viewOutcome(item, outcome)">{{'common.button.task.negative'|translate}} &nbsp;<i
+                                    class="fa fa-eye" aria-hidden="true"></i></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div data-ng-if="outcome">
+                                {{ outcome.user.getFullName() }}
+                            </div>
+                        </td>
+                        <td class="text-right">
+                            <button class="btn btn-sm btn-info" data-ng-click="viewProcedure(item.procedure)"
+                                    data-ng-if__="!isccp" title="View procedure">
+                            <span class="visible-lg visible-sm visible-xs">{{'common.button.task.viewProcedure'|translate}} &nbsp;<i
+                                    class="fa fa-eye" aria-hidden="true"></i></span>
+                                <i class="fa fa-eye hidden-lg hidden-sm hidden-xs" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-sm btn-warning text-nowrap" data-ng-click="perform(item, outcome)"
+                                    title="Perform" data-ng-disabled="!isUntilToday(item.dueDate)">
+                            <span class="visible-lg visible-sm visible-xs">{{'common.button.task.perform'|translate}} &nbsp;<i
+                                    class="fa fa-check" aria-hidden="true"></i></span>
+                                <i class="fa fa-check hidden-lg hidden-sm hidden-xs" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel panel-info"
+             data-ng-if="(items | filter : { frequency : { asNeeded : true }}: true).length > 0">
+            <div class="panel-heading">
+                {{'nav.tasks.sub.commonSub.monitorings.asNeeded'|translate}} -
+                {{'nav.tasks.sub.commonSub.monitorings.name'|translate}}
+            </div>
+            <div class="panel-body">
+
+                <table class="table table-condensed" wt-responsive-table>
+                    <thead>
+                    <tr>
+                        <th>{{'common.tableAndForm.id.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.title.name'|translate}}</th>
+                        <th data-ng-if="isAdmin">{{'common.tableAndForm.roleInCharge.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.prerequisite.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.subject.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.lastMonitored.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.lastOutcome.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.examiner.name'|translate}}</th>
+                        <!--<th>{{'common.tableAndForm.attachment.name'|translate}}</th>-->
+                        <th class="text-right">{{'common.tableAndForm.action.name'|translate}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-repeat="item in items | filter : { frequency : { asNeeded : true }}: true | orderBy: -id;"
+                        data-ng-init="procedure = (procedures | filter : { id : item.procedure.id }:true)[0];
+					outcome = (outcomes | filter : { monitoring : { id : item.id }}:true | orderBy:'-insertTime')[0];
+					role = (userRoles | filter : { id : procedure.userRole.id } : true )[0]">
+                        <!-- | filter : { asNeeded : true } : true"> -->
+
+                        <td>{{item.id}} <!--{{ monitoring }} {{ outcome }}--></td>
+                        <td>{{procedure.title}}</td>
+                        <td data-ng-if="isAdmin">{{role.name}}</td>
+                        <td>{{item.procedure.prerequisiteType.name}}</td>
+                        <td>{{item.objectOfControl}}</td>
+                        <td>{{outcome.updateTime ? (outcome.updateTime | date : 'dd/MM/yyyy H:mm:ss') :
+                            (outcome.insertTime
+                            | date : 'dd/MM/yyyy H:mm:ss')}}
+                        </td>
+                        <td>
+                            <div data-ng-if="outcome">
+						<span data-ng-if="outcome.result" class="label label-success" title="view notes"
+                              data-ng-click="viewOutcome(item, outcome)">{{'common.button.task.positive'|translate}} &nbsp;<i
+                                class="fa fa-eye" aria-hidden="true"></i></span>
+
+						<span data-ng-if="!outcome.result" class="label label-danger" title="view notes"
+                              data-ng-click="viewOutcome(item, outcome)">{{'common.button.task.negative'|translate}} &nbsp;<i
+                                class="fa fa-eye" aria-hidden="true"></i></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div data-ng-if="outcome"
+                                 data-ng-init="examiner = ( people | filter : {id : outcome.user.id }:true)[0]">
+                                <span data-ng-if="examiner">{{ examiner.getFullName() }}</span>
+                            </div>
+                        </td>
+                        <!--<td>-->
+                        <!--<div data-ng-if="outcome.attachment">-->
+                        <!--<a class="label label-info" title="download" target="_blank" href="{{outcome.attachment.content}}">-->
+                        <!--{{ outcome.attachment.file.name }} - {{ outcome.attachment.file.size/1024 | number : 2 }} KB &nbsp; <i class="fa fa-download" aria-hidden="true"></i></a>-->
+                        <!--</div>-->
+                        <!--</td>-->
+                        <td class="text-right">
+                            <button class="btn btn-sm btn-info" data-ng-click="viewProcedure(procedure)"
+                                    data-ng-if__="!isccp" title="View procedure">
+                            <span class="visible-lg visible-sm visible-xs">{{'common.button.task.viewProcedure'|translate}} &nbsp;<i
+                                    class="fa fa-eye" aria-hidden="true"></i></span>
+                                <i class="fa fa-eye hidden-lg hidden-sm hidden-xs" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-sm btn-warning text-nowrap" data-ng-click="perform(item, outcome)"
+                                    title="Perform" data-ng-disabled="!isUntilToday(item.dueDate)">
+                            <span class="visible-lg visible-sm visible-xs">{{'common.button.task.perform'|translate}} &nbsp;<i
+                                    class="fa fa-check" aria-hidden="true"></i></span>
+                                <i class="fa fa-check hidden-lg hidden-sm hidden-xs" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel panel-warning"
+             data-ng-if="(tasks | filter : { frequency : { asNeeded : !true, justOnce : !true }}: true).length > 0">
+            <div class="panel-heading">
+               {{'nav.tasks.sub.commonSub.monitorings.planned'|translate}} -
+                {{'nav.tasks.sub.commonSub.monitorings.name'|translate}}
+            </div>
+            <div class="panel-body">
+                <table class="table table-condensed" wt-responsive-table>
+                    <thead>
+                    <tr>
+                        <th>{{'common.tableAndForm.id.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.title.name'|translate}}</th>
+                        <th data-ng-if="isAdmin">{{'common.tableAndForm.roleInCharge.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.prerequisite.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.subject.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.dueDate.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.frequency.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.lastMonitored.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.lastOutcome.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.examiner.name'|translate}}</th>
+                        <!--<th>{{'common.tableAndForm.attachment.name'|translate}}</th>-->
+                        <th class="text-right">{{'common.tableAndForm.action.name'|translate}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-repeat="item in (tasks | filter : { frequency : { asNeeded : !true, justOnce : !true }}: true | orderBy: 'dueDate')"
+                        data-ng-init="outcome = item.outcomes[0]"
+                        data-ng-init___="	procedure = (procedures | filter : { id : item.procedure.id } : true )[0];
+		    	  					outcome = (outcomes | filter : { monitoring : { id : item.id } } : true | orderBy:'-insertTime')[0];
+									role = (userRoles | filter : { id : procedure.userRole.id } : true )[0]">
+                        <!-- | filter : { asNeeded : true } : true"> -->
+
+                        <td>{{item.id}}</td>
+                        <td>{{item.procedure.title}}</td>
+                        <td data-ng-if="isAdmin">{{item.procedure.userRole.name}}</td>
+                        <td>{{item.procedure.prerequisiteType.name}}</td>
+                        <td>{{ item.prerequisite.name }}</td>
+                        <td>
+
+                            <strong class="text-danger" data-ng-if="isUntilToday(item.dueDate)">
+                                {{ item.dueDate | date : 'dd/MM/yyyy'}}
+                            </strong>
+
+                            <span data-ng-if="!isUntilToday(item.dueDate)">
+                                {{ item.dueDate | date : 'dd/MM/yyyy'}}
+                            </span>
+                        </td>
+                        <td class="text-nowrap">Every {{item.frequency.value}} {{item.frequency.period}}</td>
+                        <td>{{outcome.updateTime ? (outcome.updateTime | date : 'dd/MM/yyyy H:mm:ss') :
+                            (outcome.insertTime | date : 'dd/MM/yyyy H:mm:ss')}}
+                        </td>
+                        <td>
+                            <div data-ng-if="outcome">
+                                <span data-ng-if="outcome.result" class="label label-success" title="view notes"
+                                      data-ng-click="viewOutcome(item, outcome)">{{'common.button.task.positive'|translate}} &nbsp;<i
+                                        class="fa fa-eye" aria-hidden="true"></i></span>
+                                <span data-ng-if="!outcome.result" class="label label-danger" title="view notes"
+                                      data-ng-click="viewOutcome(item, outcome)">{{'common.button.task.negative'|translate}} &nbsp;<i
+                                        class="fa fa-eye" aria-hidden="true"></i></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div data-ng-if="outcome">
+                                {{ outcome.user.getFullName() }}
+                            </div>
+                        </td>
+                        <!--<td>-->
+                        <!--<div data-ng-if="outcome.attachment">-->
+                        <!--<attachment data-ng-model="outcome.attachment" readonly></attachment>-->
+                        <!--</div>-->
+                        <!--</td>-->
+                        <td class="text-right">
+                            <button class="btn btn-sm btn-info" data-ng-click="viewProcedure(item.procedure)"
+                                    data-ng-if__="!isccp" title="View procedure">
+                            <span class="visible-lg visible-sm visible-xs">{{'common.button.task.viewProcedure'|translate}} &nbsp;<i
+                                    class="fa fa-eye" aria-hidden="true"></i></span>
+                                <i class="fa fa-eye hidden-lg hidden-sm hidden-xs" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-sm btn-warning text-nowrap" data-ng-click="perform(item, outcome)"
+                                    title="Perform" data-ng-disabled="!isUntilToday(item.dueDate)">
+                            <span class="visible-lg visible-sm visible-xs">{{'common.button.task.perform'|translate}} &nbsp;<i
+                                    class="fa fa-check" aria-hidden="true"></i></span>
+                                <i class="fa fa-check hidden-lg hidden-sm hidden-xs" aria-hidden="true"></i>
+                            </button>
+                        </td>
+
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+
+        <div class="panel panel-warning"
+             data-ng-if="(items | filter : { frequency : { asNeeded : !true, justOnce : !true }}: true).length > 0">
+            <div class="panel-heading">
+                {{'nav.tasks.sub.commonSub.monitorings.planned'|translate}} -
+                {{'nav.tasks.sub.commonSub.monitorings.name'|translate}}
+            </div>
+            <div class="panel-body">
+                <table class="table table-condensed" wt-responsive-table>
+                    <thead>
+                    <tr>
+                        <th>{{'common.tableAndForm.id.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.title.name'|translate}}</th>
+                        <th data-ng-if="isAdmin">{{'common.tableAndForm.roleInCharge.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.prerequisite.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.subject.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.dueDate.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.frequency.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.lastMonitored.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.lastOutcome.name'|translate}}</th>
+                        <th>{{'common.tableAndForm.examiner.name'|translate}}</th>
+                        <!--<th>{{'common.tableAndForm.attachment.name'|translate}}</th>-->
+                        <th class="text-right">{{'common.tableAndForm.action.name'|translate}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-repeat="item in items | filter : { frequency : { asNeeded : !true, justOnce : !true }}: true | orderBy: -id;"
+                        data-ng-init="	procedure = (procedures | filter : { id : item.procedure.id } : true )[0];
+		    	  					outcome = (outcomes | filter : { monitoring : { id : item.id } } : true | orderBy:'-insertTime')[0];
+									role = (userRoles | filter : { id : procedure.userRole.id } : true )[0]">
+                        <!-- | filter : { asNeeded : true } : true"> -->
+
+                        <td>{{item.id}}</td>
+                        <td>{{procedure.title}}</td>
+                        <td data-ng-if="isAdmin">{{role.name}}</td>
+                        <td>{{item.procedure.prerequisiteType.name}}</td>
+                        <td>{{item.objectOfControl}}</td>
+                        <td><strong class="text-danger">{{ item.dueDate | date : 'dd/MM/yyyy H:mm'}}</strong></td>
+                        <td>Every {{item.frequency.value}} {{item.frequency.period}}</td>
+                        <td>{{outcome.updateTime ? (outcome.updateTime | date : 'dd/MM/yyyy H:mm:ss') :
+                            (outcome.insertTime | date : 'dd/MM/yyyy H:mm:ss')}}
+                        </td>
+                        <td>
+                            <div data-ng-if="outcome">
+							<span data-ng-if="outcome.result" class="label label-success" title="view notes"
+                                  data-ng-click="viewOutcome(item, outcome)">{{'common.button.task.positive'|translate}} &nbsp;<i
+                                    class="fa fa-eye" aria-hidden="true"></i></span>
+							<span data-ng-if="!outcome.result" class="label label-danger" title="view notes"
+                                  data-ng-click="viewOutcome(item, outcome)">{{'common.button.task.negative'|translate}} &nbsp;<i
+                                    class="fa fa-eye" aria-hidden="true"></i></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div data-ng-if="outcome"
+                                 data-ng-init="examiner = ( people | filter : {id : outcome.user.id }:true)[0]">
+                                <span data-ng-if="examiner">{{ examiner.getFullName() }}</span>
+                            </div>
+                        </td>
+                        <!--<td>-->
+                        <!--<div data-ng-if="outcome.attachment">-->
+                        <!--<attachment data-ng-model="outcome.attachment" readonly></attachment>-->
+                        <!--</div>-->
+                        <!--</td>-->
+                        <td class="text-right">
+                            <button class="btn btn-sm btn-info" data-ng-click="viewProcedure(procedure)"
+                                    data-ng-if__="!isccp" title="View procedure">
+                            <span class="visible-lg visible-sm visible-xs">{{'common.button.task.viewProcedure'|translate}} &nbsp;<i
+                                    class="fa fa-eye" aria-hidden="true"></i></span>
+                                <i class="fa fa-eye hidden-lg hidden-sm hidden-xs" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-sm btn-warning text-nowrap" data-ng-click="perform(item, outcome)"
+                                    title="Perform" data-ng-disabled="!isUntilToday(item.dueDate)">
+                            <span class="visible-lg visible-sm visible-xs">{{'common.button.task.perform'|translate}} &nbsp;<i
+                                    class="fa fa-check" aria-hidden="true"></i></span>
+                                <i class="fa fa-check hidden-lg hidden-sm hidden-xs" aria-hidden="true"></i>
+                            </button>
+                        </td>
+
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>

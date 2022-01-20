@@ -1,0 +1,473 @@
+<!doctype html>
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- Needs images, font... therefore can not be part of main.css -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet'
+          type='text/css'>
+    <!-- end Needs images -->
+
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css" />
+    <link rel="stylesheet" href="bower_components/toastr/toastr.css" />
+    <link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.css" />
+    <link rel="stylesheet" href="bower_components/textAngular/dist/textAngular.css" />
+    <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.min.css" />
+    <link rel="stylesheet" href="bower_components/weather-icons/css/weather-icons.css" />
+    <link rel="stylesheet" href="bower_components/weather-icons/css/weather-icons.min.css" />
+    <link rel="stylesheet" href="bower_components/weather-icons/css/weather-icons-wind.css" />
+    <link rel="stylesheet" href="bower_components/weather-icons/css/weather-icons-wind.min.css" />
+    <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css" />
+    <link rel="stylesheet" href="bower_components/angular-responsive-tables/release/angular-responsive-tables.css" />
+    <!-- endbower -->
+    <link rel="stylesheet" href="scripts/lib/print-headers-and-footers/src/print-headers-and-footers.css">
+    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
+    <link rel="stylesheet" href="scripts/lib/print-js/print.min.css">
+    <!-- endbuild -->
+
+    <!-- build:css({.tmp,client}) styles/main.css -->
+    <link rel="stylesheet" href="styles/bootstrap.css">
+    <link rel="stylesheet" href="styles/ui.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+
+    <!-- build:css(.) styles/font-awesome.css -->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- endbuild -->
+
+    <!--[if IE 9]>
+    <style>
+        /* rules for IE9 only */
+        .responsive {
+            overflow: hidden;
+        }
+
+        .responsive td:nth-child(odd), .responsive td:nth-child(even) {
+            float: left;
+            width: 100%;
+        }
+    </style>
+    <![endif]-->
+
+</head>
+<body ng-app="APP" id="body" data-custom-page
+      data-off-canvas-nav
+      data-ng-controller="AppCtrl">
+<!--[if lt IE 9]>
+<div class="lt-ie9-bg">
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser.</p>
+    <p>Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+</div>
+<![endif]-->
+
+<div style="display: none">
+    <div id="print-container" data-ng-bind-html="printContent"></div>
+</div>
+
+<script type="text/javascript">
+    var userip;
+</script>
+
+<!--
+<script type="text/javascript" src="https://l2.io/ip.js?var=userip"></script>
+
+<script type="text/javascript">
+  document.write("Your IP is :", userip);
+  alert(userip);
+</script>
+-->
+<!--
+    <div class="view-container">
+        <div data-ng-hide="isFullScreenPage()" data-ng-cloak>
+            <section data-ng-include=" 'views/common/header.html' " id="header" class="top-header"></section>
+            <aside data-ng-include=" 'views/common/nav.html' " id="nav-container"></aside>
+
+        </div>
+
+        <section ui-view id="content" class="animate-fade-up"></section>
+    </div>
+    -->
+
+<section id="app-container">
+    <section id="app"
+             class="app nav-collapsed-min"
+             data-ng-class=" { 'layout-boxed': main.layout === 'boxed',
+                                       'nav-collapsed-min': main.isMenuCollapsed
+            } ">
+
+        <header data-ng-include=" 'views/common/header.html' "
+                data-ng-if="!isFullScreenPage()"
+                id="header"
+                class="header-container "
+                data-ng-class="{ 'header-fixed': main.fixedHeader,
+                                          'bg-white': ['11','12','13','14','15','16','21'].indexOf(main.skin) >= 0,
+                                          'bg-dark': main.skin === '31',
+                                          'bg-primary': ['22','32'].indexOf(main.skin) >= 0,
+                                          'bg-success': ['23','33'].indexOf(main.skin) >= 0,
+                                          'bg-info-alt': ['24','34'].indexOf(main.skin) >= 0,
+                                          'bg-warning': ['25','35'].indexOf(main.skin) >= 0,
+                                          'bg-danger': ['26','36'].indexOf(main.skin) >= 0
+                         }"></header>
+
+        <div class="main-container">
+            <aside data-ng-include=" 'views/common/sidebar.html' "
+                   data-ng-if="!isFullScreenPage()"
+                   data-ng-if="true"
+                   id="nav-container"
+                   class="nav-container nav-vertical"
+                   data-ng-class="{ 'nav-fixed': main.fixedSidebar,
+                                            'bg-white': ['31','32','33','34','35','36'].indexOf(main.skin) >= 0,
+                                            'bg-dark': ['31','32','33','34','35','36'].indexOf(main.skin) < 0
+                           }">
+            </aside>
+            <section id="content" class="content-container {{main.pageTransition.class}}" ui-view>
+            </section>
+        </div>
+
+    </section>
+</section>
+
+
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/es5-shim/es5-shim.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-messages/angular-messages.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-touch/angular-touch.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/jquery.slimscroll/jquery.slimscroll.js"></script>
+<script src="bower_components/jquery.slimscroll/jquery.slimscroll.min.js"></script>
+<script src="bower_components/seiyria-bootstrap-slider/dist/bootstrap-slider.js"></script>
+<script src="bower_components/angular-bootstrap-slider/slider.js"></script>
+<script src="bower_components/angular-translate/angular-translate.js"></script>
+<script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
+<script src="bower_components/angular-translate-storage-local/angular-translate-storage-local.js"></script>
+<script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+<script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+<script src="bower_components/toastr/toastr.js"></script>
+<script src="bower_components/moment/moment.js"></script>
+<script src="bower_components/angular-moment/angular-moment.js"></script>
+<script src="bower_components/flot/jquery.flot.js"></script>
+<script src="bower_components/flot.tooltip/js/jquery.flot.tooltip.js"></script>
+<script src="bower_components/marked/lib/marked.js"></script>
+<script src="bower_components/angular-md5/angular-md5.js"></script>
+<script src="bower_components/angular-file-model/angular-file-model.js"></script>
+<script src="bower_components/angular-filereader/angular-filereader.min.js"></script>
+<script src="bower_components/angular-ui-validate/dist/validate.js"></script>
+<script src="bower_components/angular-ui-tree/dist/angular-ui-tree.js"></script>
+<script src="bower_components/jquery-ui/jquery-ui.js"></script>
+<script src="bower_components/angular-ui-sortable/sortable.js"></script>
+<script src="bower_components/angular-repeat-n/dist/angular-repeat-n.js"></script>
+<script src="bower_components/angular-base64/angular-base64.js"></script>
+<script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+<script src="bower_components/at-table/dist/angular-table.js"></script>
+<script src="bower_components/angular-promise-buttons/dist/angular-promise-buttons.js"></script>
+<script src="bower_components/api-check/dist/api-check.js"></script>
+<script src="bower_components/rangy/rangy-core.js"></script>
+<script src="bower_components/rangy/rangy-classapplier.js"></script>
+<script src="bower_components/rangy/rangy-highlighter.js"></script>
+<script src="bower_components/rangy/rangy-selectionsaverestore.js"></script>
+<script src="bower_components/rangy/rangy-serializer.js"></script>
+<script src="bower_components/rangy/rangy-textrange.js"></script>
+<script src="bower_components/textAngular/dist/textAngular.js"></script>
+<script src="bower_components/textAngular/dist/textAngular-sanitize.js"></script>
+<script src="bower_components/textAngular/dist/textAngularSetup.js"></script>
+<script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
+<script src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
+<script src="bower_components/fullcalendar/dist/fullcalendar.js"></script>
+<script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
+<script src="bower_components/angular-validation-match/dist/angular-validation-match.min.js"></script>
+<script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+<script src="bower_components/angular-scroll/angular-scroll.js"></script>
+<script src="bower_components/es6-shim/es6-shim.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/chart.js/dist/Chart.js"></script>
+<script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+<script src="bower_components/angular-responsive-tables/release/angular-responsive-tables.js"></script>
+<script src="bower_components/highcharts/highcharts.js"></script>
+<!-- endbower -->
+<script src="bower_components/flot/jquery.flot.resize.js"></script>
+<script src="bower_components/flot/jquery.flot.pie.js"></script>
+<script src="bower_components/flot/jquery.flot.stack.js"></script>
+<script src="bower_components/flot/jquery.flot.time.js"></script>
+
+<script src="bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
+<script src="bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
+
+
+
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+
+<script src="bower_components/moment/locale/it.js"></script>
+<script src="bower_components/moment/locale/en-gb.js"></script>
+<script src="bower_components/moment/locale/es.js"></script>
+<script src="bower_components/moment/locale/pt.js"></script>
+<script src="bower_components/moment/locale/ar.js"></script>
+<script src="bower_components/moment/locale/ja.js"></script>
+<script src="bower_components/moment/locale/ru.js"></script>
+<script src="bower_components/moment/locale/zh-cn.js"></script>
+
+
+<script src="scripts/lib/css-regions-polyfill/bin/css-regions-polyfill.min.js"></script>
+<script src="scripts/lib/print-headers-and-footers/src/print-headers-and-footers.js"></script>
+<script src="scripts/lib/print-js/print.min.js"></script>
+
+
+<script src="scripts/app.js"></script>
+<script src="scripts/app.config.js"></script>
+<script src="scripts/app.controller.js"></script>
+<script src="scripts/i18n.js"></script>
+<script src="scripts/filters/filters.js"></script>
+<script src="scripts/services/apiservice.js"></script>
+<script src="scripts/services/modalservice.js"></script>
+<script src="scripts/services/apiinterceptor.js"></script>
+<script src="scripts/services/resourceservice.js"></script>
+<script src="scripts/services/utilsservice.js"></script>
+<script src="scripts/services/notifyfactory.js"></script>
+<script src="scripts/services/permissionservice.js"></script>
+<script src="scripts/services/storageservice.js"></script>
+<script src="scripts/services/validationservice.js"></script>
+<script src="scripts/services/printservice.js"></script>
+
+<script src="scripts/controllers/common/animations.js"></script>
+<script src="scripts/controllers/common/auth.directive.js"></script>
+
+<script src="scripts/controllers/login.js"></script>
+<script src="scripts/controllers/main/home.js"></script>
+
+<script src="scripts/controllers/organization/list.js"></script>
+<script src="scripts/controllers/organization/view.js"></script>
+<script src="scripts/controllers/organization/organization.directive.js"></script>
+<script src="scripts/controllers/organization/templates/organizationDetail.js"></script>
+<script src="scripts/controllers/organization/templates/organizationSelector.js"></script>
+
+<script src="scripts/controllers/user_/list.js"></script>
+<script src="scripts/controllers/user_/view.js"></script>
+<script src="scripts/controllers/user_/user.directive.js"></script>
+<script src="scripts/controllers/user_/templates/userDetail.js"></script>
+<script src="scripts/controllers/user_/profile.js"></script>
+
+<script src="scripts/controllers/dashboard/dashboard.js"></script>
+<script src="scripts/controllers/dashboard/dashboard.directive.js"></script>
+<script src="scripts/controllers/dashboard/dashboard.noncomplainces.js"></script>
+
+<script src="scripts/controllers/audit/audit.system.js"></script>
+<script src="scripts/controllers/audit/audit.process.js"></script>
+<script src="scripts/controllers/audit/audit.planning.js"></script>
+
+<script src="scripts/controllers/prerequisite/prerequisite.js"></script>
+
+<script src="scripts/controllers/prerequisite/layout/layout.js"></script>
+<script src="scripts/controllers/prerequisite/layout/layout.directive.js"></script>
+
+<script src="scripts/controllers/prerequisite/waterSupply/waterSupply.js"></script>
+<script src="scripts/controllers/prerequisite/waterSupply/waterSupplyAnalysis.js"></script>
+<script src="scripts/controllers/prerequisite/waterSupply/waterSupply.directive.js"></script>
+
+<script src="scripts/controllers/prerequisite/airConditioning/airConditioning.js"></script>
+<script src="scripts/controllers/prerequisite/airConditioning/airConditioningEquipments.js"></script>
+<script src="scripts/controllers/prerequisite/airConditioning/airConditioning.directive.js"></script>
+
+<script src="scripts/controllers/prerequisite/cleaning/cleaning.js"></script>
+<script src="scripts/controllers/prerequisite/cleaning/cleaningProcedures.js"></script>
+<script src="scripts/controllers/prerequisite/cleaning/cleaningProducts.js"></script>
+<script src="scripts/controllers/prerequisite/cleaning/cleaning.directive.js"></script>
+
+
+<script src="scripts/controllers/prerequisite/wasteDisposal/wasteDisposal.js"></script>
+<script src="scripts/controllers/prerequisite/wasteDisposal/wasteDisposal.directive.js"></script>
+
+<script src="scripts/controllers/prerequisite/equipment/equipment.js"></script>
+<script src="scripts/controllers/prerequisite/equipment/equipmentEquipments.js"></script>
+<script src="scripts/controllers/prerequisite/equipment/equipment.directive.js"></script>
+
+<script src="scripts/controllers/prerequisite/pestControl/pestControl.js"></script>
+
+<script src="scripts/controllers/prerequisite/staffHygiene/staffHygiene.js"></script>
+<script src="scripts/controllers/prerequisite/staffHygiene/staffHygiene.directive.js"></script>
+<script src="scripts/controllers/prerequisite/staffHygiene/staffHygieneUsers.js"></script>
+<script src="scripts/controllers/prerequisite/staffHygiene/staffHygieneMonitorings.js"></script>
+
+<script src="scripts/controllers/prerequisite/packaging/packaging.js"></script>
+<script src="scripts/controllers/prerequisite/packaging/packaging.directive.js"></script>
+<script src="scripts/controllers/prerequisite/packaging/packagingMaterials.js"></script>
+<script src="scripts/controllers/prerequisite/packaging/packagingMonitorings.js"></script>
+
+<script src="scripts/controllers/prerequisite/flows/flows.js"></script>
+<script src="scripts/controllers/prerequisite/flows/flowCharts.js"></script>
+<script src="scripts/controllers/prerequisite/flows/flowDiagrams.js"></script>
+<script src="scripts/controllers/prerequisite/flows/flowDetail.js"></script>
+<script src="scripts/controllers/prerequisite/flows/flow.directive.js"></script>
+<script src="scripts/controllers/prerequisite/flows/templates/flowCanvas.js"></script>
+
+<script src="scripts/controllers/prerequisite/common/prerequisite.directive.js"></script>
+
+<script src="scripts/controllers/ccp/ccp.js"></script>
+<script src="scripts/controllers/procedure/procedure.js"></script>
+<script src="scripts/controllers/floor/floor.js"></script>
+
+<script src="scripts/controllers/user/user.js"></script>
+<script src="scripts/controllers/user/role.js"></script>
+<script src="scripts/controllers/user/organization.js"></script>
+<script src="scripts/controllers/user/profile.js"></script>
+<script src="scripts/controllers/user/supplier.js"></script>
+
+<script src="scripts/controllers/task/task.directive.js"></script>
+
+<script src="scripts/controllers/processCheck/processCheck.js"></script>
+<script src="scripts/controllers/systemCheck/systemCheck.js"></script>
+
+<script src="scripts/controllers/danger/danger.js"></script>
+<script src="scripts/controllers/danger/riskAnalysis.js"></script>
+<script src="scripts/controllers/danger/haccp.js"></script>
+<script src="scripts/controllers/danger/common/danger.directive.js"></script>
+
+<script src="scripts/controllers/noncompliance/noncompliance.js"></script>
+<script src="scripts/controllers/noncompliance/templates/noncompliance.detail.js"></script>
+
+<script src="scripts/controllers/training/course.js"></script>
+<script src="scripts/controllers/training/lesson.js"></script>
+
+<script src="scripts/controllers/setting/setting.data.js"></script>
+<script src="scripts/controllers/data/relatedFrequency.js"></script>
+<script src="scripts/controllers/data/equipmentTypes.js"></script>
+<script src="scripts/controllers/data/waterSupplyType.js"></script>
+<script src="scripts/controllers/data/wasteDisposalType.js"></script>
+<script src="scripts/controllers/data/airConditioningType.js"></script>
+<script src="scripts/controllers/data/pestControlType.js"></script>
+<script src="scripts/controllers/data/riskClasses.js"></script>
+<script src="scripts/controllers/data/data.js"></script>
+<script src="scripts/controllers/data/materialCategories.js"></script>
+<script src="scripts/controllers/data/food.js"></script>
+
+<script src="scripts/controllers/sampling/analysisParameters.js"></script>
+<script src="scripts/controllers/sampling/analysisParameterValues.js"></script>
+
+<script src="scripts/controllers/common/plan/plan.directive.js"></script>
+<script src="scripts/controllers/common/plan/plan.js"></script>
+<script src="scripts/controllers/common/plan/elementDetail.js"></script>
+
+<script src="scripts/controllers/common/canvas/canvas.js"></script>
+<script src="scripts/controllers/common/canvas/chart.js"></script>
+
+<script src="scripts/controllers/common/sidebar.js"></script>
+<script src="scripts/controllers/common/header.js"></script>
+<script src="scripts/controllers/common/component.directive.js"></script>
+<script src="scripts/controllers/common/datetimepicker.directive.js"></script>
+
+<script src="scripts/controllers/common/layout.module.js"></script>
+<script src="scripts/controllers/common/layout.directive.js"></script>
+
+<script src="scripts/controllers/common/page.module.js"></script>
+<script src="scripts/controllers/common/page.directive.js"></script>
+
+<script src="scripts/controllers/common/nav.module.js"></script>
+<script src="scripts/controllers/common/nav.directive.js"></script>
+
+<script src="scripts/controllers/common/templates/datePicker.js"></script>
+<script src="scripts/controllers/common/templates/dateTimePicker.js"></script>
+<script src="scripts/controllers/common/templates/editableField.js"></script>
+
+
+<script src="scripts/controllers/print/print.js"></script>
+
+<script src="scripts/models/riskClass.js"></script>
+<script src="scripts/models/prerequisite.js"></script>
+<script src="scripts/models/prerequisiteType.js"></script>
+<script src="scripts/models/floor.js"></script>
+<script src="scripts/models/command.js"></script>
+<script src="scripts/models/layout.js"></script>
+<script src="scripts/models/waterSupply.js"></script>
+<script src="scripts/models/waterSupplyType.js"></script>
+<script src="scripts/models/airConditioning.js"></script>
+<script src="scripts/models/airConditioningType.js"></script>
+<script src="scripts/models/cleaning.js"></script>
+<script src="scripts/models/wasteDisposal.js"></script>
+<script src="scripts/models/wasteDisposalType.js"></script>
+<script src="scripts/models/equipment.js"></script>
+<script src="scripts/models/pestControl.js"></script>
+<script src="scripts/models/pestControlType.js"></script>
+<script src="scripts/models/staffHygiene.js"></script>
+
+<script src="scripts/enums/color.js"></script>
+<script src="scripts/models/shape.js"></script>
+
+<script src="scripts/models/flow/diagram.js"></script>
+<script src="scripts/models/flow/shape.js"></script>
+<script src="scripts/models/flow/entity.js"></script>
+<script src="scripts/models/flow/rectangle.js"></script>
+<script src="scripts/models/flow/ellipse.js"></script>
+<script src="scripts/models/flow/rhombus.js"></script>
+<script src="scripts/models/flow/parallelogram.js"></script>
+<script src="scripts/models/flow/anchorPoint.js"></script>
+<script src="scripts/models/flow/arrow.js"></script>
+
+<script src="scripts/models/monitoring.js"></script>
+<script src="scripts/models/monitoringOutcome.js"></script>
+<script src="scripts/models/procedure.js"></script>
+
+<script src="scripts/models/person.js"></script>
+<script src="scripts/models/userRole.js"></script>
+<script src="scripts/models/organization.js"></script>
+<script src="scripts/models/organizationPlace.js"></script>
+<script src="scripts/models/organizationCertification.js"></script>
+<script src="scripts/models/profile.js"></script>
+<script src="scripts/models/grant.js"></script>
+
+<script src="scripts/models/frequency.js"></script>
+<script src="scripts/models/relatedFrequency.js"></script>
+<script src="scripts/models/equipmentTypes.js"></script>
+<script src="scripts/models/eEquipment.js"></script>
+<script src="scripts/models/outcome.js"></script>
+
+<script src="scripts/models/course.js"></script>
+<script src="scripts/models/training.js"></script>
+<script src="scripts/models/participant.js"></script>
+
+<script src="scripts/models/packagingMaterial.js"></script>
+<script src="scripts/models/materialCategory.js"></script>
+<script src="scripts/models/supplier.js"></script>
+<script src="scripts/models/danger.js"></script>
+<script src="scripts/models/riskMap.js"></script>
+
+<script src="scripts/models/processCheck.js"></script>
+<script src="scripts/models/processCheckPlanning.js"></script>
+<script src="scripts/models/processCheckOutcome.js"></script>
+
+<script src="scripts/models/systemCheck.js"></script>
+<script src="scripts/models/systemCheckRequirement.js"></script>
+<script src="scripts/models/systemCheckPlanning.js"></script>
+<script src="scripts/models/systemCheckOutcome.js"></script>
+<script src="scripts/models/noncompliance.js"></script>
+
+<script src="scripts/models/analysisParameter.js"></script>
+<script src="scripts/models/analysisParameterValue.js"></script>
+
+<script src="scripts/models/context.js"></script>
+<script src="scripts/models/attachment.js"></script>
+
+<script src="scripts/models/chart.js"></script>
+
+<script src="config/scripts/config.js"></script>
+<!-- endbuild -->
+</body>
+</html>

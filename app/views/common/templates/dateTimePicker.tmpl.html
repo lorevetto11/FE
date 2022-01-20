@@ -1,0 +1,25 @@
+
+<div class="form-inline">
+  
+   <div class="input-group ui-datepicker">
+    <input type="text" 
+           class="form-control"
+           uib-datepicker-popup="{{format}}"
+           ng-model="date"
+           is-open="opened"
+           datepicker-options="dateOptions" 
+           date-disabled="disabled(date, mode)"
+           ng-required="true" 
+           current-text="Oggi"
+           clear-text="Pulisci il campo"
+           close-text="Annulla">
+    <span class="input-group-addon" ng-click="open($event)"><i class="fa fa-calendar"></i></span>
+  </div>
+
+  <div class="form-group" style="margin-left:20px">
+    <label>{{'date.hours'|translate}}: </label>
+    <select class="form-control" ng-model="hour" ng-change="onChangeHour()" ng-options="h for h in hours track by h"></select>
+     <label>{{'date.minutes'|translate}}: </label>
+     <select class="form-control" ng-model="minute" ng-change="onChangeMinute()" ng-options="m for m in minutes"></select>
+  </div>
+</div>

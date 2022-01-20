@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        <h4>Equipments</h4>
+
+       <table class="table table-condensed">
+           <thead>
+               <tr>
+                   <th>{{'common.tableAndForm.name.name'|translate}}</th>
+                   <th>{{'common.tableAndForm.description.name'|translate}}</th>
+                   <th>{{'common.tableAndForm.place.name'|translate}}</th>
+                   <th>{{'common.tableAndForm.maintenance.name'|translate}}</th>
+                   <th>{{'common.tableAndForm.entrustedCompany.name'|translate}}</th>
+                   <th>{{'common.tableAndForm.personInCharge.name'|translate}}</th>
+               </tr>
+           </thead>
+           <tbody>
+               <tr data-ng-repeat="item in items">
+                   <td>{{item.equipment.name}}</td>
+                   <td>{{item.equipment.description}}</td>
+                   <td>{{item.maintenance.period}} {{item.maintenance.periodType}}</td>
+                   <td>{{item.maintenance.company}}</td>
+                   <td>{{item.maintenance.personInCharge}}</td>
+               </tr>
+           </tbody>
+       </table>
+    </div>
+</div>

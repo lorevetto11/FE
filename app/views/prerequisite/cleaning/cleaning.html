@@ -1,0 +1,47 @@
+<div class="prerequisite-water-supply full-width">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div>
+				{{'nav.prerequisites.sub.cleaningAndSanitizing'|translate}}
+				<div class="inline" style="margin-left:20px">
+					<button class="btn btn-default" data-ng-class="{'btn-primary' : command.action == Command.action.ADD}"
+							data-ng-click="add()">{{'common.button.form.add'|translate}}&nbsp;&nbsp;
+						<i class="glyphicon glyphicon-pencil"></i>
+					</button>
+
+					<button class="btn btn-default" data-ng-class="{'btn-primary' : mode == MODE.SHOW_ANALYSIS}"
+							data-ng-click="showAnalysis()">{{'common.button.prerequisites.analysis'|translate}}&nbsp;&nbsp;
+						<i class="glyphicon glyphicon-duplicate"></i>
+					</button>
+<!--
+					<button class="btn btn-default" data-ng-class="{'btn-primary' : mode == MODE.SHOW_PROCEDURES}"
+							data-ng-click="showProcedures()">Procedures&nbsp;&nbsp;
+						<i class="glyphicon glyphicon-bullhorn"></i>
+					</button>
+-->
+					<button class="btn btn-default" data-ng-class="{'btn-primary' : mode == MODE.SHOW_PRODUCTS}"
+							data-ng-click="showProducts()">{{'common.button.prerequisites.products'|translate}}&nbsp;&nbsp;
+						<i class="glyphicon glyphicon-folder-close"></i>
+					</button>
+
+				</div>
+			</div>
+		</div>
+		<div class="panel-body">
+			<plan data-command="command" data-ng-if="mode == MODE.SHOW_PLAN"
+				  data-items="items"
+				  data-on-save="onSaveItem(item, floor)"
+				  data-on-delete="onDeleteItem(item)"></plan>
+
+			<prerequisite-analysis data-prerequisite-type="command.type" data-ng-model="items"  data-ng-if="mode == MODE.SHOW_ANALYSIS">
+			</prerequisite-analysis>
+
+			<cleaning-procedures data-ng-if="mode == MODE.SHOW_PROCEDURES">
+			</cleaning-procedures>
+
+			<cleaning-products data-ng-if="mode == MODE.SHOW_PRODUCTS">
+			</cleaning-products>
+
+		</div>
+	</div>
+</div>

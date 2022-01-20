@@ -1,0 +1,234 @@
+<div data-ng-if="selectedOrganization && loading">
+	<br/><br/><br/><br/><br/>
+	<h3 class="text-primary text-center">
+		<i class="fa fa-2x fa-circle-o-notch fa-spin"></i><br/>
+		{{'common.tableAndForm.loading.name'|translate}}...
+	</h3>
+	<br/><br/><br/><br/><br/>
+</div>
+
+<div class="user-role-home" data-ng-if="!loading">
+	<div class="row">
+		<div class="col-md-4" data-ng-class="{'hidden-sm hidden-xs' : selectedItem}">
+			<div class="panel">
+				<div class="panel-heading"> {{'nav.people.sub.commonSub.search'|translate}}</div>
+				<div class="panel-body">
+					<div class="panel-search-section">
+						<div class="row">
+							<div class="col-xs-10">
+								<input id="searchUsers" type="text" data-ng-model="filter.keyword"
+								       class="form-control"
+								       placeholder="{{'people.panel.search.searchPlaceholder'|translate}}">
+							</div>
+							<div class="col-xs-2"><!-- TODO auth="USER_SUPPLIER_ADD"-->
+								<div class="pull-right">
+									<div class="pull-right btn btn-primary" data-ng-click="add(form)" role="button"
+									     tabindex="0">
+										<i class="fa fa-plus"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<hr/>
+
+
+					<div class="text-center" data-ng-show="!loading">
+						<small>{{ (items | filter : itemsFilter).length }} fornitori trovati</small>
+					</div>
+
+					<div style="max-height: 100%">
+						<div class="slimScrollDiv"
+						     style="position: relative; overflow: hidden; width: auto; height: 100%;">
+							<div class="filterbox-vertical" data-slim-scroll=""
+							     style="overflow: hidden; width: auto; height: 100%;">
+
+								<section class="panel panel-default mail-categories">
+
+									<ul class="list-group">
+										<li class="list-group-item" ng-class="{'active': selectedItem.id == item.id}"
+										    data-ng-click="edit(item)"
+										    data-ng-repeat="item in items | filter : itemsFilter | orderBy: 'name'">
+											<a>{{item.name}}
+												<small class="pull-right help-block">
+													{{item.organization.name }}
+												</small>
+											</a>
+										</li>
+									</ul>
+
+								</section>
+							</div>
+							<div class="slimScrollBar"
+							     style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 2287px;">
+
+							</div>
+							<div class="slimScrollRail"
+							     style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;">
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col col-md-8" >
+			<div class="panel animate-if" data-ng-if="selectedItem">
+				<div class="panel-heading">
+					<div class="media">
+						<div class="media-body media-middle">
+							<div class="media-heading">
+								<span data-ng-if="selectedItem.id">{{ selectedItem.id }} - </span>
+								<span>{{'nav.people.sub.commonSub.details'|translate}}</span>
+							</div>
+							<span style="text-transform: none">{{selectedItem.name}}</span>
+						</div>
+						<div class="media-right">
+							<div class="btn btn-default" data-ng-click="cancel()" role="button" tabindex="0">
+								<i class="fa fa-times"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel-body">
+					<div class="user-role-detail">
+						<form name="form" class="form-validation" novalidate>
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3">
+										<label>{{'common.tableAndForm.name.name'|translate}}:</label></div>
+									<div class="col col-sm-9">
+										<input class="form-control" data-ng-model="selectedItem.name"
+										       name="name" required/>
+										<small class="text-danger"
+										       data-ng-if="form.name.$dirty && form.name.$error.required">
+											This is a required field!
+										</small>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3">
+										<label>{{'common.tableAndForm.description.name'|translate}}:</label></div>
+									<div class="col col-sm-9">
+										<input class="form-control" data-ng-model="selectedItem.description"
+										       name="description"/>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3"><label>{{'common.tableAndForm.vatNumber.name'|translate}}:</label></div>
+									<div class="col col-sm-9">
+										<input class="form-control" data-ng-model="selectedItem.vatNumber" data-ng-pattern="pattern.VATNUMBER" name="vatNumber" required/>
+										<small class="text-danger" data-ng-if="form.vatNumber.$dirty && form.vatNumber.$error.required" >
+											This is a required field!
+										</small>
+										<small class="text-danger" data-ng-if="form.vatNumber.$error.pattern" >
+											The VAT number has to be valid!
+											Learn more at <a target="_blank" href="https://www.vatlive.com/eu-vat-rules/eu-vat-number-registration/eu-vat-number-formats/">EU VAT number formats</a>.
+										</small>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3"><label>{{'common.tableAndForm.contact.name'|translate}}:</label></div>
+									<div class="col col-sm-9">
+										<input class="form-control" data-ng-model="selectedItem.contact" name="contact" required/>
+										<small class="text-danger" data-ng-if="form.contact.$dirty && form.contact.$error.required" >
+											This is a required field!
+										</small>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3"><label>{{'common.tableAndForm.address.name'|translate}}:</label></div>
+									<div class="col col-sm-9">
+										<input class="form-control" data-ng-model="selectedItem.address" data-ng-pattern="pattern.LEGALRESIDENCE" name="address" required/>
+										<small class="text-danger" data-ng-if="form.address.$dirty && form.address.$error.required" >
+											This is a required field!
+										</small>
+										<small class="text-danger" data-ng-if="form.address.$error.pattern" >
+											The postal address can be maximum 100 characters long!
+										</small>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3">
+										<label>{{'common.tableAndForm.email.name'|translate}}:</label></div>
+									<div class="col col-sm-9">
+										<input class="form-control"
+										       name="email"
+										       data-ng-model="selectedItem.email"
+										       data-ng-pattern="pattern.EMAIL"
+										       required/>
+										<small class="text-danger"
+										       data-ng-if="form.email.$dirty && form.email.$error.required">
+											This is a required field!
+										</small>
+										<small class="text-danger"
+										       data-ng-if="form.email.$error.pattern">
+											The email has to be valid!
+											Learn more at <a target="_blank" href="https://en.wikipedia.org/wiki/Email_address">Email address</a>.
+										</small>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3">
+										<label>{{'common.tableAndForm.phone.name'|translate}}:</label>
+									</div>
+									<div class="col col-sm-9">
+										<input class="form-control" type="tel" placeholder="+14155552671"
+										       data-ng-model="selectedItem.phone" data-ng-pattern="pattern.PHONE"
+										       name="phone"/>
+										<small class="text-danger"
+										       data-ng-if="form.phone.$dirty && form.phone.$error.pattern">
+											The phone number has to be valid!
+											Learn more at <a target="_blank" href="https://en.wikipedia.org/wiki/E.164">E.164</a>.
+										</small>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3"><label>{{'common.tableAndForm.organization.name'|translate}}:</label>
+									</div>
+									<div class="col col-sm-9">
+										<select class="form-control" data-ng-model="selectedItem.organization.id"
+										        data-ng-options="organization.id as ('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' | limitTo: kinshipLevels.get(organization.id)*3)  + organization.name for organization in organizations"
+										        name="organization" required>
+										</select>
+										<small class="text-danger"
+										       data-ng-if="form.organization.$dirty && form.organization.$error.required">
+											This is a required field!
+										</small>
+									</div>
+								</div>
+							</div>
+						</form>
+						<div>
+							<button class="btn btn-primary pull-right" type="button"
+							        data-ng-click="save(selectedItem, form)"> <!-- TODO auth="USER_SUPPLIER_EDIT"-->
+								{{'common.button.form.save'|translate}} &nbsp; <i
+									class="glyphicon glyphicon-floppy-disk"></i></button>
+
+							<button class="btn btn-default" type="button" ng-click="delete(selectedItem)"
+							        data-ng-if="selectedItem.id != null" > <!-- TODO auth="USER_SUPPLIER_DELETE"-->
+								{{'common.button.form.delete'|translate}} &nbsp; <i
+									class="glyphicon glyphicon-trash"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

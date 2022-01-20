@@ -1,0 +1,50 @@
+<div>
+	<div data-ng-if="loading">
+		<br/><br/><br/><br/><br/>
+		<h3 class="text-primary text-center">
+			<i class="fa fa-2x fa-circle-o-notch fa-spin"></i><br/>
+			{{'common.tableAndForm.loading.name'|translate}}...
+		</h3>
+		<br/><br/><br/><br/><br/>
+	</div>
+
+	<div data-ng-if="!loading">
+		<div class="prerequisites-audits-detail-modal">
+			<div class="modal-header">
+				<h3 class="modal-title">Details</h3>
+			</div>
+			<div class="modal-body">
+
+				<form name="form" novalidate>
+
+					<div class="form-group">
+						<div class="row">
+							<div class="col col-sm-2"><label>{{'common.tableAndForm.name.name'|translate}}:</label></div>
+							<div class="col col-sm-10">
+								<input type="text" class="form-control" data-ng-model="item.name" required>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="row">
+							<div class="col col-sm-2"><label>{{'common.tableAndForm.description.name'|translate}}:</label></div>
+							<div class="col col-sm-10">
+								<input type="text" class="form-control" data-ng-model="item.description">
+							</div>
+						</div>
+					</div>
+
+				</form>
+
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary pull-right" type="button" ng-click="save(item, form)">
+					{{'common.button.form.save'|translate}}
+					<i class="fa fa-archive"></i>
+				</button>
+				<button class="btn btn-default pull-left" type="button" ng-click="cancel()">{{'common.button.form.cancel'|translate}}</button>
+			</div>
+		</div>
+	</div>
+</div>

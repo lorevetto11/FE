@@ -1,0 +1,86 @@
+<div class="page page-profile">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-profile">
+                <div class="panel-heading  clearfix">
+                    <a href="" class="pull-left profile">
+                        <img ng-if="userImage.image" ng-src="{{userImage.image}}" class="img-circle img80_80">
+                        <img ng-if="!userImage.image" ng-src="images/userImage.png" class="img-circle img80_80">
+                    </a>
+                    <h3>{{currentUser.fullName}}</h3>
+                </div>
+                <ul class="list-unstyled list-info">
+                    <li>
+                        <span class="icon glyphicon glyphicon-user"></span>
+                        <label data-translate="user.profile.username"></label>
+                        {{currentUser.username}}
+                    </li>
+                    <li>
+                        <span class="icon glyphicon glyphicon-envelope"></span>
+                        <label data-translate="user.profile.email"></label>
+                        {{currentUser.email}}
+                    </li>
+                    <li>
+                        <span class="icon glyphicon glyphicon-earphone"></span>
+                        <label data-translate="user.profile.phone"></label>
+                        {{currentUser.phone}}
+                    </li>
+                    <li>
+                        <span class="icon glyphicon glyphicon-flag"></span>
+                        <label data-translate="user.profile.language"></label>
+                        {{ 'language.'+currentUser.language.code | translate}}
+                    </li>
+                    <!--
+                    <li>
+                      <div class="input-group">
+                        <input type="file" class="form-control" file-model="fileModel"></input>
+                        <span class="input-group-btn" style="padding-left:15px">
+                          <button type="file" class="btn btn-sm btn-default" ng-click="changeImage()"><i class="fa fa-fw fa-camera"></i> {{'user.profile.changeImage'|translate}}</button>
+                        </span>
+                      </div>
+                      <div ng-if="preview" class="profile" style="width:80px;margin-top:15px">
+                          <img alt="" ng-src="{{preview.image}}" class="img-circle img80_80">
+                      </div>
+                    </li>
+                    -->
+                    <li>
+                      <button type="button" class="btn btn-sm btn-primary" ng-click="showPassword=true">
+                          <i class="fa fa-fw fa-key"></i> {{'user.profile.changePassword'|translate}}
+                      </button>
+                    </li>
+                    <li>
+                        <form class="form-horizontal form-validation" name="validationFormStep1" novalidate>
+                            <div class="form-group_" ng-show="showPassword">
+                                <label data-translate="user.profile.oldPassword"></label>
+
+                                <div class="input-group">
+                                    <input type="password" ng-model="oldPassword"
+                                           class="form-control"
+                                           name="oldPassword" />
+                                </div>
+                                <label data-translate="user.profile.newPassword"></label>
+
+                                <div class="input-group">
+                                    <input type="password" ng-model="newPassword"
+                                        class="form-control" name="newPassword" />
+                                </div>
+                                <label data-translate="user.profile.confirmNewPassword"></label>
+
+                                <div class="input-group">
+                                    <input type="password" ng-model="confirmNewPassword"
+                                        class="form-control" name="confirmNewPassword"  ui-validate="{invalidField : 'checkPassword($value)'}"/>
+                                      <p class="help-block" ng-if="validationFormStep1.confirmNewPassword.$error.invalidField">{{'user.profile.passwordNotMatch'|translate}}</p>
+                                </div>
+
+                            </div>
+                        </form>
+                    </li>
+					<li>
+						<button  ng-show="showPassword" type="button" class="btn btn-sm btn-primary" ng-click="changePassword()">{{'user.profile.savePassword'|translate}}</button>
+                   </li>
+				</ul>
+            </div>
+        </div>
+    </div>
+</div>

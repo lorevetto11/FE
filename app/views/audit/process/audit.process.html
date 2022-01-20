@@ -1,0 +1,302 @@
+<div data-ng-if="selectedOrganization && loading">
+    <br/><br/><br/><br/><br/>
+    <h3 class="text-primary text-center">
+        <i class="fa fa-2x fa-circle-o-notch fa-spin"></i><br/>
+        {{ 'loading' | translate }}
+    </h3>
+    <br/><br/><br/><br/><br/>
+</div>
+
+<div data-ng-if="!inProgressItem && !loading">
+    <div class="panel panel-info" data-ng-if="inProgressItems.length > 0">
+        <div class="panel-heading">{{'nav.audit.sub.commonSub.inProgress'|translate}}&nbsp;{{'nav.audit.sub.processChecks'|translate}}</div>
+        <div class="panel-body">
+            <table class="table table-condensed">
+                <thead>
+                <tr>
+                    <th>{{'common.tableAndForm.id.name'|translate}}</th>
+                    <th>{{'common.tableAndForm.planningDate.name'|translate}}</th>
+                    <th>{{'common.tableAndForm.company.name'|translate}}</th>
+                    <th>{{'common.tableAndForm.checks.name'|translate}}</th>
+                    <th>{{'common.tableAndForm.startedDate.name'|translate}}</th>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="item in inProgressItems">
+                    <td>{{ $index + 1}}</td>
+                    <td>{{ item.date | date : 'dd-MMM-yyyy'}}</td>
+                    <td>{{ item.company.name }}</td>
+                    <td>{{ item.processchecks.length }}</td>
+                    <td>{{ item.startDate | date : 'dd-MMM-yyyy HH:mm'}}</td>
+                    <td class="text-right">
+                        <button class="btn btn-sm btn-line-info" data-ng-click="takeInProgress(item)">
+                            {{'common.button.form.view'|translate}} &nbsp; <i class="glyphicon glyphicon-eye-open"></i>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-md-6 col-lg-8">
+            <div class="panel">
+                <div class="panel-body">
+                    <div data-ng-if="eventSources" class="animate-if">
+                        <div id="calendar" ui-calendar="uiConfig.calendar" class="span8 calendar"
+                             data-ng-model="eventSources"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-md-6 col-lg-4">
+            <div class="panel" data-ng-if="selectedItem" class="animate-if">
+                <div class="panel-heading">{{'nav.audit.sub.commonSub.details'|translate}}<span class="pull-right">{{'audit.panel.details.status.'+selectedItem.status|translate}}</span>
+                </div>
+                <div class="panel-body">
+                    <div>
+                        <form novalidate>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col col-sm-3">
+                                        <label>{{'common.tableAndForm.company.name'|translate}}:</label></div>
+                                    <div class="col col-sm-9">{{ selectedItem.company.name }}</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col col-sm-3">
+                                        <label>{{'common.tableAndForm.date.name'|translate}}:</label></div>
+                                    <div class="col col-sm-9">{{ selectedItem.date | date : 'd-MMM-yyyy' }}</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col col-sm-3">
+                                        <label>{{'common.tableAndForm.checks.name'|translate}}:</label></div>
+                                    <div class="col col-sm-9">
+                                        <div data-ng-repeat="check in selectedItem.processchecks" class="form-group">
+                                            <div class="input-group"
+                                                 data-ng-init="check = (processChecks | filter : { id : selectedItem.processchecks[$index].id}:true )[0]">
+                                                {{ $index + 1 }} {{ check.prerequisiteType.name }} - {{ check.name }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div>
+                            <button class="btn btn-primary pull-right" data-ng-if="selectedItem.status == 'created'"
+                                    type="button" data-ng-click="takeInProgress(selectedItem)">
+                                {{'common.button.audit.startAudit'|translate}} &nbsp; <i
+                                    class="glyphicon glyphicon-edit"></i></button>
+
+                            <button class="btn btn-line-primary pull-left" data-ng-if="selectedItem.status != 'created'"
+                                    type="button" data-ng-click="takeInProgress(selectedItem)">
+                                {{'common.button.audit.viewAudit'|translate}} &nbsp; <i
+                                    class="glyphicon glyphicon-eye-open"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div data-ng-if="inProgressItem && !loading" data-ng-init="viewProcessCheckDetail(inProgressItem.processchecks[0])">
+
+    <div class="panel">
+        <div class="panel-heading">
+            {{'nav.audit.sub.processChecks'|translate}} - <strong>{{inProgressItem.company.name}}</strong>
+
+            <div class="pull-right">
+                <div data-ng-if="inProgressItem.status == 'inprogress'" class="btn btn-warning" title="complete"
+                     data-ng-click="completeCheck(inProgressItem)">
+                    {{'common.button.audit.markAsCompleted'|translate}} &nbsp;<i class="fa fa-ok"></i>
+                </div>
+                <span data-ng-if="inProgressItem.status == 'closed'">{{'audit.panel.details.status.closed'|translate}}</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="btn btn-default" title="cancel" data-ng-click="cancelInProgressItem()">
+                    <i class="fa fa-times"></i>
+                </div>
+            </div>
+
+        </div>
+        <div class="panel-body">
+
+            <div class="row">
+                <div class="col col-sm-4 col-lg-3">
+                    <div class="panel-search-section">
+                        <div style="max-height: 100%">
+                            <div class="slimScrollDiv"
+                                 style="position: relative; overflow: hidden; width: auto; height: 100%;">
+                                <div class="filterbox-vertical" data-slim-scroll=""
+                                     style="overflow: hidden; width: auto; height: 100%;">
+                                    <section class="panel panel-default mail-categories">
+                                        <ul class="list-group">
+                                            <li class="list-group-item"
+                                                ng-class="{'active': selectedProcessCheck.id == processCheck.id}"
+                                                data-ng-click="viewProcessCheckDetail(processCheck)"
+                                                data-ng-repeat="check in inProgressItem.processchecks"
+                                                data-ng-init="processCheck = (processChecks | filter : { id : check.id }: true)[0]">
+                                                <a>
+                                                    {{processCheck.name }}
+													<span class="pull-right">
+														{{ processCheck.prerequisiteType.name }}
+													</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </section>
+                                </div>
+                                <div class="slimScrollBar"
+                                     style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 2287px;">
+                                </div>
+                                <div class="slimScrollRail"
+                                     style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col col-sm-8 col-lg-9">
+                    <div class="panel panel-default" data-ng-if="selectedProcessCheck">
+
+                        <div class="panel-body">
+                            <!--	 data-ng-init="outcome = (outcomes | filter : { processCheckId : selectedProcessCheck.id }:true)[0]">
+                                        noncompliance = (noncompliances | filter : { id: outcome.noncomplianceId }:true)[0];
+                                        user = (users | filter : { id : outcome.userExaminerId}:true)[0]">
+    -->
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col col-sm-2">
+                                        <label>{{'common.tableAndForm.name.name'|translate}}</label>
+                                    </div>
+                                    <div class="col col-sm-10">
+                                        {{ selectedProcessCheck.type }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col col-sm-2">
+                                        <label>{{'common.tableAndForm.description.name'|translate}}</label>
+                                    </div>
+                                    <div class="col col-sm-10">
+										<span>
+											{{ selectedProcessCheck.description }}
+										</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col col-sm-2">
+                                        <label>{{'common.tableAndForm.evidence.name'|translate}}</label>
+                                    </div>
+                                    <div class="col col-sm-10">
+										<span>
+											{{ selectedProcessCheckOutcome.evidence }}
+										</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col col-sm-2">
+                                        <label>{{'common.tableAndForm.nonCompliance.name'|translate}}</label>
+                                    </div>
+                                    <div class="col col-sm-10">
+                                        <div data-ng-if="selectedProcessNoncompliance">
+                                            <strong data-ng-class="{ 'text-danger': selectedProcessNoncompliance.closeDate == null, 'text-success' : selectedProcessNoncompliance.closeDate != null}">
+                                                {{ selectedProcessNoncompliance.description }}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-right">
+                                <button class="btn btn-sm btn-info"
+                                        data-ng-click="perform(selectedProcessCheck)">
+                                    {{'common.button.audit.perform'|translate}} &nbsp;<i
+                                        class="glyphicon glyphicon-alert"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger"
+                                        data-ng-click="addNoncompliance(selectedProcessCheck)">
+                                    {{'common.button.audit.nonCompliance'|translate}} &nbsp;<i
+                                        class="glyphicon glyphicon-alert"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
+							<table class="table table-bordered table-condensed">
+								<thead>
+									<tr>
+										<th>#</th>
+										<td>Requirement</td>
+										<td>Evidence</td>
+										<td>Attachment</td>
+										<td>Non-compliance</td>
+										<td>Examiner</td>
+										<td></td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr data-ng-repeat="requirement in requirements | filter : { systemCheckId :  selectedSystemCheck.id }: true"
+										data-ng-init="outcome = (outcomes | filter : { systemCheckRequirementId : requirement.id }:true)[0];
+												noncompliance = (noncompliances | filter : { id: outcome.noncomplianceId }:true)[0];
+												user = (users | filter : { id : outcome.userExaminerId}:true)[0]">
+										<td>{{ $index + 1 }} {{ noncompliance }}</td>
+										<td>
+											{{ requirement.name }}
+										</td>
+										<td>
+											{{ outcome.evidence }}
+										</td>
+										<td>
+											<div data-ng-if="outcome.attachment">
+												{{ outcome.attachment.file.name }} - {{ outcome.attachment.file.size/1024 | number : 2 }} KB
+												<a class="btn btn-sm btn-line-primary" target="_blank" href="{{outcome.attachment.content}}">Download &nbsp; <i class="fa fa-download" aria-hidden="true"></i></a>
+											</div>
+										</td>
+										<td>
+											{{ noncompliance.description }}
+										</td>
+										<td>
+											{{ user.getFullname() }}
+										</td>
+										<td class="text-right">
+											<button class="btn btn-sm btn-info" data-ng-disabled="inProgressItem.status != 'inprogress'"
+													data-ng-click="performRequirement(requirement)">
+												Perform &nbsp;<i class="glyphicon glyphicon-alert"></i>
+											</button>
+											<button class="btn btn-sm btn-danger" data-ng-disabled="inProgressItem.status != 'inprogress'"
+													data-ng-click="addNonCompliance(requirement)">
+												Add Non-Compliance &nbsp;<i class="glyphicon glyphicon-alert"></i>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+</div>

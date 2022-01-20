@@ -1,0 +1,115 @@
+<style>
+
+
+</style>
+
+<div class="print organization">
+
+    <div class="panel panel-primary title">
+        <div class="panel-heading">
+            Dati Aziendali
+        </div>
+    </div>
+
+    <div>
+        <div class="form-group">
+            <h1 class="text-primary">{{ organization.name }}</h1>
+        </div>
+
+        <br/>
+        <div class="form-group">
+            <div class="row">
+                <div class="col col-sm-3"><label>{{'common.tableAndForm.legalResidence.name'|translate}}:</label>
+                </div>
+                <div class="col col-sm-9">
+                    {{ organization.legalResidence }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-sm-3"><label>{{'organization.organizationOwner'|translate}}:</label>
+                </div>
+                <div class="col col-sm-9">
+                    {{ organization.description }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-sm-3">
+                    <label>{{'common.tableAndForm.vatNumber.name'|translate}}:</label></div>
+                <div class="col col-sm-9">
+                    {{ organization.vatNumber }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-sm-3">
+                    <label>{{'common.tableAndForm.email.name'|translate}}:</label></div>
+                <div class="col col-sm-9">
+                    {{ organization.email }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-sm-3">
+                    <label>{{'common.tableAndForm.phone.name'|translate}}:</label>
+                </div>
+                <div class="col col-sm-9">
+                    {{ organization.phone }}
+                </div>
+            </div>
+        </div>
+        <div data-ng-if="organization.organization">
+            <div class="row">
+                <div class="col col-sm-3"><label>{{'common.tableAndForm.parentOrganization.name'|translate}}:</label>
+                </div>
+                <div class="col col-sm-9">
+                    {{organization.organization.name }}
+                </div>
+            </div>
+        </div>
+
+
+        <div data-ng-if="places.length > 0">
+            <div>
+                <h4>{{'common.tableAndForm.productionSites.name'|translate|uppercase}}</h4>
+            </div>
+
+            <div class="panel panel-primary" data-ng-repeat="place in places">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col col-sm-3">
+                                <label>{{'common.tableAndForm.place.name'|translate}}:</label>
+                            </div>
+                            <div class="col col-sm-9">
+                                {{ place.name }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col col-sm-3">
+                                <label>{{'common.tableAndForm.address.name'|translate}}:</label>
+                            </div>
+                            <div class="col col-sm-9">
+                                {{ place.address }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col col-sm-3">
+                                <label>{{'common.tableAndForm.activity.name'|translate}}:</label>
+                            </div>
+                            <div class="col col-sm-9">
+                                <span data-ng-bind-html="place.description"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

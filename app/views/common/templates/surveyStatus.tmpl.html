@@ -1,0 +1,14 @@
+
+<span class='label' ng-class='
+  {{status}} == 0 ? "label-success" : 
+  {{status}} == 1 ? "label-info" : 
+  {{status}} == 2 ? "label-warning" : 
+  {{status}} == 3 ? "label-danger" : "label-default"'
+>
+
+    <i class='fa' ng-class="getIconClass()"></i>&nbsp;&nbsp;
+   
+   {{getLabel()}}
+</span>
+
+

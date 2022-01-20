@@ -1,0 +1,86 @@
+<div class="prerequisites-audits-detail-modal">
+	<div class="modal-header">
+		<h3 class="modal-title" data-ng-if="editMode">{{ originalItem.id != null ? 'Edit' : 'Add new'}} {{'nav.prerequisites.sub.commonSub.processCheck'|translate}}</h3>
+		<h3 class="modal-title" data-ng-if="!editMode">{{'nav.prerequisites.sub.commonSub.details'|translate}}</h3>
+	</div>
+	<div class="modal-body">
+		<form novalidate>
+
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.name.name'|translate}}:</label></div>
+					<div class="col col-sm-10" data-ng-if="editMode">
+						<input type="text" class="form-control" data-ng-model="item.name"/>
+					</div>
+					<div class="col col-sm-10" data-ng-if="!editMode">
+						<span>{{item.name}}</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.type.name'|translate}}:</label></div>
+					<div class="col col-sm-10">
+						<select class="form-control" data-ng-model="item.type" data-ng-disabled="!editMode"
+								data-ng-options="type as ('processCheck.type.'+type | translate) for type in processCheckTypes">
+						</select>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.description.name'|translate}}:</label></div>
+					<div class="col col-sm-10">
+						<div data-ng-if="editMode">
+							<textarea class="form-control" rows="10" data-ng-model="item.description"></textarea>
+						</div>
+						<div data-ng-if="!editMode">
+							<pre>{{item.description}}</pre>
+						</div>
+					</div>
+				</div>
+			</div>
+<!--
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-sm-2"><label>Frequency:</label></div>
+					<div data-ng-if="editMode">
+						<div class="col-sm-10">
+							<div class="row">
+								<div class="col col-sm-2 text-right">
+									Every:
+								</div>
+								<div class="col col-sm-2">
+									<input type="number" class="form-control"  data-ng-disabled="item.frequency.asNeeded || item.frequency.justOnce"
+										   data-ng-model="item.frequency.value" />
+								</div>
+								<div class="col col-sm-2">
+									<select class="form-control" data-ng-model="item.frequency.scale" data-ng-disabled="item.frequency.asNeeded || item.frequency.justOnce"
+											data-ng-options="scale as scale for scale in frequencyScales">
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div data-ng-if="!editMode">
+						<div class="col col-sm-10">
+							<span>{{item.frequency | frequency }}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			-->
+		</form>
+	</div>
+	<div class="modal-footer">
+		<div data-ng-if="editMode">
+			<button class="btn btn-primary pull-right" type="button" ng-click="save()" data-ng-disabled="item.type == null || item.name == null">{{'common.button.form.save'|translate}}</button>
+			<button class="btn btn-default" type="button" ng-click="cancel()">{{'common.button.form.cancel'|translate}}</button>
+		</div>
+		<div data-ng-if="!editMode">
+			<button class="btn btn-default" type="button" ng-click="cancel()">{{'common.button.form.close'|translate}}</button>
+		</div>
+	</div>
+</div>

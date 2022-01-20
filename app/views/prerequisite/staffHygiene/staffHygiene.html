@@ -1,0 +1,24 @@
+<div class="prerequisite-staff-hygiene full-width">
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div>
+				{{'nav.prerequisites.sub.staffHygiene'|translate}}
+				<div class="inline" style="margin-left:20px">
+					<button class="btn btn-default" data-ng-class="{'btn-primary' : mode == MODE.SHOW_MONITORINGS}"
+							data-ng-click="showMonitorings()">{{'common.button.prerequisites.monitorings'|translate}}&nbsp;&nbsp;
+						<i class="glyphicon glyphicon-duplicate"></i>
+					</button>
+
+				</div>
+			</div>
+		</div>
+		<div class="panel-body">
+
+			<staff-hygiene-users  data-ng-if="mode == MODE.SHOW_USERS"></staff-hygiene-users>
+
+			<staff-hygiene-monitorings  data-ng-if="mode == MODE.SHOW_MONITORINGS"></staff-hygiene-monitorings>
+
+		</div>
+	</div>
+</div>

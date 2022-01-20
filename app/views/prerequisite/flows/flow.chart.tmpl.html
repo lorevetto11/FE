@@ -1,0 +1,64 @@
+<div>
+
+	<div data-ng-if="loading">
+		<br/><br/><br/><br/><br/>
+		<h3 class="text-primary text-center">
+			<i class="fa fa-2x fa-circle-o-notch fa-spin"></i><br/>
+			{{'common.tableAndForm.loading.name'|translate}}...
+		</h3>
+		<br/><br/><br/><br/><br/>
+	</div>
+
+	<div data-ng-if="!loading" id="wrapper">
+
+		<div data-ng-if="!diagrams || diagrams.length == 0" class="alert alert-warning">
+			<p>{{'common.message.common.noDiagrams'|translate}}</p>
+		</div>
+
+		<div data-ng-if="diagrams.length > 0">
+
+			<uib-tabset active="active" data-ng-init="selectDiagram(diagrams[0])">
+				<uib-tab ng-repeat="diagram in diagrams | orderBy: 'name' " heading="{{diagram.name}}" data-ng-click="selectDiagram(diagram)">
+				</uib-tab>
+			</uib-tabset>
+
+
+			<div style="margin-top:10px" class="row">
+				<div data-ng-if="loadingShapesAndEntities">
+					<br/><br/><br/><br/><br/>
+					<h3 class="text-primary text-center">
+						<i class="fa fa-2x fa-circle-o-notch fa-spin"></i><br/>
+						{{'common.tableAndForm.loading.name'|translate}}...
+					</h3>
+					<br/><br/><br/><br/><br/>
+				</div>
+				<div class="col col-lg-8" >
+					<flow-canvas data-ng-if="!loadingShapesAndEntities"
+								 data-command="command" data-shapes="shapes"></flow-canvas>
+					<div class="zoom-icons" data-ng-if="!loadingShapesAndEntities">
+						<div data-ng-mousedown="zoomIn()">
+							<i class="fa fa-search-plus fa-2x"></i>
+						</div>
+						<div data-ng-mousedown="zoomOut()">
+							<i class="fa fa-search-minus fa-2x"></i>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="col col-lg-4" data-ng-if="!loadingShapesAndEntities">
+					<element-diagram-detail
+							data-ng-if="selectedShape != null"
+							data-ng-model="selectedShape"
+							data-on-save="onSave({item: item})"
+							data-on-delete="onDelete({item: item})"></element-diagram-detail>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+

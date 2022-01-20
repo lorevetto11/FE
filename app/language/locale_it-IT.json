@@ -1,0 +1,1274 @@
+{
+  "lang": {
+    "it-IT": "Italiano",
+    "en-US": "Inglese",
+    "es": "Spanish",
+    "pt": "Português",
+    "zh-cn": "中文",
+    "ja": "日本語",
+    "ru": "Ру�?�?кий �?зык",
+    "ar": "العربية"
+  },
+  "date": {
+    "hours": "Ore",
+    "minutes": "Minuti",
+    "seconds": "Secondi"
+  },
+  "user": {
+    "username": "Username",
+    "password": "Password",
+    "role": {
+      "Administrator": "Amministratore",
+      "Moderator": "Moderatore",
+      "User": "Utente"
+    }
+  },
+  "header": {
+    "profile": {
+      "options": {
+        "myProfile": "Profilo personale",
+        "logOut": "Esci"
+      }
+    }
+  },
+  "nav": {
+    "organization": {
+      "name": "Organizzazione",
+      "title": "Organizzazione"
+    },
+    "dashboard": {
+      "name": "Cruscotto",
+      "title": "Cruscotto",
+      "sub": {
+        "name": "SCM - Main Check Panel",
+        "nonCompliances": "Non conformità",
+        "monitorings": "Monitoraggi",
+        "dataAnalysis": "Analisi del dato"
+      }
+    },
+    "prerequisites": {
+      "name": "Prerequisiti",
+      "title": "Prerequisiti",
+      "sub": {
+        "name": "Prerequisiti",
+        "layouts": "Layouts",
+        "waterSupply": "Approvvigionamento idrico",
+        "airConditioning": "Condizionamento aria",
+        "wasteDisposal": "Gestione rifiuti",
+        "equipmentMaintenance": "Manutenzione attrezzature",
+        "cleaningAndSanitizing": "Pulizia e sanificazione",
+        "pestControl": "Controllo infestanti",
+        "staffHygiene": "Igiene dello staff",
+        "flows": "Flussi",
+        "packaging": {
+          "name": "Materiali confezionamento",
+          "sub": {
+            "material": "Materiali",
+            "supplier": "Fornitori"
+          }
+        },
+        "commonSub": {
+          "analysisArchive": "Archivio analisi",
+          "processCheck": "Verifica di processo",
+          "equipments": "Attrezzature",
+          "products": "Prodotti",
+          "monitorings": "Monitoraggi",
+          "procedures": "Procedure",
+          "equipment": "Dettaglio equipaggiamento",
+          "details": "Dettagli",
+          "add": "Aggiungi nuovo monitoraggio",
+          "update": "Aggiorna monitoraggio",
+          "usersTrainingList": "Lista corsi utente"
+        }
+      }
+    },
+    "data": {
+      "name": "Data",
+      "title": "Data",
+      "sub": {
+        "name": "Repository data",
+        "procedures": "Procedure",
+        "systemCheck": "Verifica di sistema",
+        "processCheck": "Verifica di processo",
+        "dangers": "Pericoli",
+        "floors": "Piani",
+        "prerequisiteRelatedFrequency": "Frequenza relativa ai prerequisiti",
+        "analysisParameters": "Parametri di analisi",
+        "analysisParameterValues": "Valori parametri di analisi",
+        "riskClasses": "Classi di rischio",
+        "equipmentTypes": "Attrezzature",
+        "waterSupplyTypes": "Forniture d'acqua",
+        "wasteDisposalTypes": "Smmaltimento rifiuti",
+        "airConditioningTypes": "Condizionatori d'aria",
+        "pestControlTypes": "Controllo infestanti",
+        "materialCategory": "Categorie materiale",
+        "food": "Cibo",
+        "commonSub": {
+          "monitorings": "Monitoraggi",
+          "materials": "Materiali",
+          "search": "Cerca",
+          "details": "Dettagli",
+          "perform": "Svolgi",
+          "analysisParameters": "Parametri di analisi",
+          "messages": {
+            "noMaterials": "Nessun materiale"
+          }
+        }
+      }
+    },
+    "people": {
+      "name": "Personale",
+      "title": "Personale",
+      "sub": {
+        "name": "Utenti",
+        "users": "Utenti",
+        "organization": "Organizzazione",
+        "usersRoles": "Ruoli utente",
+        "profile": "Profilo",
+        "commonSub": {
+          "search": "Cerca",
+          "details": "Dettagli"
+        }
+      }
+    },
+    "training": {
+      "name": "Formazione",
+      "title": "Formazione",
+      "sub": {
+        "name": "Formazione",
+        "courses": "Corsi",
+        "lessons": {
+          "name": "Lezioni",
+          "sub": {
+            "courseDetails": "Dettaglio del corso",
+            "markParticipants": "Seleziona partecipanti",
+            "addLesson": "Aggiungi lezione"
+          }
+        },
+        "commonSub": {
+          "search": "Cerca",
+          "details": "Dettaglio"
+        }
+      }
+    },
+    "tasks": {
+      "name": "Compiti",
+      "title": "Compiti",
+      "sub": {
+        "name": "",
+        "prerequisite": "Compiti dei prerequisiti",
+        "ccp": "Compiti dei CCP",
+        "prerequisiteTasks": "Compiti dei prerequisiti",
+        "ccpTasks": "Compiti dei CCP",
+        "oprpTasks": "Compiti OPRP",
+        "commonSub": {
+          "perform": "Svolgi",
+          "monitorings": {
+            "name": "Monitoraggi",
+            "justOnce": "Solo una volta",
+            "asNeeded": "Al bisogno",
+            "planned": "Pianificato"
+          }
+        }
+      }
+    },
+    "audit": {
+      "name": "Audit",
+      "title": "Audit",
+      "sub": {
+        "name": "Audit",
+        "systemChecks": "Verifiche di sistema",
+        "processChecks": "Verifiche di processo",
+        "nonCompliances": "Non conformità",
+        "open": "Aperta",
+        "closed": "Chiusa",
+        "planning": "Pianificazione",
+        "commonSub": {
+          "details": "Dettaglio",
+          "inProgress": "In svolgimento",
+          "checkRequirement": "Richiesta verifica",
+          "perform": "Svolgi",
+          "nonCompliance": "Dettaglio non conformità"
+        }
+      }
+    },
+    "nonCompliance": {
+      "name": "Non conformità",
+      "title": "Titolo",
+      "sub": {
+        "name": "Non conformità",
+        "open": "Aperta",
+        "closed": "Chiusa",
+        "commonSub": {
+          "add": "Aggiungi nuova non conformità",
+          "update": "Aggiorna non conformità",
+          "details": "Dettaglio non conformità"
+        }
+      }
+    },
+    "riskAnalysis": {
+      "name": "Analisi del rischio",
+      "title": "Analisi del rischio",
+      "sub": {
+        "name": "Analisi del rischio",
+        "commonSub": {
+          "riskMap": "Mappa del rischio",
+          "survey": "Questionario",
+          "phases": "Fasi",
+          "dangers": "Pericoli",
+          "materialsInvolved": "Materiali coinvolti"
+        },
+        "messages": {
+          "noPhases": "Nessuna fase trovata!",
+          "noDangers": "Nessun pericolo trovato!",
+          "noMaterials": "Nessun materiale involuto trovato!",
+          "noDiagrams": "Nessun diagramma di flusso trovato, creane uno prima!"
+        }
+      }
+    },
+    "haccp": {
+      "name": "HACCP",
+      "title": "Hazard Analysis and Critical Control Points",
+      "sub": {
+        "name": "HACCP"
+      }
+    },
+    "settings": {
+      "name": "Settaggi",
+      "sub": {
+        "name": "Settaggi",
+        "data": "Dati salvati in locale"
+      }
+    },
+    "agenda": {
+      "name": "Agenda / Disponibilità"
+    },
+    "prints":{
+      "name":"Stampe",
+      "sub": {
+        "name": "Stampa documenti"
+      }
+    }
+  },
+
+  "aaa": "prova",
+  "dashboard": {
+    "message": {
+      "good": "OK!",
+      "bad": "NO!"
+    },
+    "table": {
+      "prerequisites": "Prerequisiti",
+      "haccp": "HACCP"
+    }
+  },
+  "prerequisites": {
+    "panel": {
+      "details": {
+        "content": "Contenuto",
+        "monitoring": "Monitoraggio",
+        "design": "Disegna"
+      },
+      "monitorings": {
+        "outcome": {
+          "positive": "Positivo",
+          "negative": "Negativo"
+        },
+        "trainings": "Formazioni",
+        "monitorings": "Monitoraggi"
+      }
+    }
+  },
+  "data": {
+    "panel": {
+      "search": {
+        "searchPlaceholder": "Cerca...",
+        "anyRoleValue": "Qualsiasi ruolo",
+        "anyPrerequisiteValue": "Qualsiasi prerequisito",
+        "anyTypeValue": "Qualsiasi tipo"
+      },
+      "details": {
+        "anyRiskValue": "qualsiasi rischio",
+        "searchUserRolePlaceholder": "Cerca ruolo utente...",
+        "newFloorValue": "Nuovo piano",
+        "newParameterValue": "Nuovo parametro",
+        "thresholdValue": "Valore soglia",
+        "anyPrerequisiteValue": "qualsiasi prerequisito"
+      }
+    }
+  },
+  "people": {
+    "panel": {
+      "search": {
+        "searchPlaceholder": "Cerca...",
+        "newTypeValue": "Nuovo tipo"
+      },
+      "details": {
+        "newRoleValue": "Nuovo ruolo",
+        "all": "Tutti"
+      }
+    }
+  },
+  "training": {
+    "panel": {
+      "search": {
+        "searchPlaceholder": "Cerca..."
+      },
+      "details": {
+      },
+      "lesson": {
+        "choice": {
+          "user": "Utente",
+          "users": "Utenti",
+          "has": "L'utente ha",
+          "have": "Gli utenti hanno"
+        },
+        "passedExam": "Esame superato"
+      }
+    }
+  },
+  "tasks": {
+    "panel": {
+      "ccp": "Punti critici di controllo"
+    }
+  },
+  "audit": {
+    "panel": {
+      "planning": {
+        "planProcessCheck": "Pianifica verifica di processo",
+        "planSystemCheck": "Pianifica verifica di sistema"
+      },
+      "details": {
+        "status": {
+          "created": "Creato",
+          "inprogress": "In svolgimento",
+          "closed": "Chiusa"
+        },
+        "selectCompanyValue": "-- Seleziona azienda --",
+        "selectProcessCheckValue": "-- Seleziona una verifica di processo --",
+        "selectSystemCheckValue": "-- Seleziona una verifica di sistema --"
+      }
+    }
+  },
+  "nonCompliance": {
+    "type": {
+      "prerequisite": "Prerequisiti",
+      "systemCheck": "Verifica di sistema",
+      "processCheck": "Verifica di processo",
+      "haccp": "HACCP"
+    },
+    "status": {
+      "open": "Aperta",
+      "closed": "Chiusa"
+    },
+    "closeNonCompliance": "chiudi non conformità"
+  },
+  "riskAnalysis": {
+    "panel": {
+      "riskMap": {
+        "label": "Rischio",
+        "seriousness": {
+          "risk": "Rischio",
+          "nonRelevant": "Non rilevante",
+          "significant": "Significativo",
+          "critical": "Critico",
+          "serious": "Serio"
+        },
+        "frequency": {
+          "probability": "Probabilità",
+          "improbable": "Improbabile",
+          "occasional": "Occasionale",
+          "probable": "Probabile",
+          "frequent": "Frequente"
+        }
+      },
+      "ccpTable": {
+        "heading": {
+          "d1": "Esistono misure preventive di controllo?",
+          "d2": "Il controllo in questa fase è necessario per la sicurezza del prodotto?",
+          "d3": "Questa fase elimina o riduce il pericolo ad un livello accettabile?",
+          "d4": "Può avvenire una contaminazione in questa fase o può crescere il pericolo o è già aumentato nelle fasi precedenti e non sono previsti prima di questa fase CCP o OPRP?",
+          "d5": "Una fase successiva può eliminare o ridurre il pericolo a livelli accettabili?",
+          "d6": "Quale misura utilizzo?"
+        },
+        "yesCells": {
+          "d1": "Si (Vai a D2)",
+          "d2": "Si (Modifica la fase e ritorna a D1)",
+          "d3": "Si (E' un CCP)",
+          "d4": "Si (Vai a D4)",
+          "d5": "Si (STOP, non è un CCP)",
+          "ccp": "CCP"
+        },
+        "noCells": {
+          "d1": "No (Vai a D1.1)",
+          "d2": "No (STOP, non è un CCP)",
+          "d3": "No (Vai a D3)",
+          "d4": "No (STOP, non è un CCP)",
+          "d5": "No (Scegli tra CCP o OPRP)",
+          "oprp": "OPRP"
+        }
+      }
+    }
+  },
+  "haccp": {
+  },
+  "organization": {
+    "organizationOwner" : "Rappresentante legale"
+  },
+  "common": {
+    "button": {
+      "form": {
+        "add": "Aggiungi",
+        "create": "Crea",
+        "update": "Aggiorna",
+        "save": "Salva",
+        "reassesses": "Rivaluta",
+        "saveAll": "Salva tutto",
+        "delete": "Elimina",
+        "cancel": "Cancella",
+        "close": "Chiudi",
+        "link": "Link",
+        "upload": "Carica",
+        "download": "Scarica",
+        "view": "Vedi",
+        "clear": "Pulisci",
+        "clone": "Clona",
+        "login": "Login",
+        "startDate": "Data inizio",
+        "edit": "Modifica"
+      },
+      "prerequisites": {
+        "processCheck": "Verifica di processo",
+        "analysis": "Analisi",
+        "equipments": "Attrezzature",
+        "monitorings": "Monitoraggi",
+        "products": "Prodotti",
+        "viewTrainings": "Visualizza formazione",
+        "viewCharts": "Visualizza diagrammi",
+        "newEquipment": "Nuovo ",
+        "background": "Indietro",
+        "foreground": "Davanti",
+        "configure": "Configura",
+        "viewSupplier": "Vedi fornitore",
+        "editMaterial": "Modifica",
+        "diagrams": "Diagrammi",
+        "viewMonitoring": "Vedi monitoraggio"
+      },
+      "training": {
+        "courseDetail": "Dettaglio del corso",
+        "markParticipants": "Seleziona partecipanti"
+      },
+      "task": {
+        "positive": "Positivo",
+        "negative": "Negativo",
+        "viewProcedure": "Visualizza procedura",
+        "perform": "Esegui",
+        "nonCompliance": "Non conformità"
+      },
+      "audit": {
+        "today": "Oggi",
+        "markAsCompleted": "Segna come completata",
+        "perform": "Esegui",
+        "nonCompliance": "Non conformità",
+        "startAudit": "Avvia audit",
+        "viewAudit": "Visualizza audit"
+      },
+      "common": {
+        "book": "Prenota",
+        "requestReservation": "Richiedi prenotazione"
+      }
+    },
+    "message": {
+      "login": {
+        "unauthorized": "Username o password errati!",
+        "error": "Errore Login!",
+        "credits": "Inserisci i tuoi dati ed entra nel Sistema!"
+      },
+      "prerequisites": {
+        "noAnalysis": "Non sono stati trovati dati analisi per il tipo di prerequisito"
+      },
+      "tasks": {
+        "empty": "OK. Non c'è nessun compito da svolgere."
+      },
+      "dialog": {
+      },
+      "common": {
+        "sizeExceed": "The file exceeds the maximum size allowed (100 KB)",
+        "noFloors": "Non sono stati trovati piani. Devi definire almeno un piano attraverso la",
+        "noDiagrams": "Non sono stati trovati diagrammi. Devi definirne almeno uno",
+        "noFloorsSettingsPage": "pagina impostazioni",
+        "fileUploading": "Caricamento file",
+        "enterUrlRemoteResource": "Inserisci URL"
+      }
+    },
+    "disease": {
+      "description": "Descrizione",
+      "controlMeasure": "Misura di controllo",
+      "criticalLimit": "Limite critico",
+      "acceptanceLimit": "Limite accettabilità",
+      "procedures": "Procedure",
+      "riskLevel": {
+        "noRisk": "Nessuno",
+        "low": "Basso",
+        "medium": "Medio",
+        "high": "Alto",
+        "veryHigh": "Molto alto"
+      }
+    },
+    "tableAndForm": {
+      "vatNumber": {
+        "name": "Partita IVA",
+        "title": ""
+      },
+      "privacy": {
+        "name": "Privacy",
+        "title": ""
+      },
+      "acceptanceLimit": {
+        "name": "Limite accettabilità",
+        "title": ""
+      },
+      "maintainer": {
+        "name": "Manutentore",
+        "title": ""
+      },
+      "equipmentType": {
+        "name": "Tipo Attrezzatura",
+        "title": ""
+      },
+      "legalResidence": {
+        "name": "Indirizzo legale",
+        "title": ""
+      },
+      "phone": {
+        "name": "Telefono",
+        "title": ""
+      },
+      "lastMonitoredDate": {
+        "name": "Ultima data monitorata",
+        "title": ""
+      },
+      "size": {
+        "name": "Dimensioni",
+        "title": ""
+      },
+      "lastMonitoredOutcome": {
+        "name": "Ultimo risultato monitorato",
+        "title": ""
+      },
+      "monitorings": {
+        "name": "Monitoraggi",
+        "title": ""
+      },
+      "involvedDiagrams": {
+        "name": "Diagrammi coinvolti",
+        "title": ""
+      },
+      "filters": {
+        "name": "Filtri",
+        "title": ""
+      },
+      "clickToModify": {
+        "name": "Clicca per modificare",
+        "title": ""
+      },
+      "productionSites": {
+        "name": "Indirizzo sede produttiva",
+        "title": ""
+      },
+      "certifications": {
+        "name": "Certificazioni",
+        "title": ""
+      },
+      "phaseStatus": {
+        "CCP": "Punto Critico di Controllo",
+        "OPRP": "Programma Prerequisito Operativo",
+        "NONE": "Non CCP/OPRP"
+      },
+      "otherAttachments": {
+        "name": "Altri allegati",
+        "title": ""
+      },
+      "denomination": {
+        "name": "Denominazione",
+        "title": ""
+      },
+      "newDanger": {
+        "name": "Nuovo pericolo",
+        "title": ""
+      },
+      "newAnalysisParameter": {
+        "name": "Nuovo parametro analisi",
+        "title": ""
+      },
+      "procedure": {
+        "name": "Procedura",
+        "title": ""
+      },
+      "capacity": {
+        "name": "Capacità",
+        "title": ""
+      },
+      "duration": {
+        "name": "Durata",
+        "title": ""
+      },
+      "dateAndHour": {
+        "name": "Data e ora",
+        "title": ""
+      },
+      "dateFrom": {
+        "name": "Data da",
+        "title": ""
+      },
+      "typology": {
+        "name": "Tipologia",
+        "title": ""
+      },
+      "dateTo": {
+        "name": "Data a",
+        "title": ""
+      },
+      "state": {
+        "name": "Stato",
+        "title": ""
+      },
+      "destinationRole": {
+        "name": "Ruolo di destinazione",
+        "title": ""
+      },
+      "phase1": {
+        "name": "Fase 1",
+        "title": ""
+      },
+      "dueDate": {
+        "name": "Data scadenza",
+        "title": ""
+      },
+      "phase2": {
+        "name": "Fase 2",
+        "title": ""
+      },
+      "phase3": {
+        "name": "Fase 3",
+        "title": ""
+      },
+      "phase4": {
+        "name": "Fase 4",
+        "title": ""
+      },
+      "phase5": {
+        "name": "Fase 5",
+        "title": ""
+      },
+      "loading": {
+        "name": "Caricamento",
+        "title": ""
+      },
+      "selectAnOrganizationToManageDataOnIt": {
+        "name": "Seleziona un'organizzazione per gestire i dati",
+        "title": ""
+      },
+      "selectAnOrganization": {
+        "name": "Seleziona un'organizzazione",
+        "title": ""
+      },
+      "changeOrganization": {
+        "name": "Cambia organizzazione",
+        "title": ""
+      },
+      "nProcedures": {
+        "name": "N° procedure",
+        "title": ""
+      },
+      "equipment": {
+        "name": "Attrezzature",
+        "title": ""
+      },
+      "name": {
+        "name": "Name",
+        "title": "Nome tipo prerequisito"
+      },
+      "nonCompliance": {
+        "name": "NC",
+        "title": "Non conformità"
+      },
+      "positive": {
+        "name": "Positivo",
+        "title": ""
+      },
+      "negative": {
+        "name": "Negativo",
+        "title": ""
+      },
+      "createdBy": {
+        "name": "Creato da",
+        "title": ""
+      },
+      "closedBy": {
+        "name": "Chiuso da",
+        "title": ""
+      },
+      "threshold": {
+        "name": "Soglia",
+        "title": ""
+      },
+      "requiredField": {
+        "name": "Questo è un campo necessario!",
+        "title": ""
+      },
+      "issuingAuthority": {
+        "name": "autorità rilasciante",
+        "title": ""
+      },
+      "address": {
+        "name": "Indirizzo",
+        "title": ""
+      },
+      "activity": {
+        "name": "Attività",
+        "title": ""
+      },
+      "issued": {
+        "name": "Rilascio",
+        "title": ""
+      },
+      "expiring": {
+        "name": "Scadenza",
+        "title": ""
+      },
+      "document": {
+        "name": "Documento",
+        "title": ""
+      },
+      "sampledValue": {
+        "name": "Valore campionato",
+        "title": ""
+      },
+      "samplingLastDate": {
+        "name": "Data ultimo campionamento",
+        "title": ""
+      },
+      "type": {
+        "name": "Tipo",
+        "title": ""
+      },
+      "description": {
+        "name": "Descrizione",
+        "title": ""
+      },
+      "creationDate": {
+        "name": "Data creazione",
+        "title": ""
+      },
+      "samplingPoint": {
+        "name": "Punto campionamento",
+        "title": ""
+      },
+      "parameters": {
+        "name": "Parametri",
+        "title": ""
+      },
+      "lastSamplingDate": {
+        "name": "Data ultimo campionamento",
+        "title": ""
+      },
+      "lastSamplingValue": {
+        "name": "Valore ultimo campionamento",
+        "title": ""
+      },
+      "compliant": {
+        "name": "Conforme",
+        "title": ""
+      },
+      "action": {
+        "name": "Azione",
+        "title": ""
+      },
+      "actions": {
+        "name": "Azioni",
+        "title": ""
+      },
+      "place": {
+        "name": "Posto",
+        "title": ""
+      },
+      "maintenance": {
+        "name": "Manutenzione",
+        "title": ""
+      },
+      "company": {
+        "name": "Azienda",
+        "title": ""
+      },
+      "entrustedCompany": {
+        "name": "Azienda incaricata",
+        "title": ""
+      },
+      "personInCharge": {
+        "name": "Persona in carica",
+        "title": ""
+      },
+      "detailsPoint": {
+        "name": "Punto dettagli",
+        "title": ""
+      },
+      "supplier": {
+        "name": "Fornitore",
+        "title": ""
+      },
+      "attachment": {
+        "name": "Allegato",
+        "title": ""
+      },
+      "role": {
+        "name": "Ruolo",
+        "title": ""
+      },
+      "trainings": {
+        "name": "Formazioni",
+        "title": ""
+      },
+      "lastLessonDate": {
+        "name": "Data ultima lezione",
+        "title": ""
+      },
+      "lastCheckDate": {
+        "name": "Data ultima verifica",
+        "title": ""
+      },
+      "courseTitle": {
+        "name": "Titolo corso",
+        "title": ""
+      },
+      "trainer": {
+        "name": "Formatore",
+        "title": ""
+      },
+      "result": {
+        "name": "Risultato",
+        "title": ""
+      },
+      "note": {
+        "name": "Note",
+        "title": ""
+      },
+      "date": {
+        "name": "Data",
+        "title": ""
+      },
+      "course": {
+        "name": "Corso",
+        "title": ""
+      },
+      "participants": {
+        "name": "Partecipanti",
+        "title": ""
+      },
+      "title": {
+        "name": "Titolo",
+        "title": ""
+      },
+      "roleInCharge": {
+        "name": "Ruolo in carica",
+        "title": ""
+      },
+      "prerequisite": {
+        "name": "Prerequisito",
+        "title": ""
+      },
+      "subject": {
+        "name": "Soggetto",
+        "title": ""
+      },
+      "lastMonitored": {
+        "name": "Ultimo monitoraggio",
+        "title": ""
+      },
+      "grants": {
+        "name": "Garantisce",
+        "title": ""
+      },
+      "lastOutcome": {
+        "name": "Ultimo risultato",
+        "title": ""
+      },
+      "examiner": {
+        "name": "Esaminatore",
+        "title": ""
+      },
+      "planningDate": {
+        "name": "Data pianificata",
+        "title": ""
+      },
+      "id": {
+        "name": "#",
+        "title": ""
+      },
+      "checks": {
+        "name": "Verifiche",
+        "title": ""
+      },
+      "startedDate": {
+        "name": "Valore ultimo campionamento",
+        "title": ""
+      },
+      "requirement": {
+        "name": "Requisito",
+        "title": ""
+      },
+      "productsTreatment": {
+        "name": "Trattamento dei prodotti",
+        "title": ""
+      },
+      "retrieval": {
+        "name": "Recupero",
+        "title": ""
+      },
+      "causes": {
+        "name": "Cause",
+        "title": ""
+      },
+      "closedDate": {
+        "name": "Data chiusura",
+        "title": ""
+      },
+      "status": {
+        "name": "Stato",
+        "title": ""
+      },
+      "corrections": {
+        "name": "Correzioni",
+        "title": ""
+      },
+      "evidence": {
+        "name": "Evidenza",
+        "title": ""
+      },
+      "report": {
+        "name": "Report",
+        "title": ""
+      },
+      "monitoringPositive": {
+        "name": "Il monitoraggio è risultato POSITIVO",
+        "title": ""
+      },
+      "monitoringNegative": {
+        "name": "Il monitoraggio è risultato NEGATIVO",
+        "title": ""
+      },
+      "fullName": {
+        "name": "Nome completo",
+        "title": ""
+      },
+      "examPassed": {
+        "name": "Esame superato",
+        "title": ""
+      },
+      "trainingCourse": {
+        "name": "Corso di formazione",
+        "title": ""
+      },
+      "firstName": {
+        "name": "Nome",
+        "title": ""
+      },
+      "lastName": {
+        "name": "Cognome",
+        "title": ""
+      },
+      "email": {
+        "name": "Email",
+        "title": ""
+      },
+      "curriculum": {
+        "name": "Curriculum",
+        "title": ""
+      },
+      "language": {
+        "name": "Lingua",
+        "title": ""
+      },
+      "prerequisiteType": {
+        "name": "Tipo Prerequisito",
+        "title": ""
+      },
+      "phaseMarked": {
+        "name": "Questa fase è segnata come:",
+        "title": ""
+      },
+      "relatedRiskClass": {
+        "name": "Classe di rischio relativo",
+        "title": ""
+      },
+      "userRoleInCharge": {
+        "name": "Ruolo utente in carica",
+        "title": ""
+      },
+      "purpose": {
+        "name": "Scopo",
+        "title": ""
+      },
+      "equipments": {
+        "name": "Attrezzatura",
+        "title": ""
+      },
+      "activities": {
+        "name": "Attività",
+        "title": ""
+      },
+      "processCheck": {
+        "name": "Process check",
+        "title": ""
+      },
+      "resultsCheck": {
+        "name": "Verifica risultato",
+        "title": ""
+      },
+      "revision": {
+        "name": "Revisione",
+        "title": ""
+      },
+      "controlMeasure": {
+        "name": "Misura di controllo",
+        "title": ""
+      },
+      "criticalLimit": {
+        "name": "Limite critico",
+        "title": ""
+      },
+      "order": {
+        "name": "Ordine",
+        "title": ""
+      },
+      "background": {
+        "name": "Sfondo",
+        "title": ""
+      },
+      "backgroundSize": {
+        "name": "Dimensioni sfondo",
+        "title": "Titolo",
+        "width": "Larghezza(px)",
+        "height": "Altezza(px)"
+      },
+      "asNeeded": {
+        "name": "Al bisogno",
+        "title": ""
+      },
+      "phase": {
+        "name": "Fase",
+        "title": ""
+      },
+      "justOnce": {
+        "name": "Solo una volta",
+        "title": ""
+      },
+      "every": {
+        "name": "Ogni",
+        "title": ""
+      },
+      "thresholdValue": {
+        "name": "Valore soglia",
+        "title": ""
+      },
+      "filterBy": {
+        "name": "Filtra per",
+        "title": ""
+      },
+      "position": {
+        "name": "Posizione",
+        "title": ""
+      },
+      "dimension": {
+        "name": "Dimensione",
+        "title": ""
+      },
+      "riskClass": {
+        "name": "Classe di rischio",
+        "title": ""
+      },
+      "contact": {
+        "name": "Contatto",
+        "title": ""
+      },
+      "frequency": {
+        "name": "Frequenza",
+        "title": ""
+      },
+      "selectDiagram": {
+        "name": "Seleziona un diagramma di flusso",
+        "title": ""
+      },
+      "selectDanger": {
+        "name": "Seleziona un pericolo",
+        "title": ""
+      },
+      "constrainedTo": {
+        "name": "Vincolato a",
+        "title": ""
+      },
+      "parentOrganization": {
+        "name": "Organizzazione afferente a",
+        "title": ""
+      },
+      "materialCategory": {
+        "name": "Categoria materiale",
+        "title": ""
+      },
+      "risk": {
+        "name": "Rischio",
+        "title": ""
+      },
+      "organization": {
+        "name": "Organizzazione",
+        "title": ""
+      },
+      "shape": {
+        "name": "Forma",
+        "title": ""
+      },
+      "color": {
+        "name": "Colore",
+        "title": ""
+      },
+      "archived": {
+        "name": "Archiviato",
+        "title": ""
+      },
+      "archiveTraining": {
+        "name": "Archivio formazioni",
+        "title": ""
+      },
+      "danger": {
+        "type": {
+          "Biological": "Biologico",
+          "Allergens": "Allergene",
+          "Chemical": "Chimico",
+          "Physical": "Fisico"
+        }
+      },
+      "material": {
+        "name": "Materiale",
+        "title": ""
+      },
+      "category": {
+        "name": "Categoria",
+        "title": ""
+      },
+      "diagram": {
+        "name": "Diagramma",
+        "title": ""
+      },
+      "profiles": {
+        "name": "Profili",
+        "title": ""
+      },
+      "radius": {
+        "name": "Raggio",
+        "title": ""
+      },
+      "additionalInformation": {
+        "name": "Informazioni aggiuntive",
+        "title": ""
+      },
+      "editInformation": {
+        "name": "Modifica informazioni",
+        "title": ""
+      }
+    }
+  },
+  "user.grant": {
+    "MENU": "Voci di menu",
+    "MENU_PREREQUISITES": "Gestione prerequisiti",
+    "MENU_TASKS": "Gestione Task",
+    "MENU_TRAINING": "Gestione Formazione",
+    "MENU_USERS": "Gestione Utenti e Organizzazioni",
+    "MENU_ORGANIZATION": "Visione dati dell'organizzazione",
+    "MENU_DRAWCHART": "Gestione Organigramma aziendale",
+    "MENU_NONCOMPLIANCE": "Gestione Non conformità",
+    "MENU_AUDIT": "Gestione Audit",
+    "MENU_DASHBOARD": "Visione statistiche delle organizzazioni",
+    "MENU_DATA": "Gestione Dati",
+    "MENU_RISKANALYSIS": "Gestione Analisi dei rischi",
+    "MENU_HACCP": "Gestione HACCP",
+    "USER": "Personale",
+    "USER_ORGANIZATION_ADD": "Aggiunta organizzazione",
+    "USER_ORGANIZATION_DELETE": "Eliminazione organizzazione",
+    "USER_ORGANIZATION_EDIT": "Modifica organizzazione",
+    "USER_ORGANIZATION_LIST": "Aggiunta organizzazione",
+    "USER_PROFILE_ADD": "Aggiunta profilo",
+    "USER_PROFILE_DELETE": "Eliminazione profilo",
+    "USER_PROFILE_EDIT": "Modifica profilo",
+    "USER_PROFILE_LIST": "Lista profili",
+    "USER_ROLE_ADD": "Aggiunta ruolo",
+    "USER_ROLE_DELETE": "Eliminazione ruolo",
+    "USER_ROLE_EDIT": "Modifica ruolo",
+    "USER_ROLE_LIST": "Lista ruoli",
+    "USER_USER_ADD": "Aggiunta utente",
+    "USER_USER_DELETE": "Eliminazione utente",
+    "USER_USER_EDIT": "Modifica utente",
+    "USER_USER_LIST": "Lista utenti"
+  },
+  "dashboard.preRequisites": {
+    "Layout": "Layout",
+    "Flow": "Flusso",
+    "WaterSupply": "Approvvigionamento idrico",
+    "AirConditioning": "Condizionamento aria",
+    "EnergySupply": "Approvvigionamento energia",
+    "WasteDisposal": "Gestione rifiuti",
+    "Cleaning": "Pulizie e sanificazione",
+    "Equipment": "Attrezzature",
+    "PestControl": "Controllo infestanti",
+    "StaffHygiene": "Igiene dello staff",
+    "PackagingMaterial": "Materiali confezionamento",
+    "Supplier": "Fornitori"
+  },
+  "notify": {
+    "success" : "Successo",
+    "warning" : "Attenzione",
+    "dangerCreated": "Nuovo pericolo creato con successo",
+    "dangerUpdated": "Pericolo aggiornato con successo",
+    "courseCreated": "Nuovo corso creato con successo",
+    "courseUpdated": "Corso aggiornato con successo",
+    "lessonCreated": "Nuova lezione di formazione creata con successo",
+    "lessonUpdated": "Lezione di formazione aggiornata con successo",
+    "typeCreated": "Tipo creato con successo",
+    "typeUpdated": "Tipo aggiornato con successo",
+    "savingDataError": "Errore salvataggio dati!",
+    "cannotDeleteCourseWithLessons": "Non puoi cancellare un corso che ha al suo interno una lezione!"
+  },
+
+  "alertMessage": {
+    "delete": "Elimina",
+    "willBeDeleted": "Verrà eliminato, vuoi procedere?",
+    "cancel": "Cancella",
+    "ok": "Ok",
+    "wantToCreateOutcome": "Per prima cosa devi creare il risultato. Vuoi crearlo?"
+  },
+
+  "entity": {
+    "danger": "Pericolo",
+    "course": "Corso",
+    "lesson": "Lezione",
+    "type": "Tipo",
+    "supplier": "Fornitore",
+    "diagram": "Diagramma",
+    "material": "Materiale",
+    "materialCategory": "Categoria materiale"
+  },
+
+  "new": {
+    "course": "Nuovo corso",
+    "lesson": "Nuova lezione",
+    "equipmentType": "Nuova attrezzatura",
+    "waterSupplyType": "Nuovo tipo di approvvigionamento idrico",
+    "wasteDisposalType": "Nuovo tipo di rifiuto",
+    "airConditioningType": "Nuovo tipo di confezionamento aria",
+    "pestControlType": "Nuovo tipo di controllo infestanti",
+    "supplier": "Nuovo fonritore",
+    "material": "Nuovo materiale",
+    "materialCategory": "Nuova categoria di materiali",
+    "diagram": "Nuovo diagramma",
+    "entity": "Nuova entità"
+  }
+}

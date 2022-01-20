@@ -1,0 +1,57 @@
+
+<div class="clearfix">
+    <form name="form" novalidate>
+    <div data-ng-show="mode == 'link'">
+        <div data-ng-show="!readonly && !attachment" class="row">
+            <div class="col col-xs-9 col-md-10">
+                <input name="attachment" required__ ng-required__="{{required}}" data-ng-model="link" placeholder="{{'common.message.common.enterUrlRemoteResource'|translate}}"
+                   type="text" class="form-control" data-ng-blur="onLinkChange(link)"/>
+            </div>
+            <div class="col col-xs-3 col-md-2 text-right">
+                <button class="btn btn-line-default" data-ng-click="mode = 'file'; clear();" title="{{'common.button.form.upload'|translate}}">
+                    <span class="hidden-xs hidden-sm">{{'common.button.form.upload'|translate}}</span> <i class="glyphicon glyphicon-upload"></i>
+                </button>
+            </div>
+        </div>
+        <div data-ng-show="attachment" class="form-control" style="height: auto;">
+            <button data-ng-if="!readonly" class="btn-link text-danger pull-right" data-ng-click="clear()">
+                <i class="glyphicon glyphicon-remove"></i>
+            </button>
+            <a class="btn-link pointer" data-ng-href="{{attachment.link}}" target="_blank" title="{{ attachment.link}}">
+                <i class="glyphicon glyphicon-eye-open"></i>&nbsp; {{ attachment.link | linkedName }}</a>
+        </div>
+
+    </div>
+    <div data-ng-show="mode == 'file'">
+        <div data-ng-show="uploading" class="form-control">
+            {{'common.message.common.fileUploading'|translate}} &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-circle-o-notch fa-spin"></i>
+        </div>
+        <div data-ng-show="!uploading">
+            <div data-ng-show="!readonly && !attachment" class="row">
+                <div class="col col-xs-9 col-md-10">
+                    <input file-uploader accept_=".pdf" name="attachment" required__ ng-required__="{{required}}"
+                       type="file"class="form-control pull-left" on-file-loaded="onFileLoaded(file)" style="width:auto; max-width: 100%" />
+                </div>
+                <div class="col col-xs-3 col-md-2 text-right">
+                    <button class="btn btn-line-default pull-right" data-ng-click="mode = 'link'; clear();" title="{{'common.button.form.link'|translate}}">
+                        <span class="hidden-xs hidden-sm">{{'common.button.form.link'|translate}}</span> <i class="glyphicon glyphicon-link"></i>
+                    </button>
+                </div>
+            </div>
+            <div data-ng-show="attachment" class="form-control" style="height: auto;">
+                <button data-ng-if="!readonly" class="btn-link text-danger pull-right" data-ng-click="clear()">
+                    <i class="glyphicon glyphicon-remove"></i>
+                </button>
+
+                <a class="btn-link pointer" download="{{attachment.filename}}"  href="data:{{attachment.mimeType}};base64,{{attachment.base64}}" target="_blank">
+                    <i class="glyphicon glyphicon-cloud-download"></i>&nbsp;{{ attachment.filename }}</a>
+            </div>
+
+            <span data-ng-if="attachment.fileSize">{{'common.tableAndForm.size.name'|translate}}: {{ attachment.fileSize/1024 | number : 2}} KB
+                <div data-ng-if="attachment.fileSize > MAX_SIZE" class="text-danger">{{'common.message.common.sizeExceed'|translate}} ({{ MAX_SIZE/1024 | number : 0}}KB)</div>
+            </span>
+        </div>
+    </div>
+    </form>
+</div>
+

@@ -1,0 +1,50 @@
+<div class="task-perform-modal">
+	<div class="modal-header">
+		<h3 class="modal-title">{{'nav.data.sub.commonSub.perform'|translate}}</h3>
+	</div>
+	<div class="modal-body">
+		<form novalidate>
+			<div class="form-group">
+				<label class="ui-radio">
+					<input name="radio1" type="radio"  data-ng-value="true" data-ng-model="item.successfull">
+					<span>{{'common.tableAndForm.monitoringPositive.name'|translate}}</span>
+				</label>
+				<label class="ui-radio">
+					<input name="radio1" type="radio"  data-ng-value="false" data-ng-model="item.successfull">
+					<span>{{'common.tableAndForm.monitoringNegative.name'|translate}}</span>
+				</label>
+			</div>
+			<hr/>
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-xs-3">
+						<label>{{'common.tableAndForm.report.name'|translate}}</label>
+					</div>
+					<div class="col col-xs-9" data-ng-if="editMode">
+						<input  file-uploader type="file" class="form-control" file-model="item.attachment"/>
+						<span data-ng-if="item.attachment.file.size">{{'common.tableAndForm.size.name'|translate}}: {{ item.attachment.file.size/1024 | number : 2}} KB
+							<span data-ng-if="item.attachment.file.size > 102400" class="text-danger">{{'common.message.common.sizeExceed'|translate}}</span>
+						</span>
+					</div>
+					<div class="col col-xs-9" data-ng-if="!editMode">
+						<span data-ng-if="item.attachment">{{item.attachment.file.name }} - {{ item.attachment.file.size/1024 | number : 2}} KB</span>
+					</div>
+				</div>
+			</div>
+
+			<hr/>
+			<label>Note:</label>
+			<textarea data-ng-if="editMode" class="form-control" data-ng-model="item.note" rows="5"></textarea>
+			<pre data-ng-if="!editMode" data-ng-bind-html="item.note"></pre>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<div data-ng-if="editMode">
+			<button class="btn btn-primary pull-right" data-ng-disabled="!isValid()" type="button" ng-click="save()" data-ng-disabled="item == null">{{'common.button.form.save'|translate}}</button>
+			<button class="btn btn-default" type="button" ng-click="cancel()">{{'common.button.form.cancel'|translate}}</button>
+		</div>
+		<div data-ng-if="!editMode">
+			<button class="btn btn-default" type="button" ng-click="cancel()">{{'common.button.form.close'|translate}}</button>
+		</div>
+	</div>
+</div>

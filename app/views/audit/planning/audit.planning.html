@@ -1,0 +1,202 @@
+<div data-ng-if="selectedOrganization && loading">
+	<br/><br/><br/><br/><br/>
+	<h3 class="text-primary text-center">
+		<i class="fa fa-2x fa-circle-o-notch fa-spin"></i><br/>
+		{{ 'loading' | translate }}
+	</h3>
+	<br/><br/><br/><br/><br/>
+</div>
+
+<div class="systemCheck-planning" data-ng-if="!loading">
+	<div class="row">
+		<div class="col col-md-6 col-lg-8">
+			<div class="panel">
+				<div class="panel-body">
+					<div data-ng-if="eventSources"  class="animate-if">
+						<div id="calendar" ui-calendar="uiConfig.calendar" class="span8 calendar" data-ng-model="eventSources"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col col-md-6 col-lg-4">
+			<div class="panel">
+				<div class="panel-heading clearfix">
+					<div>
+						<div class="btn btn-block btn-line-info" ng-click="addProcessCheck()" role="button" tabindex="0">
+							{{'audit.panel.planning.planProcessCheck'|translate}} &nbsp;<i class="fa fa-calendar-plus-o pull-right"></i>
+						</div>
+						<div class="btn btn-block btn-line-success" ng-click="addSystemCheck()" role="button" tabindex="0">
+							{{'audit.panel.planning.planSystemCheck'|translate}} &nbsp;<i class="fa fa-calendar-plus-o pull-right"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="panel" data-ng-if="selectedItem && isSystemCheck(selectedItem)" class="animate-if">
+				<div class="panel-heading">
+					{{'nav.audit.sub.commonSub.details'|translate}}  <strong>{{'nav.audit.sub.systemChecks'|translate}}</strong>
+					<span class="pull-right">{{'audit.panel.details.status.'+selectedItem.status|translate}}</span>
+				</div>
+				<div class="panel-body">
+					<div>
+						<form name="form" novalidate>
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3"><label>{{'common.tableAndForm.company.name'|translate}}:</label></div>
+									<div class="col col-sm-9">
+										<select class="form-control" data-ng-model="selectedItem.company"
+												name="company" required data-ng-options="organization as ('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' | limitTo: kinshipLevels.get(organization.id)*3)  + organization.name for organization in companies track by organization.id">
+											<option data-ng-selected="selected" value="">{{'audit.panel.details.selectCompanyValue'|translate}}</option>
+										</select>
+										<small class="text-danger" data-ng-if="form.company.$dirty && form.company.$error.required" >
+											This is a required field!
+										</small>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3"><label>{{'common.tableAndForm.date.name'|translate}}:</label></div>
+									<div class="col col-sm-9">
+										<p class="input-group">
+											<input type="text" class="form-control" uib-datepicker-popup="dd-MMM-yyyy"
+												   data-ng-model="selectedItem.date" is-open="popup.opened" datepicker-options_="dateOptions"
+												   close-text="Close" alt-input-formats_="'M!/d!/yyyy'" name="date" required/>
+											<span class="input-group-btn">
+												<button type="button" class="btn btn-default" ng-click="open()"><i class="glyphicon glyphicon-calendar"></i></button>
+											</span>
+										</p>
+										<small class="text-danger" data-ng-if="form.date.$dirty && form.date.$error.required" >
+											This is a required field!
+										</small>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3"><label>{{'common.tableAndForm.checks.name'|translate}}:</label></div>
+									<div class="col col-sm-9">
+										<div data-ng-repeat="check in selectedItem.systemchecks" class="form-group">
+											<div class="input-group">
+												<select class="form-control" data-ng-model="selectedItem.systemchecks[$index]"
+														name="systemchecks" required data-ng-options="check as check.name for check in systemChecks track by check.id">
+													<option data-ng-selected="selected" value="">{{'audit.panel.details.selectSystemCheckValue'|translate}}</option>
+												</select>
+												<span class="input-group-btn">
+													<button  data-ng-if="!$last"  class="btn btn-sm btn-line-danger pull-right"
+															 data-ng-click="deleteCheck(selectedItem, $index)">
+													<i class="glyphicon glyphicon-trash"></i>
+													</button>
+													<button data-ng-if="$last" class="btn btn-sm btn-line-primary pull-right"
+															data-ng-click="addCheck(selectedItem)" data-ng-disabled="selectedItem.systemchecks[$index] == null">
+														<i class="glyphicon glyphicon-plus"></i>
+													</button>
+												</span>
+											</div>
+										</div>
+										<small class="text-danger" data-ng-if="form.systemchecks.$dirty && form.systemchecks.$error.required" >
+											This is a required field!
+										</small>
+									</div>
+								</div>
+							</div>
+						</form>
+						<div>
+							<button class="btn btn-primary pull-right" type="button" data-ng-click="save(selectedItem, form)"
+									data-ng-disabled="selectedItem.status != 'created'">
+								{{'common.button.form.save'|translate}} &nbsp; <i class="glyphicon glyphicon-floppy-disk"></i></button>
+							<button class="btn btn-default" type="button" data-ng-click="delete(selectedItem)"
+									data-ng-if="selectedItem.id != null" data-ng-disabled="selectedItem.status != 'created'">
+								{{'common.button.form.delete'|translate}} &nbsp; <i class="glyphicon glyphicon-trash"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="panel" data-ng-if="selectedItem && isProcessCheck(selectedItem)" class="animate-if">
+				<div class="panel-heading">
+					{{'nav.audit.sub.commonSub.details'|translate}} <strong>{{'nav.audit.sub.processChecks'|translate}}</strong>
+					<span class="pull-right">{{'audit.panel.details.status.'+selectedItem.status|translate}}</span>
+				</div>
+				<div class="panel-body">
+					<div>
+						<form name="form" novalidate>
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3"><label>{{'common.tableAndForm.company.name'|translate}}:</label></div>
+									<div class="col col-sm-9">
+										<select class="form-control" data-ng-model="selectedItem.company"
+												name="company" required data-ng-options="organization as ('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' | limitTo: kinshipLevels.get(organization.id)*3) + organization.name for organization in companies track by organization.id">
+											<option data-ng-selected="selected" value="">{{'audit.panel.details.selectCompanyValue'|translate}}</option>
+										</select>
+										<small class="text-danger" data-ng-if="form.company.$dirty && form.company.$error.required" >
+											This is a required field!
+										</small>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3"><label>{{'common.tableAndForm.date.name'|translate}}:</label></div>
+									<div class="col col-sm-9">
+										<p class="input-group">
+											<input type="text" class="form-control" uib-datepicker-popup="dd-MMM-yyyy"
+												   data-ng-model="selectedItem.date" is-open="popup.opened" datepicker-options_="dateOptions"
+												   close-text="Close" alt-input-formats_="'M!/d!/yyyy'" name="date" required/>
+											<span class="input-group-btn">
+												<button type="button" class="btn btn-default" ng-click="open()"><i class="glyphicon glyphicon-calendar"></i></button>
+											</span>
+										</p>
+										<small class="text-danger" data-ng-if="form.date.$dirty && form.date.$error.required" >
+											This is a required field!
+										</small>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3"><label>{{'common.tableAndForm.checks.name'|translate}}:</label></div>
+									<div class="col col-sm-9">
+										<div data-ng-repeat="check in selectedItem.processchecks" class="form-group">
+											<div class="input-group">
+												<select class="form-control" data-ng-model="selectedItem.processchecks[$index]"
+														name="processchecks" required data-ng-options="check as check.prerequisiteType.name + ' - ' + check.name for check in processChecks track by check.id">
+													<option data-ng-selected="selected" value="">{{'audit.panel.details.selectProcessCheckValue'|translate}}</option>
+												</select>
+												<span class="input-group-btn">
+													<button  data-ng-if="!$last"  class="btn btn-sm btn-line-danger pull-right"
+															 data-ng-click="deleteCheck(selectedItem, $index)">
+													<i class="glyphicon glyphicon-trash"></i>
+													</button>
+													<button data-ng-if="$last" class="btn btn-sm btn-line-primary pull-right"
+															data-ng-click="addCheck(selectedItem)" data-ng-disabled="selectedItem.processchecks[$index] == null">
+														<i class="glyphicon glyphicon-plus"></i>
+													</button>
+												</span>
+											</div>
+										</div>
+										<small class="text-danger" data-ng-if="form.processchecks.$dirty && form.processchecks.$error.required" >
+											This is a required field!
+										</small>
+									</div>
+								</div>
+							</div>
+						</form>
+						<div>
+							<button class="btn btn-primary pull-right" type="button" data-ng-click="save(selectedItem, form)"
+									data-ng-disabled="selectedItem.status != 'created'">
+								{{'common.button.form.save'|translate}} &nbsp; <i class="glyphicon glyphicon-floppy-disk"></i></button>
+							<button class="btn btn-default" type="button" data-ng-click="delete(selectedItem)"
+									data-ng-if="selectedItem.id != null" data-ng-disabled="selectedItem.status != 'created'">
+								{{'common.button.form.delete'|translate}} &nbsp; <i class="glyphicon glyphicon-trash"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</div>

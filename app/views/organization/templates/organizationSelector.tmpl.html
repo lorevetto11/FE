@@ -1,0 +1,42 @@
+
+
+<div class="panel panel-default" data-ng-show="organizations == null || organizations.length > 1">
+    <div class="panel-heading">
+        <span>{{page | translate}}</span>
+    </div>
+    <div class="panel-body">
+
+        <div data-ng-if="!organizations && loading">
+            {{'common.tableAndForm.loading.name'|translate}}...
+        </div>
+
+        <div class="row">
+            <!-- div class="col col-sm-3">
+                <label>Organizzazione corrente:</label>
+            </div -->
+
+            <div data-ng-if="!loading">
+                <div class="col col-sm-12" data-ng-if="!selected.organization">
+                    <select class="form-control" data-ng-model="selected.organization"
+                            data-ng-change="onOrganizationChanged()"
+                            data-ng-options="organization as ('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' | limitTo: kinshipLevels.get(organization.id)*3)  + organization.name for organization in organizations"
+                            name="organization" required>
+                        <option data-ng-selected="true" value="">
+                            <em>--- {{'common.tableAndForm.selectAnOrganization.name'|translate}} ---</em>
+                        </option>
+                    </select>
+                </div>
+                <div class="col col-sm-8" data-ng-if="selected.organization">
+
+                    <h2 style="margin-top:0px" class="text-primary">{{selected.organization.name}}</h2>
+                    <span>{{ selected.organization.legalResidence}}</span> - <span>{{ selected.organization.vatNumber }}</span>
+
+                    </h3>
+                </div>
+                <div class="col col-sm-4 text-right" data-ng-if="selected.organization && organizations.length > 1">
+                    <button class="btn btn-line-primary" data-ng-click="clearOrganization()" >{{'common.tableAndForm.changeOrganization.name'|translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

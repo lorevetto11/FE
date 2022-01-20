@@ -1,0 +1,30 @@
+<div class="page task">
+    <div class="row">
+        <div class="col col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                   <div class="nav-wrapper">
+                        <ul class="nav nav-pills"
+                            data-slim-scroll
+                            data-accordion-nav
+                            data-highlight-active>
+
+                            <li ui-sref-active="active" data-ui-sref="task.prerequisite">
+                                <a>{{'nav.tasks.sub.prerequisiteTasks'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="task.ccp">
+                                <a>{{'nav.tasks.sub.ccpTasks'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="task.oprp">
+                                <a>{{'nav.tasks.sub.oprpTasks'|translate}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-xs-12">
+            <div ui-view ></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+<div class="panel panel-default user-list">
+	<div class="panel-heading clearfix">
+		<h3>&nbsp;&nbsp;<small>{{ 'organization.manage.users' | translate }} - [{{organization.name}}]</small>
+			<button class="btn btn-default pull-left" title="{{'organization.backToList' | translate }}" ui-sref="organization.list">
+				<i class="fa fa-angle-left"></i>
+			</button>
+
+			<div class="pull-right">
+				<button class="btn btn-default" ui-sref="organization.users.new">
+					<i class="glyphicon glyphicon-plus"/> {{ 'user.add' | translate }}
+				</button>
+			</div>
+		</h3>
+	</div>
+	<div class="panel-body">
+
+		<div class="row">
+			<div class="form-group col-sm-offset-9 col-sm-3">
+				<div class="input-group">
+					<input type="text" class="form-control" ng-model="filter.fullName" placeholder="{{ 'user.filter.placeholder' | translate }}">
+					<div class="input-group-addon">
+						<i class="fa fa-search"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--
+		<div data-ng-if="!items.length" class="alert alert-info">
+			Nessun utente trovato
+		</div>
+		-->
+		<div ng-if="items.length > 0">
+			<table class="table table-striped">
+				<thead>
+					<th>#</th>
+					<th data-translate="user.surnameAndName"></th>
+					<th data-translate="user.role"></th>
+					<th data-translate="user.email"></th>
+					<th data-translate="user.status"></th>
+					<th data-translate="user.language"></th>
+					<th data-translate="user.actions"></th>
+				</thead>
+				<tbody>
+				<tr ng-repeat="item in items | filter: filter">
+					<td>{{item.id}}</td>
+					<td>{{item.fullName}}</td>
+					<td>{{'user.type.'+item.userType|lowercase|translate}}</td>
+					<td>{{item.email}}</td>
+					<td style="white-space: nowrap">
+							<span class="label"
+								  ng-class="item.status == 'ENABLED' ? 'label-success' : 'label-danger'">
+								{{item.status|translate}}
+							</span>&nbsp;
+							<span ng-if="!isCurrentUser(item.id)">
+								<button ng-if="item.status == 'ENABLED'"
+										ng-click="disableUser(item)"
+										title="{{ 'user.disable.title' | translate }}"
+										class="btn btn-xs btn-gap-v btn-line-default">
+									<i class="fa fa-eye-slash"></i>
+								</button>
+								<button ng-if="item.status != 'ENABLED'"
+										ng-click="enableUser(item)"
+										title="{{ 'user.enable.title' | translate }}"
+										class="btn btn-xs btn-gap-v btn-line-default">
+									<i class="fa fa-eye"></i>
+								</button>
+							</span>
+					</td>
+					<td>{{'language.'+item.language.code | translate}}</td>
+					<td style="white-space: nowrap">
+						<button class="btn btn-line-info btn-sm"
+								title="{{ 'user.modify.title' | translate }}"
+								ui-sref="organization.users.view({'userId' : item.id})"
+								ng-click="editUser(item)">
+							<i class="fa fa-pencil-square-o"></i> {{ 'user.modify' | translate }}</button>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</div>

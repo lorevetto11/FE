@@ -1,0 +1,179 @@
+<div class="prerequisites-audits-detail-modal">
+    <div class="modal-header">
+        <h3 class="modal-title" data-ng-if="editMode">{{ originalItem.id != null ?
+            'nav.prerequisites.sub.commonSub.update' : 'nav.prerequisites.sub.commonSub.add' | translate}}
+            Monitoring</h3>
+        <h3 class="modal-title" data-ng-if="!editMode">{{'nav.prerequisites.sub.commonSub.details'|translate}}</h3>
+    </div>
+    <div class="modal-body">
+        <form novalidate>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col col-sm-2"><label>{{'common.tableAndForm.procedure.name'|translate}}:</label></div>
+                    <div class="col col-sm-10">
+                        <select data-ng-if="item.id == null" class="form-control" data-ng-model="item.procedure"
+                                data-ng-options="procedure as getProcedureOptionLabel(procedure) for procedure in procedures">
+                        </select>
+						<span data-ng-if="item.id != null"
+                              data-ng-init="procedure = (procedures | filter : { id : item.procedure.id } : true)[0]">
+							{{procedure.title}}
+						</span>
+                    </div>
+                </div>
+                <br/>
+                <div data-ng-if="item.procedure.id != null">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col col-sm-2">
+                                <label>{{'common.tableAndForm.roleInCharge.name'|translate}}:</label></div>
+                            <div class="col col-sm-10">
+                                <div>
+										<span data-ng-if="item.procedure.userRole">
+											{{item.procedure.userRole.name}} <span
+                                                data-ng-if="item.procedure.userRole.description"> - {{ item.procedure.userRole.description }}</span>
+										</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" data-ng-if="!isCCP">
+                        <div class="row">
+                            <div class="col col-sm-2">
+                                <label>{{'common.tableAndForm.relatedRiskClass.name'|translate}}:</label></div>
+                            <div class="col col-sm-10">
+                                <span class="pull-left">{{ item.procedure.riskClass ? item.procedure.riskClass.name.toUpperCase() : 'Any risk class' }}</span>
+                                <div class="risk-class-color"
+                                     data-ng-style="{'margin-left':'90px','background-color': item.procedure.riskClass.color}"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col col-sm-2"><label>{{'common.tableAndForm.frequency.name'|translate}}:</label>
+                            </div>
+                            <div data-ng-if="editMode">
+                                <div class="col-sm-10">
+                                    <div class="row" data-ng-if="relatedFrequency">
+                                        <div class="col col-sm-4">
+                                            <select class="form-control"
+                                                    data-ng-model="item.frequencyRelatedToRiskClass"
+                                                    data-ng-options="frequencyTypeLabel(opt) for opt in [true, false]"
+                                                    data-ng-change="onRelatedFrequencyChange(item.frequencyRelatedToRiskClass)">
+                                            </select>
+                                        </div>
+                                        <div class="col col-sm-8" data-ng-if="item.frequencyRelatedToRiskClass">
+											<span>{{item.frequency.justOnce ? "Just once" :
+													item.frequency.asNeeded ? "As needed" :
+												    item.frequency.value ? "Every " + item.frequency.value + " " + item.frequency.period : null}}</span>
+                                        </div>
+                                        <br/>
+                                    </div>
+                                    <div class="row" data-ng-if="!item.frequencyRelatedToRiskClass">
+                                        <div class="col col-sm-2">
+                                            <label class="ui-checkbox">
+                                                <input type="checkbox" data-ng-model="item.frequency.asNeeded"
+                                                       data-ng-value="true" data-ng-disabled="item.frequency.justOnce"/>
+                                                <span>{{'common.tableAndForm.asNeeded.name'|translate}}</span>
+                                            </label>
+                                        </div>
+                                        <div class="col col-sm-2">
+                                            <label class="ui-checkbox">
+                                                <input type="checkbox" data-ng-model="item.frequency.justOnce"
+                                                       data-ng-value="true" data-ng-disabled="item.frequency.asNeeded"/>
+                                                <span>{{'common.tableAndForm.justOnce.name'|translate}}</span>
+                                            </label>
+                                        </div>
+                                        <div class="col col-sm-2 text-right">
+                                            {{'common.tableAndForm.every.name'|translate}}:
+                                        </div>
+                                        <div class="col col-sm-2">
+                                            <input type="number" min="1" class="form-control" value="1"
+                                                   data-ng-disabled="item.frequency.asNeeded || item.frequency.justOnce"
+                                                   data-ng-model="item.frequency.value"/>
+                                        </div>
+                                        <div class="col col-sm-2">
+                                            <select class="form-control" data-ng-model="item.frequency.period"
+                                                    data-ng-disabled="item.frequency.asNeeded || item.frequency.justOnce"
+                                                    data-ng-options="period as period for period in frequencyScales">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-ng-if="!editMode">
+                                <div class="col col-sm-10">
+                                    <span>{{item.frequency | frequency }}</span>
+
+                                    <span data-ng-if="item.frequency.asNeeded">As needed</span>
+                                    <span data-ng-if="item.frequency.justOnce">Just once</span>
+                                    <span data-ng-if="!item.frequency.asNeeded && !item.frequency.justOnce">Every <strong>{{ item.frequency.value}} {{ item.frequency.period}}</strong></span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-ng-if="!isCCP">
+                        <br/>
+                        <div class="row">
+                            <div class="col col-sm-2"><label>{{'common.tableAndForm.purpose.name'|translate}}:</label>
+                            </div>
+                            <div class="col col-sm-10">
+                                <pre data-ng-bind-html="item.procedure.purpose"></pre>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-sm-2">
+                                <label>{{'common.tableAndForm.equipments.name'|translate}}:</label></div>
+                            <div class="col col-sm-10">
+                                <pre data-ng-bind-html="item.procedure.equipments"></pre>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-sm-2">
+                                <label>{{'common.tableAndForm.activities.name'|translate}}:</label></div>
+                            <div class="col col-sm-10">
+                                <pre data-ng-bind-html="item.procedure.activities"></pre>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-sm-2">
+                                <label>{{'common.tableAndForm.processCheck.name'|translate}}:</label></div>
+                            <div class="col col-sm-10">
+                                <pre data-ng-bind-html="item.procedure.process_check"></pre>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-sm-2">
+                                <label>{{'common.tableAndForm.resultsCheck.name'|translate}}:</label></div>
+                            <div class="col col-sm-10">
+                                <pre data-ng-bind-html="item.procedure.results_check"></pre>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-sm-2"><label>{{'common.tableAndForm.revision.name'|translate}}:</label>
+                            </div>
+                            <div class="col col-sm-10">
+                                <span>{{ item.procedure.revision / 100 | number : 2}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <div data-ng-if="editMode">
+            <button class="btn btn-primary pull-right" type="button" ng-click="save()"
+                    data-ng-disabled="item == null || item.procedure.id == null">{{'common.button.form.save'|translate}}
+            </button>
+            <button class="btn btn-default" type="button" ng-click="cancel()">
+                {{'common.button.form.cancel'|translate}}
+            </button>
+        </div>
+        <div data-ng-if="!editMode">
+            <button class="btn btn-default" type="button" ng-click="cancel()">{{'common.button.form.close'|translate}}
+            </button>
+        </div>
+    </div>
+</div>

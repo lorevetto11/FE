@@ -1,0 +1,51 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        <h4>{{'nav.sub.prerequisites.commonSub.analysisArchive'|translate}}</h4>
+
+
+       <table class="table table-condensed">
+           <thead>
+               <tr>
+                   <th>{{'common.tableAndForm.date.name'|translate}}</th>
+                   <th>{{'common.tableAndForm.samplingPoint.name'|translate}}</th>
+                   <th>{{'common.tableAndForm.document.name'|translate}}</th>
+                   <th>{{'common.tableAndForm.compliant.name'|translate}}</th>
+               </tr>
+           </thead>
+           <tbody>
+               <tr data-ng-repeat="item in items">
+                   <td>{{item.createDate | date : 'dd/MM/yyyy HH:mm' }}</td>
+                   <td>{{item.preRequisite.name}} <span data-ng-if="item.preRequisite.description"> - {{item.preRequisite.description}}</span></td>
+                   <td>
+                       <div data-ng-if="item.attachment">
+                           {{ item.attachment.file.name }} - {{ item.attachment.file.size/1024 | number : 2 }} KB
+                           <a class="btn btn-sm btn-line-primary" target="_blank" href="{{item.attachment.content}}">{{'common.button.form.download'|translate}} &nbsp; <i class="fa fa-download" aria-hidden="true"></i></a>
+                       </div>
+                   </td>
+                   <td>
+                       <span data-ng-if="item.successfull" class="label label-success">{{'prerequisite.panel.monitorings.outcome.positive'|translate}}</span>
+                       <span data-ng-if="!item.successfull" class="label label-danger">{{'prerequisite.panel.monitorings.outcome.negative'|translate}}</span>
+                   </td>
+               </tr>
+           </tbody>
+       </table>
+    </div>
+
+    <!--
+
+     <pre>
+        {{preRequisites | json}}
+        </pre>
+    <br/>
+         <pre>
+        {{audits | json}}
+        </pre>
+    <br/>
+        <pre>
+        {{ items | json }}
+        </pre>
+-->
+
+
+</div>

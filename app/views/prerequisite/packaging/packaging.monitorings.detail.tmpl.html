@@ -1,0 +1,179 @@
+<div class="prerequisites-audits-detail-modal">
+	<div class="modal-header">
+		<h3 class="modal-title" data-ng-if="editMode">{{ originalItem.id != null ? 'nav.prerequisites.sub.commonSub.update' : 'nav.prerequisites.sub.commonSub.add' | translate}}</h3>
+		<h3 class="modal-title" data-ng-if="!editMode">Details</h3>
+	</div>
+	<div class="modal-body">
+
+		<form novalidate>
+
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.material.name'|translate}}:</label></div>
+					<div class="col col-sm-10">
+						<select data-ng-if="monitoring.id == null"
+						        data-ng-model="monitoring.context"
+						        data-ng-options="material.context as material.name for material in materials"
+						        class="form-control" >
+						</select>
+						<span data-ng-if="monitoring.id != null"
+						      data-ng-init="material = (materials | filter : { context : { id : monitoring.context.id } } : true)[0]">
+							{{material.name}}
+						</span>
+					</div>
+				</div>
+			</div>
+			<div data-ng-if="monitoring.context != null"
+			     class="form-group">
+				<div class="row">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.procedure.name'|translate}}:</label></div>
+					<div class="col col-sm-10">
+						<select data-ng-if="monitoring.id == null"
+						        data-ng-model="monitoring.procedure"
+						        data-ng-options="procedure as procedure.title for procedure in procedures"
+						        class="form-control" >
+						</select>
+						<span data-ng-if="monitoring.id != null"
+						      data-ng-init="procedure = (procedures | filter : { id : item.procedure.id } : true)[0]">
+							{{procedure.title}}
+						</span>
+					</div>
+				</div>
+			</div>
+
+			<div data-ng-if="monitoring.procedure.id != null">
+
+				<hr/>
+
+				<div class="form-group">
+					<div class="row">
+						<div class="col col-sm-2"><label>{{'common.tableAndForm.frequency.name'|translate}}:</label></div>
+						<div data-ng-if="editMode">
+							<div class="col col-sm-2">
+								<label class="ui-checkbox">
+									<input data-ng-model="monitoring.frequency.asNeeded"
+									       data-ng-value="true"
+									       data-ng-disabled="monitoring.frequency.justOnce"
+									       type="checkbox"/>
+									<span>{{'common.tableAndForm.asNeeded.name'|translate}}</span>
+								</label>
+							</div>
+							<div class="col col-sm-2">
+								<label class="ui-checkbox">
+									<input data-ng-model="monitoring.frequency.justOnce"
+									       data-ng-value="true"
+									       data-ng-disabled="monitoring.frequency.asNeeded"
+									       type="checkbox"/>
+									<span>{{'common.tableAndForm.justOnce.name'|translate}}</span>
+								</label>
+							</div>
+							<div class="col col-sm-2 text-right">
+								{{'common.tableAndForm.every.name'|translate}}:
+							</div>
+							<div class="col col-sm-2">
+								<input data-ng-disabled="monitoring.frequency.asNeeded || monitoring.frequency.justOnce"
+								       data-ng-model="monitoring.frequency.value"
+								       type="number" class="form-control"/>
+							</div>
+							<div class="col col-sm-2">
+								<select data-ng-model="monitoring.frequency.period"
+								        data-ng-disabled="monitoring.frequency.asNeeded || monitoring.frequency.justOnce"
+								        data-ng-options="period as period for period in frequencyPeriods"
+								        class="form-control">
+								</select>
+							</div>
+						</div>
+						<div data-ng-if="!editMode">
+							<div class="col col-sm-10">
+								<span data-ng-if="monitoring.frequency.asNeeded">{{'common.tableAndForm.asNeeded.name'|translate}}</span>
+								<span data-ng-if="monitoring.frequency.justOnce">{{'common.tableAndForm.justOnce.name'|translate}}</span>
+								<span data-ng-if="!monitoring.frequency.asNeeded && !monitoring.frequency.justOnce">
+									{{'common.tableAndForm.every.name'|translate}} <strong>{{ monitoring.frequency.value}} {{ monitoring.frequency.period}}</strong>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<br/>
+
+				<div class="form-group">
+					<div class="row">
+						<div class="col col-sm-2"><label>{{'common.tableAndForm.roleInCharge.name'|translate}}:</label></div>
+						<div class="col col-sm-10">
+							<span>
+								{{monitoring.procedure.userRole.name}} <span data-ng-if="monitoring.procedure.userRole.description"> - {{ monitoring.procedure.userRole.description }}</span>
+							</span>
+						</div>
+					</div>
+				</div>
+
+				<br/>
+
+				<div class="row"
+				     data-ng-if="monitoring.procedure.purpose != null">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.purpose.name'|translate}}:</label></div>
+					<div class="col col-sm-10">
+						<span>{{monitoring.procedure.purpose}}</span>
+					</div>
+				</div>
+				<div class="row"
+				     data-ng-if="monitoring.procedure.equipments != null">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.equipments.name'|translate}}:</label></div>
+					<div class="col col-sm-10">
+						<span>{{monitoring.procedure.equipments}}</span>
+					</div>
+				</div>
+				<div class="row"
+				     data-ng-if="monitoring.procedure.activities != null">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.activities.name'|translate}}:</label></div>
+					<div class="col col-sm-10">
+						<span>{{monitoring.procedure.activities}}</span>
+					</div>
+				</div>
+				<div class="row"
+				     data-ng-if="monitoring.procedure.process_check != null">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.processCheck.name'|translate}}:</label></div>
+					<div class="col col-sm-10">
+						<span>{{monitoring.procedure.process_check}}</span>
+					</div>
+				</div>
+				<div class="row"
+				     data-ng-if="monitoring.procedure.results_check != null">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.resultsCheck.name'|translate}}:</label></div>
+					<div class="col col-sm-10">
+						<span>{{monitoring.procedure.results_check}}</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.revision.name'|translate}}:</label></div>
+					<div class="col col-sm-10">
+						<span>{{ monitoring.procedure.revision / 100 | number : 2}}</span>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<div data-ng-if="editMode">
+			<button class="btn btn-primary pull-right" type="button"
+			        data-ng-click="save()"
+			        data-ng-disabled="monitoring == null
+			            || monitoring.procedure.id == null
+			            || ( monitoring.frequency.justOnce === false
+			                && monitoring.frequency.asNeeded === false
+			                && ( monitoring.frequency.value == null
+			                    || monitoring.frequency.value <= 0 ) ) ">
+				{{'common.button.form.save'|translate}}
+			</button>
+			<button class="btn btn-default pull-left" type="button" data-ng-click="cancel()">
+				{{'common.button.form.cancel'|translate}}
+			</button>
+		</div>
+		<div data-ng-if="!editMode">
+			<button class="btn btn-default" type="button" data-ng-click="cancel()">
+				{{'common.button.form.close'|translate}}
+			</button>
+		</div>
+	</div>
+</div>

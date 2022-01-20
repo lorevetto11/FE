@@ -1,0 +1,87 @@
+<div class="prerequisites-audits-detail-modal">
+	<div class="modal-header">
+		<h3 class="modal-title">{{'nav.prerequisites.sub.commonSub.supplier'|translate}}</h3>
+	</div>
+	<div class="modal-body">
+		<div data-ng-if="item.name">
+			<div class="row">
+				<div class="col col-xs-12 col-sm-2">
+					<b>{{'common.tableAndForm.name.name'|translate}}</b>
+				</div>
+				<div class="col col-xs-12 col-sm-10">
+					{{item.name}}
+				</div>
+			</div>
+			<br>
+		</div>
+		<div data-ng-if="item.description">
+			<div class="row">
+				<div class="col col-xs-12 col-sm-2">
+					<b>{{'common.tableAndForm.description.name'|translate}}</b>
+				</div>
+				<div class="col col-xs-12 col-sm-10">
+					{{item.description}}
+				</div>
+			</div>
+			<br>
+		</div>
+		<div data-ng-if="item.vatNumber">
+			<div class="row">
+				<div class="col col-xs-12 col-sm-2">
+					<b>{{'common.tableAndForm.vatNumber.name'|translate}}</b>
+				</div>
+				<div class="col col-xs-12 col-sm-10">
+					{{item.vatNumber}}
+				</div>
+			</div>
+			<br>
+		</div>
+		<div data-ng-if="item.contact">
+			<div class="row">
+				<div class="col col-xs-12 col-sm-2">
+					<b>{{'common.tableAndForm.contact.name'|translate}}</b>
+				</div>
+				<div class="col col-xs-12 col-sm-10">
+					{{item.contact}}
+				</div>
+			</div>
+			<br>
+		</div>
+		<div data-ng-if="item.address">
+			<div class="row">
+				<div class="col col-xs-12 col-sm-2">
+					<b>{{'common.tableAndForm.address.name'|translate}}</b>
+				</div>
+				<div class="col col-xs-12 col-sm-10">
+					{{item.address}}
+				</div>
+			</div>
+			<br>
+		</div>
+		<div data-ng-if="item.email">
+			<div class="row">
+				<div class="col col-xs-12 col-sm-2">
+					<b>{{'common.tableAndForm.email.name'|translate}}</b>
+				</div>
+				<div class="col col-xs-12 col-sm-10">
+					{{item.email}}
+				</div>
+			</div>
+			<br>
+		</div>
+		<div data-ng-if="item.phone">
+			<div class="row">
+				<div class="col col-xs-12 col-sm-2">
+					<b>{{'common.tableAndForm.phone.name'|translate}}</b>
+				</div>
+				<div class="col col-xs-12 col-sm-10">
+					{{item.phone}}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-default" type="button" ng-click="close()">{{'common.button.form.close'|translate}}
+		</button>
+	</div>
+</div>

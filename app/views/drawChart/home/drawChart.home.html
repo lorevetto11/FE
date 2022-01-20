@@ -1,0 +1,81 @@
+<div class="prerequisite-layout full-width">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div>
+                Tools
+                <div class="inline" style="margin-left:20px">
+                    <div class="btn-group dropdown" uib-dropdown="" is-open="status.isopen">
+                        <button type="button" class="btn btn-default dropdown-toggle"
+                                uib-dropdown-toggle="" ng-disable="disabled" aria-haspopup="true" aria-expanded="false"
+                                data-ng-class="{'btn-primary' : command.action == Command.action.ADD.SHAPE}">
+                            Shapes&nbsp;&nbsp;
+                            <i class="fa fa-chevron-down"></i>
+                        </button>
+                        <ul class="dropdown-menu btn-block"  role="menu">
+                            <li>
+                                <a data-ng-click="addSquare()">
+                                    Rectangle&nbsp;&nbsp;<i class="fa fa-square"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-ng-click="addCircle()">
+                                    Circle&nbsp;&nbsp;<i class="fa fa-circle"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-ng-click="addTriangle()">
+                                    Triangle&nbsp;&nbsp;<i class="fa fa-play"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button class="btn btn-default" data-ng-class="{'btn-primary' : command.action == Command.action.ADD.ARROW}"
+                            data-ng-click="addArrow()">Arrow&nbsp;&nbsp;
+                        <i class="fa fa-long-arrow-right"></i>
+                    </button>
+
+                    <button class="btn btn-default pull-right btn-primary" data-ng-click="add()">
+                        Add chart&nbsp;&nbsp;
+                        <i class="fa fa-plus"></i>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div style__="width:100%; float:right">
+
+                <div data-ng-if="!charts || charts.length == 0" class="alert alert-warning">
+                    <p>No floors yet, create one chart!</p>
+                </div>
+
+                <div data-ng-if="charts.length > 0">
+
+                    <uib-tabset active="active">
+                        <uib-tab ng-repeat="chart in charts | orderBy: 'order' " heading="{{chart.name}}" data-ng-click="selectChart(chart)">
+                        </uib-tab>
+                    </uib-tabset>
+
+                    <div style="margin-top:10px" class="row">
+                        <div class="col col-lg-8">
+                            <floor-canvas
+                                    data-elements="items"
+                                    data-selected-element="selectedElement"
+                                    data-command="command"
+                                    data-selected-floor="selectedFloor"></floor-canvas>
+                        </div>
+                        <div class="col col-lg-4">
+                            <element-detail
+                                    data-elements="items"
+                                    data-element="selectedElement"
+                                    data-on-save="onSave({item: item, floor : selectedFloor})"
+                                    data-on-delete="onDelete({item: item})"
+                            ></element-detail>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

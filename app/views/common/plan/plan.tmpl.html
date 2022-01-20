@@ -1,0 +1,37 @@
+<div>
+    <p data-ng-if="itemsLoading"><b>Loading...</b></p>
+    <div data-ng-if="!itemsLoading" style__="width:100%; float:right">
+
+        <div data-ng-if="!floors || floors.length == 0" class="alert alert-warning">
+            <p>{{'common.message.common.noFloors'|translate}}
+                <a data-ui-sref="data.floor">{{'common.message.common.noFloorsSettingsPage'|translate}}</a></p>
+        </div>
+
+        <div data-ng-if="floors.length > 0">
+
+            <uib-tabset active="active">
+                <uib-tab ng-repeat="floor in floors | orderBy: 'order' " heading="{{floor.name}}" data-ng-click="selectFloor(floor)">
+                </uib-tab>
+            </uib-tabset>
+
+            <div style="margin-top:10px" class="row">
+                <div class="col col-lg-8">
+                    <floor-canvas
+                            data-elements="items"
+                            data-selected-element="selectedElement"
+                            data-command="command"
+                            data-selected-floor="selectedFloor"></floor-canvas>
+                    <br/>
+                </div>
+                <div class="col col-lg-4">
+                    <element-detail
+                            data-elements="items"
+                            data-element="selectedElement"
+                            data-on-save="onSave({item: item, floor : selectedFloor})"
+                            data-on-delete="onDelete({item: item})"
+                    ></element-detail>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+<div class="page monitoring">
+
+    <organization-selector data-page="'nav.data.sub.name'"></organization-selector>
+
+    <div class="alert alert-info" data-ng-if="!selectedOrganization">
+        {{'common.tableAndForm.selectAnOrganizationToManageDataOnIt.name'|translate}}
+    </div>
+
+    <div class="row" data-ng-if="selectedOrganization">
+        <div class="col col-xs-12">
+            <div class="panel panel-default" style="margin-top: -20px">
+                <!--<div class="panel-heading">-->
+                    <!--<span>{{'nav.data.sub.name'|translate}}</span>-->
+                <!--</div>-->
+                <div class="panel-body">
+                    <div class="nav-wrapper">
+                        <ul class="nav nav-pills"
+                            data-slim-scroll
+                            data-accordion-nav
+                            data-highlight-active>
+                            <li ui-sref-active="active" data-ui-sref="data.procedure">
+                                <a>{{'nav.data.sub.procedures'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="data.systemCheck">
+                                <a>{{'nav.data.sub.systemCheck'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="data.processCheck">
+                                <a>{{'nav.data.sub.processCheck'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="data.danger">
+                                <a>{{'nav.data.sub.dangers'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="data.floor">
+                                <a>{{'nav.data.sub.floors'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="data.relatedFrequency">
+                                <a>{{'nav.data.sub.prerequisiteRelatedFrequency'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="data.analysisParameters">
+                                <a>{{'nav.data.sub.analysisParameters'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="data.analysisParameterValues">
+                                <a>{{'nav.data.sub.analysisParameterValues'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="data.riskClasses">
+                                <a>{{'nav.data.sub.riskClasses'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="data.equipmentTypes">
+                                <a>{{'nav.data.sub.equipmentTypes'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="data.waterSupplyTypes">
+                                <a>{{'nav.data.sub.waterSupplyTypes'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="data.wasteDisposalTypes">
+                                <a>{{'nav.data.sub.wasteDisposalTypes'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="data.airConditioningTypes">
+                                <a>{{'nav.data.sub.airConditioningTypes'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="data.pestControlTypes">
+                                <a>{{'nav.data.sub.pestControlTypes'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="data.materialCategories">
+                                <a>{{'nav.data.sub.materialCategory'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="data.food">
+                                <a>{{'nav.data.sub.food'|translate}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-xs-12">
+            <div ui-view data-ng-if="selectedOrganization"></div>
+        </div>
+    </div>
+</div>

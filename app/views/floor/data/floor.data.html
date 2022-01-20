@@ -1,0 +1,211 @@
+<div class="monitoring-home">
+    <div class="row">
+        <div class="col-md-6 col-lg-4">
+            <div class="panel">
+                <div class="panel-heading ng-binding"> {{'nav.data.sub.commonSub.search'|translate}}</div>
+                <div class="panel-body">
+                    <div class="panel-search-section">
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <input type="text" data-ng-model="keywordFilter"
+                                       class="form-control"
+                                       placeholder="{{'data.panel.search.searchPlaceholder'|translate}}">
+                            </div>
+                            <div class="col-xs-2">
+                                <div class="pull-right">
+                                    <div class="pull-right btn btn-primary" ng-click="add()" role="button" tabindex="0">
+                                        <i class="fa fa-plus"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr/>
+
+                    <div style="max-height: 100%">
+                        <div class="slimScrollDiv"
+                             style="position: relative; overflow: hidden; width: auto; height: 100%;">
+                            <div class="filterbox-vertical" data-slim-scroll=""
+                                 style="overflow: hidden; width: auto; height: 100%;">
+
+                                <p data-ng-if="itemsLoading"><b>Loading...</b></p>
+                                <section data-ng-show="!itemsLoading" class="panel panel-default mail-categories">
+                                    <ul class="list-group">
+                                        <li class="list-group-item" ng-class="{'active': selectedItem.id == item.id}"
+                                            data-ng-click="edit(item)"
+                                            data-ng-repeat="item in items | filter : itemsFilter | orderBy : 'order'">
+                                            <a>{{item.name }}
+                                                <span class="pull-right">
+                                                    {{ item.width }} x {{item.height}} pixels
+                                                </span>
+                                                <div>
+                                                    <small>{{item.description}}</small>
+                                                </div>
+                                                <hr/>
+                                                <p class="text-right">
+                                                    <attachment data-ng-model="item.backgroundImageAttachment"
+                                                                readonly></attachment>
+                                                </p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </section>
+                            </div>
+                            <div class="slimScrollBar"
+                                 style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 2287px;">
+                            </div>
+                            <div class="slimScrollRail"
+                                 style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col col-md-6 col-lg-8" data-ng-if="selectedItem">
+
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="media">
+                        <div class="media-body media-middle">
+                            <div class="media-heading">
+                                <span>{{'nav.data.sub.commonSub.details'|translate}}</span>
+                            </div>
+                            <span style="text-transform: none">{{selectedItem.name}}</span>
+                        </div>
+                        <div class="media-right">
+                            <div class="btn btn-default" title="{{'common.button.form.clone'|translate}}"
+                                 data-ng-if="selectedItem.id != null" data-ng-click="clone(selectedItem)" role="button"
+                                 tabindex="0">
+                                <i class="fa fa-copy"></i>
+                            </div>
+                        </div>
+                        <div class="media-right">
+                            <div class="btn btn-default" title="{{'common.button.form.cancel'|translate}}"
+                                 data-ng-click="cancel()" role="button" tabindex="0">
+                                <i class="fa fa-times"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="floor-detail">
+
+                        <form novalidate name="form">
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col col-sm-3">
+                                        <label>{{'common.tableAndForm.name.name'|translate}}:</label></div>
+                                    <div class="col col-sm-9">
+                                        <input name="name" type="text" data-ng-model="selectedItem.name" required
+                                               class="form-control">
+                                        <small class="text-danger"
+                                               data-ng-if="form.name.$dirty && form.name.$error.required">
+                                            This is a required field!
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col col-sm-3"><label>{{'common.tableAndForm.description.name'|translate}}:</label>
+                                    </div>
+                                    <div class="col col-sm-9">
+                                        <textarea class="form-control" data-ng-model="selectedItem.description"
+                                                  rows="3"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col col-sm-3">
+                                        <label>{{'common.tableAndForm.order.name'|translate}}:</label></div>
+                                    <div class="col col-sm-9">
+                                        <input name="order" type="number" data-ng-model="selectedItem.order" required
+                                               class="form-control">
+
+                                        <small class="text-danger"
+                                               data-ng-if="form.order.$dirty && form.order.$error.required">
+                                            This is a required field!
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" data-ng-if___="!itemAdding">
+                                <div class="row">
+                                    <div class="col col-sm-3"><label>{{'common.tableAndForm.background.name'|translate}}:</label>
+                                    </div>
+                                    <div class="col col-sm-9">
+                                        <attachment name="attachment"
+                                                    data-ng-model="selectedItem.backgroundImageAttachment"></attachment>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col col-sm-3"><label>{{'common.tableAndForm.backgroundSize.name'|translate}}:</label>
+                                    </div>
+                                    <div class="col col-sm-9">
+                                        <div class="row">
+                                            <div class="col col-sm-6">
+                                                <div class="row">
+                                                    <div class="col col-sm-4 text-right text-nowrap">
+                                                        {{'common.tableAndForm.backgroundSize.width'|translate}}:
+                                                    </div>
+                                                    <div class="col col-sm-8">
+                                                        <input type="number" name="width"
+                                                               data-ng-disabled="isImage(selectedItem.backgroundImageAttachment)"
+                                                               data-ng-model="selectedItem.width"
+                                                               required class="form-control"/>
+                                                        <small class="text-danger"
+                                                               data-ng-if="form.width.$dirty && form.width.$error.required">
+                                                            This is a required field!
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col col-sm-6">
+                                                <div class="row">
+                                                    <div class="col col-sm-4 text-right text-nowrap">
+                                                        {{'common.tableAndForm.backgroundSize.height'|translate}}:
+                                                    </div>
+                                                    <div class="col col-sm-8">
+                                                        <input type="number" name="height"
+                                                               data-ng-disabled="isImage(selectedItem.backgroundImageAttachment)"
+                                                               data-ng-model="selectedItem.height"
+                                                               required class="form-control"/>
+                                                        <small class="text-danger"
+                                                               data-ng-if="form.width.$dirty && form.width.$error.required">
+                                                            This is a required field!
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <button class="btn btn-primary pull-right" type="button"
+                                        ng-click="save(form, selectedItem)"
+                                        data-ng-disabled__="form.$invalid">
+                                    {{'common.button.form.save'|translate}} &nbsp; <i
+                                        class="glyphicon glyphicon-floppy-disk"></i></button>
+                                <button class="btn btn-default" type="button" ng-click="delete(selectedItem)"
+                                        data-ng-if="selectedItem.id != null">
+                                    {{'common.button.form.delete'|translate}} &nbsp; <i
+                                        class="glyphicon glyphicon-trash"></i>
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

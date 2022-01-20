@@ -1,0 +1,92 @@
+<div class="prerequisites-audits-detail-modal">
+	<div class="modal-header">
+		<h3 class="modal-title">Details</h3>
+	</div>
+	<div class="modal-body">
+		<form novalidate>
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.procedure.name'|translate}}:</label></div>
+					<div class="col col-sm-10">
+						<span>
+							{{procedure.title}}
+						</span>
+					</div>
+				</div>
+				<br/>
+				<div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col col-sm-2"><label>{{'common.tableAndForm.roleInCharge.name'|translate}}:</label></div>
+							<div class="col col-sm-10">
+								<div data-ng-init="role = (userRoles | filter : { 'id' : procedure.roleInChargeId } : true)[0]">
+										<span data-ng-if="role">
+											{{role.name}} <span data-ng-if="role.description"> - {{ role.description }}</span>
+										</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group" data-ng-if__="!isCCP">
+						<div class="row">
+							<div class="col col-sm-2"><label>{{'common.tableAndForm.relatedRiskClass.name'|translate}}:</label></div>
+							<div class="col col-sm-10">
+								<span class="pull-left">{{ procedure.prerequisiteRisk ? procedure.prerequisiteRisk.name.toUpperCase() : 'Any risk class' }}</span>
+									<div class="risk-class-color" data-ng-style="{'margin-left':'90px','background-color': procedure.prerequisiteRisk.color}"></div>
+							</div>
+						</div>
+					</div>
+
+					<div data-ng-if__="!isCCP">
+						<br/>
+						<div class="row">
+							<div class="col col-sm-2"><label>{{'common.tableAndForm.purpose.name'|translate}}:</label></div>
+							<div class="col col-sm-10">
+								<pre data-ng-bind-html="procedure.purpose"></pre>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col col-sm-2"><label>{{'common.tableAndForm.equipments.name'|translate}}:</label></div>
+							<div class="col col-sm-10">
+								<pre data-ng-bind-html="procedure.equipments"></pre>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col col-sm-2"><label>{{'common.tableAndForm.activities.name'|translate}}:</label></div>
+							<div class="col col-sm-10">
+								<pre data-ng-bind-html="procedure.activities"></pre>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col col-sm-2"><label>{{'common.tableAndForm.processCheck.name'|translate}}:</label></div>
+							<div class="col col-sm-10">
+								<pre data-ng-bind-html="procedure.processCheck"></pre>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col col-sm-2"><label>{{'common.tableAndForm.resultsCheck.name'|translate}}:</label></div>
+							<div class="col col-sm-10">
+								<pre data-ng-bind-html="procedure.resultsCheck"></pre>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col col-sm-2"><label>{{'common.tableAndForm.revision.name'|translate}}:</label></div>
+							<div class="col col-sm-10">
+								<span>{{ procedure.revision / 100 | number : 2}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<div data-ng-if="editMode">
+			<button class="btn btn-primary pull-right" type="button" ng-click="save()" data-ng-disabled="item == null || item.procedureId == null">{{'common.button.form.save'|translate}}</button>
+			<button class="btn btn-default" type="button" ng-click="cancel()">{{'common.button.form.cancel'|translate}}</button>
+		</div>
+		<div data-ng-if="!editMode">
+			<button class="btn btn-default" type="button" ng-click="cancel()">{{'common.button.form.close'|translate}}</button>
+		</div>
+	</div>
+</div>

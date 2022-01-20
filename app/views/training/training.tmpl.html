@@ -1,0 +1,37 @@
+<div class="page training">
+
+    <organization-selector data-page="'nav.training.sub.name'"></organization-selector>
+
+    <div class="alert alert-info" data-ng-if="!selectedOrganization">
+        {{'common.tableAndForm.selectAnOrganizationToManageDataOnIt.name'|translate}}
+    </div>
+
+    <div class="row" data-ng-if="selectedOrganization">
+        <div class="col col-xs-12">
+            <div class="panel panel-default"  style="margin-top: -20px">
+                <!--<div class="panel-heading">-->
+                    <!--<span>{{'nav.training.sub.name'|translate}}</span>-->
+                <!--</div>-->
+                <div class="panel-body">
+                    <div class="nav-wrapper">
+                        <ul class="nav nav-pills"
+                            data-slim-scroll
+                            data-accordion-nav
+                            data-highlight-active>
+
+                            <li ui-sref-active="active" data-ui-sref="training.course">
+                                <a>{{'nav.training.sub.courses'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="training.lesson">
+                                <a>{{'nav.training.sub.lessons.name'|translate}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-xs-12">
+            <div ui-view ></div>
+        </div>
+    </div>
+</div>

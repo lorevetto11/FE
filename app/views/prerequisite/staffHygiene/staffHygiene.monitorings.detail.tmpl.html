@@ -1,0 +1,134 @@
+<div class="prerequisites-audits-detail-modal">
+	<div class="modal-header">
+		<h3 class="modal-title" data-ng-if="editMode">{{ originalItem.id != null ? 'nav.prerequisites.sub.commonSub.update' : 'nav.prerequisites.sub.commonSub.add' | translate}}</h3>
+		<h3 class="modal-title" data-ng-if="!editMode">Details</h3>
+	</div>
+	<div class="modal-body">
+		<form novalidate>
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.procedure.name'|translate}}:*</label></div>
+					<div class="col col-sm-10">
+						<select data-ng-if="item.id == null" class="form-control" data-ng-model="item.procedure.id"
+								data-ng-options="procedure.id as procedure.title for procedure in procedures">
+						</select>
+						<span data-ng-if="item.id != null" data-ng-init="procedure = (procedures | filter : { id : item.procedure.id } : true)[0]">
+							{{procedure.title}}
+						</span>
+					</div>
+				</div>
+			</div>
+			<br/>
+			<div data-ng-if="item.procedure.id != null" data-ng-init="procedure = (procedures | filter : { id : item.procedure.id } : true)[0]">
+				<div class="form-group">
+					<div class="row">
+						<div class="col col-sm-2"><label>{{'common.tableAndForm.roleInCharge.name'|translate}}:</label></div>
+						<div class="col col-sm-10">
+							<div data-ng-init="role = (userRoles | filter : { id : procedure.userRole.id } : true)[0]">
+									<span data-ng-if="role">
+										{{role.name}} <span data-ng-if="role.description"> - {{ role.description }}</span>
+									</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col col-sm-2"><label>{{'common.tableAndForm.frequency.name'|translate}}:</label></div>
+						<div data-ng-if="editMode">
+							<div class="col col-sm-2">
+								<label class="ui-checkbox">
+									<input type="checkbox" data-ng-model="item.frequency.asNeeded" data-ng-value="true" data-ng-disabled="item.frequency.justOnce"/>
+									<span>{{'common.tableAndForm.asNeeded.name'|translate}}</span>
+								</label>
+							</div>
+							<div class="col col-sm-2">
+								<label class="ui-checkbox">
+									<input type="checkbox" data-ng-model="item.frequency.justOnce" data-ng-value="true" data-ng-disabled="item.frequency.asNeeded"/>
+									<span>{{'common.tableAndForm.justOnce.name'|translate}}</span>
+								</label>
+							</div>
+							<div class="col col-sm-2 text-right">
+								{{'common.tableAndForm.every.name'|translate}}:
+							</div>
+								<div class="col col-sm-2">
+									<input type="number" class="form-control"  data-ng-disabled="item.frequency.asNeeded || item.frequency.justOnce"
+										   data-ng-model="item.frequency.value" />
+								</div>
+								<div class="col col-sm-2">
+									<select class="form-control" data-ng-model="item.frequency.period" data-ng-disabled="item.frequency.asNeeded || item.frequency.justOnce"
+											data-ng-options="period as period for period in frequencyPeriods">
+									</select>
+								</div>
+							</div>
+						<div data-ng-if="!editMode">
+							<div class="col col-sm-10">
+								<span data-ng-if="item.frequency.asNeeded">{{'common.tableAndForm.asNeeded.name'|translate}}</span>
+								<span data-ng-if="item.frequency.justOnce">{{'common.tableAndForm.justOnce.name'|translate}}</span>
+								<span data-ng-if="!item.frequency.asNeeded && !item.frequency.justOnce">{{'common.tableAndForm.every.name'|translate}} <strong>{{ item.frequency.value}} {{ item.frequency.period}}</strong></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col col-sm-2"><label>{{'common.tableAndForm.destinationRole.name'|translate}}:*</label></div>
+						<div class="col col-sm-10">
+							<select class="form-control" data-ng-model="item.destinationRole"
+									data-ng-options="role as role.name + ' - ' + role.description for role in userRoles">
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<br/>
+
+				<div class="row">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.purpose.name'|translate}}:</label></div>
+					<div class="col col-sm-10">
+						<pre data-ng-bind-html="procedure.purpose"></pre>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.equipments.name'|translate}}:</label></div>
+					<div class="col col-sm-10">
+						<pre data-ng-bind-html="procedure.equipments"></pre>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.activities.name'|translate}}:</label></div>
+					<div class="col col-sm-10">
+						<pre data-ng-bind-html="procedure.activities"></pre>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.processCheck.name'|translate}}:</label></div>
+					<div class="col col-sm-10">
+						<pre data-ng-bind-html="procedure.process_check"></pre>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.resultsCheck.name'|translate}}:</label></div>
+					<div class="col col-sm-10">
+						<pre data-ng-bind-html="procedure.results_check"></pre>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.revision.name'|translate}}:</label></div>
+					<div class="col col-sm-10">
+						<span>{{ procedure.revision / 100 | number : 2}}</span>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<div data-ng-if="editMode">
+			<button class="btn btn-primary pull-right" type="button" ng-click="save()" data-ng-disabled="item == null || item.procedure.id == null || item.destinationRole == null">{{'common.button.form.save'|translate}}</button>
+			<button class="btn btn-default pull-left" type="button" ng-click="cancel()">{{'common.button.form.cancel'|translate}}</button>
+		</div>
+		<div data-ng-if="!editMode">
+			<button class="btn btn-default" type="button" ng-click="cancel()">{{'common.button.form.close'|translate}}</button>
+		</div>
+	</div>
+</div>

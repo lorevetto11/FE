@@ -1,0 +1,48 @@
+<div class="prerequisites-audits-detail-modal">
+	<div class="modal-header">
+		<h3 class="modal-title" data-ng-if="editMode">{{ 'common.tableAndForm.additionalInformation.name' |
+			translate}}</h3>
+	</div>
+	<div class="modal-body">
+		<form name="form" novalidate>
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-sm-2">
+						<label>{{'common.tableAndForm.note.name' | translate}}</label>
+					</div>
+					<div class="col col-sm-10">
+								<textarea class="form-control" rows="3"
+								          data-ng-model="user.note"></textarea>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group"  data-ng-if="!loading">
+				<div class="row">
+					<div class="col col-sm-2">
+						<label>{{'common.tableAndForm.attachment.name' | translate}}</label>
+					</div>
+					<div class="col col-sm-10">
+						<attachment name="attachment"
+						            data-ng-model="user.attachment"></attachment>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<div data-ng-if="editMode">
+			<button class="btn btn-primary pull-right" type="button" ng-click="save(form)">
+				{{'common.button.form.save'|translate}}
+			</button>
+			<button class="btn btn-default" type="button" ng-click="cancel()">
+				{{'common.button.form.cancel'|translate}}
+			</button>
+		</div>
+		<div data-ng-if="!editMode">
+			<button class="btn btn-default" type="button" ng-click="cancel()">
+				{{'common.button.form.close'|translate}}
+			</button>
+		</div>
+	</div>
+</div>

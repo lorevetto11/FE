@@ -1,0 +1,25 @@
+<div data-ng-show="PrerequisiteType.isEquipment(element)">
+
+    <label>{{'common.tableAndForm.supplier.name'|translate}}:</label> {{item.equipment.name}} <br/>
+        <select class="form-control" data-ng-model="element.equipment.supplier" name="supplier"
+                data-ng-options="supplier as supplier.name for supplier in suppliers track by supplier.id"></select>
+    <br/>
+
+    <label>{{'common.tableAndForm.maintainer.name'|translate}}:</label>
+    <input type="text" class="form-control" data-ng-model="element.equipment.maintainer" placeholder="Maintainer">
+    <br/>
+
+    <label>{{'common.tableAndForm.frequency.name'|translate}}:</label> ({{'common.tableAndForm.every.name'|translate}})
+    <div class="row">
+        <div class="col col-xs-6 text-right">
+            <input type="number" class="form-control" data-ng-model="element.equipment.frequency.value" placeholder="0">
+        </div>
+        <div class="col col-xs-6 text-right">
+            <select class="form-control"
+                    data-ng-model="element.equipment.frequency.period"
+                    data-ng-options="opt for opt in period"></select>
+        </div>
+    </div>
+    <br/>
+
+</div>

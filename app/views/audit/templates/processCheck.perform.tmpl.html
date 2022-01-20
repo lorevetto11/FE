@@ -1,0 +1,45 @@
+<div class="task-perform-modal">
+	<div class="modal-header">
+		<h3 class="modal-title">{{'nav.audit.sub.commonSub.perform'|translate}}</h3>
+	</div>
+	<div class="modal-body">
+		<form name="form" novalidate>
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-xs-3">
+						<label>{{'common.tableAndForm.evidence.name'|translate}}</label>
+					</div>
+					<div class="col col-xs-9">
+						<textarea class="form-control" data-ng-model="outcome.evidence" name="evidence" data-ng-disabled="!editMode" required></textarea>
+						<small class="text-danger"
+							   data-ng-if="form.evidence.$dirty && form.evidence.$error.required">
+							This is a required field!
+						</small>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-xs-3">
+						<label>{{'common.tableAndForm.attachment.name'|translate}}</label>
+					</div>
+					<div class="col col-xs-9" data-ng-if="editMode">
+						<attachment data-ng-model="outcome.attachment"></attachment>
+					</div>
+					<div class="col col-xs-9" data-ng-if="!editMode">
+						<attachment data-ng-model="outcome.attachment" readonly></attachment>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<div data-ng-if="editMode">
+			<button class="btn btn-primary pull-right" data-ng-disabled="!isValid()" type="button" ng-click="save(outcome, form)" data-ng-disabled="item == null">{{'common.button.form.save'|translate}}</button>
+			<button class="btn btn-default" type="button" ng-click="cancel()">{{'common.button.form.cancel'|translate}}</button>
+		</div>
+		<div data-ng-if="!editMode">
+			<button class="btn btn-default" type="button" ng-click="cancel()">{{'common.button.form.close'|translate}}</button>
+		</div>
+	</div>
+</div>

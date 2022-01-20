@@ -1,0 +1,123 @@
+<div class="training-home">
+    <div class="row">
+        <div class="col-md-6 col-lg-4">
+            <div class="panel">
+                <div class="panel-heading ng-binding">{{'nav.training.sub.commonSub.search'|translate}}</div>
+                <div class="panel-body">
+                    <div class="panel-search-section">
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <input id="searchUsers" type="text" data-ng-model="keywordFilter"
+                                       class="form-control" placeholder="{{'training.panel.search.searchPlaceholder'|translate}}">
+                            </div>
+                            <div class="col-xs-2">
+                                <div class="pull-right">
+                                    <div class="pull-right btn btn-primary" ng-click="add()" role="button" tabindex="0">
+                                        <i class="fa fa-plus"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+
+                    <div style="max-height: 100%">
+                        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;">
+                            <div class="filterbox-vertical" data-slim-scroll="" style="overflow: hidden; width: auto; height: 100%;">
+                                <section class="panel panel-default mail-categories">
+                                    <ul class="list-group">
+                                        <li class="list-group-item" ng-class="{'active': selectedItem.id == item.id}"
+                                            data-ng-click="edit(item)" data-ng-repeat="item in items | filter : itemsFilter | orderBy: 'order'">
+                                            <a>{{item.name}}
+                                                <small class="pull-right">{{item.trainer}}</small>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </section>
+
+                                <div data-ng-if="(!items || items.length == 0)">
+                                    <button class="btn btn-line-primary btn-block" data-ng-click="cloneFromOrganizationParent()">
+                                        <i class="glyphicon glyphicon-copy"></i> Copia da organizzazione padre
+                                    </button>
+                                </div>
+
+                            </div>
+                            <div class="slimScrollBar" style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 2287px;">
+
+                            </div>
+                            <div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col col-md-6 col-lg-8" data-ng-if="selectedItem">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="media">
+                        <div class="media-body media-middle">
+                            <div class="media-heading">
+                                <span>{{'nav.training.sub.commonSub.details'|translate}}</span>
+                            </div>
+                            <span style="text-transform: none">{{selectedItem.name}}</span>
+                        </div>
+                        <div class="media-right">
+                            <div class="btn btn-default" data-ng-click="cancel()" role="button" tabindex="0">
+                                <i class="fa fa-times"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="user-role-detail">
+                        <form novalidate>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col col-sm-3"><label>{{'common.tableAndForm.title.name'|translate}}:</label></div>
+                                    <div class="col col-sm-9">
+                                        <input class="form-control" data-ng-model="selectedItem.name"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col col-sm-3"><label>{{'common.tableAndForm.description.name'|translate}}:</label></div>
+                                    <div class="col col-sm-9">
+                                        <textarea  class="form-control" data-ng-model="selectedItem.description" rows="5"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col col-sm-3"><label>{{'common.tableAndForm.color.name'|translate}}:</label></div>
+                                    <div class="col col-sm-9">
+                                        <input type="color" class="form-control" data-ng-model="selectedItem.color">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col col-sm-3"><label>{{'common.tableAndForm.order.name'|translate}}:</label></div>
+                                    <div class="col col-sm-9">
+                                        <input type="number" min="0" step="1" class="form-control" data-ng-model="selectedItem.order">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div>
+                            <button class="btn btn-primary pull-right" type="button" ng-click="save(selectedItem)"
+                                    data-ng-disabled="!isValid(selectedItem)">
+                                {{'common.button.form.save'|translate}} &nbsp; <i class="glyphicon glyphicon-floppy-disk"></i></button>
+                            <button class="btn btn-default" type="button" ng-click="delete(selectedItem)" data-ng-if="selectedItem.id != null">
+                                {{'common.button.form.delete'|translate}} &nbsp; <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

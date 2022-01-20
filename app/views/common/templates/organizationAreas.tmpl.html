@@ -1,0 +1,89 @@
+
+
+
+<div>
+
+  <style>
+      .item {
+        margin: 10px 0px 10px 30px;
+      }
+
+      .list-item {
+        border-bottom: solid 1px #eee;
+      }
+  </style>
+
+<div ng-if="originalAreas.length == 0">
+
+  <div class="alert alert-info">
+    Nessuna area organizzativa è presente per l'organizzazione corrente.
+  </div>
+
+  <form>
+    <legend>Crea da modello</legend>
+    <div class="form-group">
+      <select class="form-control" ng-model="selected.template"
+        ng-options="tpl as tpl.name for tpl in organizationAreaTemplates"></select>
+    </div>
+
+<!--
+    <div class="alert alert-default">
+      {{selected.template | json}}
+    </div>
+-->
+
+
+    <button class="btn btn-primary" ng-click="applyTemplate()">Applica modello</button>
+  </form>
+
+</div>
+
+<div ng-if="originalAreas.length > 0">
+
+  <div class="text-right">
+    <button  class="btn btn-xs btn-gap-v btn-line-success" title="Aggiungi area di primo livello" class=" text-success" ng-click="add()">
+      <i class="fa fa-plus text-success"></i> nuova area di primo livello
+    </button>
+  </div>
+
+  <div ng-repeat="area in organizationAreas" class="item">
+      <div organization-area-list-item area="area" on-remove="remove(item, organizationAreas)"></div>
+
+      <div ng-if="area.areas" class='collapse in collapse_{{area.id}}'>
+          <div ng-repeat="area_1 in area.areas" class="item">
+            <div organization-area-list-item area="area_1" on-remove="remove(item, area.areas)"></div>
+
+            <div ng-if="area_1.areas" class='collapse in collapse_{{area_1.id}}'>
+                <div ng-repeat="area_2 in area_1.areas" class="item">
+                  <div organization-area-list-item area="area_2" on-remove="remove(item, area_1.areas)"></div>
+
+                  <div ng-if="area_2.areas" class='collapse in collapse_{{area_2.id}}'>
+                      <div ng-repeat="area_3 in area_2.areas" class="item">
+                        <div organization-area-list-item area="area_3" is-leaf="true" on-remove="remove(item, area_2.areas)"></div>
+
+                      </div>
+                  </div>
+
+                </div>
+            </div>
+        </div>
+      </div>
+  </div>
+
+  <div ng-if="areas.length == 0" class="alert alert-warning">
+    Hai rimosso tutte le aree. Se vuoi applicare un modello, procedi prima al salvataggio delle ttuali eliminazioni.
+  </div>
+
+  <div class="buttons text-right">
+<!--
+      <button class="btn btn-default" ng-click="cancel()">
+          Annulla
+      </button>
+-->
+      <button class="btn btn-primary" ng-click="save()">
+          <i class="fa fa-floppy-o"></i>&nbsp;&nbsp; Salva
+      </button>
+  </div>
+
+</div>
+</div>

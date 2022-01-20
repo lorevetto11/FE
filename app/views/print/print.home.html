@@ -1,0 +1,127 @@
+<div class="print-home">
+
+    <div class="row">
+
+        <div class="col col-sm-12">
+            <div class="panel">
+                <div class="panel-heading ng-binding">{{'nav.prints.sub.name' |translate}}</div>
+
+                <div class="clearfix" data-ng-if="printing">
+
+                    <br/><br/>
+                    <div class="text-center text-primary">
+
+                        <div class="printer-loader">
+                            <i class="fa fa-circle-o-notch fa-spin"></i>
+                            <i class="fa fa-print" aria-hidden="true"></i>
+                        </div>
+
+                        <h3>Generazione stampa in corso... <br/><br/><br/>
+                            <!-- <i class="fa fa-2x fa-circle-o-notch fa-spin"></i><br/> -->
+                        </h3>
+                    </div>
+                    <br/>
+                </div>
+
+                <div class="panel-body" data-ng-if="!printing">
+
+                    <div class="panel-default">
+                        <div class="panel-heading">
+                            Dati aziendali
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col col-sm-10">
+                                    <p>Informazioni di dettaglio sull'azienda oggetto del piano</p>
+                                </div>
+                                <div class="col col-sm-2 text-right">
+                                    <button class="btn btn-line-primary" data-ng-click="printOrganizationDetails()">Stampa</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-default">
+                        <div class="panel-heading">
+                            Delega
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col col-sm-10">
+                                    <p>Affidamento dell'incarico di Responsabile del Sistema di Autocontrollo</p>
+                                </div>
+                                <div class="col col-sm-2 text-right">
+                                    <button class="btn btn-line-primary" data-ng-click="printDelega()">Stampa</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-default">
+                        <div class="panel-heading">
+                            Schede Allegate
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="row">
+                                <div class="col col-sm-10">
+                                    <label>SCHEDA 1 - Elenco del personale</label><br/>
+                                    <span>Dipendenti e relativi ruoli</span>
+                                </div>
+                                <div class="col col-sm-2 text-right">
+                                    <button class="btn btn-line-primary" data-ng-click="printStaff()">Stampa</button>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col col-sm-10">
+                                    <label>SCHEDA 2 - Registro Corsi di Addestramento del personale</label>
+                                </div>
+                                <div class="col col-sm-2 text-right">
+                                    <button class="btn btn-line-primary" data-ng-click="printStaffTrainings()">Stampa</button>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col col-sm-10">
+                                    <label>SCHEDA 3 - Omologazione Fornitori</label>
+                                </div>
+                                <div class="col col-sm-2 text-right">
+                                    <button class="btn btn-line-primary" data-ng-click="printSuppliers()">Stampa</button>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col col-sm-10">
+                                    <label>SCHEDA 4 - Non conformità</label>
+                                </div>
+                                <div class="col col-sm-2 text-right">
+                                    <button class="btn btn-line-primary" data-ng-click="printNonCompliances()">Stampa</button>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col col-sm-10">
+                                    <label>SCHEDA 5 - Monitoraggi</label>
+                                </div>
+                                <div class="col col-sm-2 text-right">
+                                    <button class="btn btn-line-primary" data-ng-click="printMonitorings()">Stampa</button>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col col-sm-10">
+                                    <label>SCHEDA 6 - Monitoraggi</label>
+                                </div>
+                                <div class="col col-sm-2 text-right">
+                                    <button class="btn btn-line-primary" data-ng-click="printMonitorings()">Stampa</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

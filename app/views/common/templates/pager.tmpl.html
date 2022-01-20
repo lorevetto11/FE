@@ -1,0 +1,31 @@
+<div class="clearfix">
+
+    <span data-ng-if="items.length > pageSize" style="white-space: nowrap">
+        Visualizzati da {{ (currentPage*pageSize)+1 }} a {{ Math.min((currentPage+1)*pageSize, items.length) }} di {{ items.length }} elementi
+    </span>
+
+    <span data-ng-if="items.length <= pageSize" style="display: block">
+        Trovati {{ items.length }} elementi
+    </span>
+
+    <ul class="pagination pagination-sm pull-right">
+
+        <li data-ng-class="{'disabled' : currentPage == 0 }"
+            data-ng-show="pages.length > 1">
+            <a data-ng-click="onPagePrev()">«</a>
+        </li>
+
+        <li data-ng-repeat="page in pages track by $index"
+            data-ng-class="{'active' :  $index == currentPage}"
+            data-ng-show="show($index)">
+            <a data-ng-click="onPageSelect($index)">{{ $index+1 }}</a>
+        </li>
+
+        <li data-ng-class="{'disabled' : currentPage == pages.length - 1 }"
+            data-ng-show="pages.length > 1">
+            <a data-ng-click="onPageNext()">»</a>
+        </li>
+
+    </ul>
+
+</div>

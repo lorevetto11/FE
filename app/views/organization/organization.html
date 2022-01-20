@@ -1,0 +1,165 @@
+<div class="page person">
+
+	<div class="organization-home" data-ng-if="items">
+		<div class="row">
+			<div class="col-sm-4" data-ng-if="items.length > 1">
+
+				<div class="panel">
+					<div class="panel-body">
+						<div style="max-height: 100%">
+							<div class="slimScrollDiv"
+							     style="position: relative; overflow: hidden; width: auto; height: 100%;">
+								<div class="filterbox-vertical" data-slim-scroll=""
+								     style="overflow: hidden; width: auto; height: 100%;">
+									<section data-ng-show="!itemsLoading" class="panel panel-default mail-categories">
+										<ul class="list-group">
+											<li class="list-group-item"
+											    data-ng-class="{'active' : selected.item.id == item.id}"
+											    data-ng-click="edit(item)"
+											    data-ng-repeat="item in items | filter : itemsFilter">
+												<a class="progeny-{{kinshipLevels.get(item.id)}}">{{item.name}}</a>
+											</li>
+										</ul>
+									</section>
+								</div>
+								<div class="slimScrollBar"
+								     style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 2287px;">
+								</div>
+								<div class="slimScrollRail"
+								     style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col col-sm-8" data-ng-init="edit(items[0])">
+
+				<div data-ng-if="loader">
+					<br/><br/><br/><br/><br/>
+					<h3 class="text-primary text-center">
+						<i class="fa fa-2x fa-circle-o-notch fa-spin"></i><br/>
+						{{ 'loading' | translate }}
+					</h3>
+					<br/><br/><br/><br/><br/>
+				</div>
+
+				<div class="panel animate-enter-if" data-ng-if="selected.item">
+					<div class="panel-body">
+						<div class="user-role-detail">
+							<div class="form-group">
+								<h1 class="text-primary">{{ selected.item.name }}</h1>
+							</div>
+
+							<br/>
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3"><label>{{'common.tableAndForm.legalResidence.name'|translate}}:</label>
+									</div>
+									<div class="col col-sm-9">
+										{{ selected.item.legalResidence }}
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3"><label>{{'organization.organizationOwner'|translate}}:</label>
+									</div>
+									<div class="col col-sm-9">
+										{{ selected.item.description }}
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3">
+										<label>{{'common.tableAndForm.vatNumber.name'|translate}}:</label></div>
+									<div class="col col-sm-9">
+										{{ selected.item.vatNumber }}
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3">
+										<label>{{'common.tableAndForm.email.name'|translate}}:</label></div>
+									<div class="col col-sm-9">
+										{{ selected.item.email }}
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col col-sm-3">
+										<label>{{'common.tableAndForm.phone.name'|translate}}:</label>
+									</div>
+									<div class="col col-sm-9">
+										{{ selected.item.phone }}
+									</div>
+								</div>
+							</div>
+							<div class="form-group" data-ng-if="selected.item.organization">
+								<div class="row">
+									<div class="col col-sm-3"><label>{{'common.tableAndForm.parentOrganization.name'|translate}}:</label>
+									</div>
+									<div class="col col-sm-9">
+										{{selected.item.organization.name }}
+									</div>
+								</div>
+							</div>
+
+							<form>
+								<div data-ng-if="places.length > 0">
+									<div>
+										<hr/>
+										<h4>{{'common.tableAndForm.productionSites.name'|translate}}</h4>
+										<br/>
+									</div>
+
+									<div class="panel panel-default animate-if" data-ng-repeat="place in places">
+										<div class="panel-body">
+											<organization-place data-ng-model="place" readonly></organization-place>
+										</div>
+									</div>
+								</div>
+
+
+								<!-- ------------- certifications --------------------- -->
+								<div data-ng-if="certifications.length > 0">
+									<div>
+										<hr/>
+										<h4>{{'common.tableAndForm.certifications.name'|translate}}</h4>
+										<br/>
+									</div>
+
+									<div class="panel panel-default animate-if"
+									     data-ng-repeat="certification in certifications"
+									     data-ng-if="!certification.deleted">
+										<div class="panel-body">
+											<organization-certification data-ng-model="certification"
+											                            readonly></organization-certification>
+
+										</div>
+									</div>
+								</div>
+
+								<!-- ------------- Allegati --------------------- -->
+								<div data-ng-if="attachments">
+									<div>
+										<hr/>
+										<h4>{{'common.tableAndForm.otherAttachments.name'|translate}}</h4>
+										<br/>
+									</div>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

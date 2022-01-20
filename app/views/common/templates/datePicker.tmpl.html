@@ -1,0 +1,19 @@
+<form name="datePickerForm" ng-class="{'form-validation': isValid}" class="input-group ui-datepicke">
+    <input type="text"
+           class="form-control"
+           uib-datepicker-popup="{{format}}"
+           ng-model="date"
+           name="date"
+           is-open="opened"
+           min="minDate"
+           max="maxDate"
+           datepicker-options="dateOptions" 
+           date-disabled="disabled(date, mode)"
+           ng-required="{{isRequired}}"
+           ng-change="onDatePickerChange()"
+           current-text="Oggi"
+           clear-text="Pulisci il campo"
+           close-text="Annulla"
+           date-picke-validator="{{isValid}}">
+    <span class="input-group-addon" ng-click="open($event)"><i class="fa fa-calendar"></i></span>
+</form>

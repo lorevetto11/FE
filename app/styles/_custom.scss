@@ -1,0 +1,261 @@
+
+html {
+    /*  mark vertical scrollbar always visible */
+    overflow-y:scroll;
+}
+
+.main-container {
+    padding-top: 50px !important;
+
+
+    > .nav-container.nav-fixed {
+        top: 50px !important;
+    }
+}
+
+/*
+.main-container {
+    background-image: url('images/logo_background.png');
+    background-repeat: repeat;
+    background-size: 100px;
+    background-color: #fff;
+    background-position:50% 50%
+}
+*/
+
+.inline {
+    display: inline;
+}
+
+.risk-class-color {
+    width:18px;
+    height: 18px;
+    border:solid 1px #999;
+}
+
+.page-profile {
+    .list-info {
+        li {
+            label {
+                width:170px;
+            }
+        }
+    }
+
+}
+.full-width {
+    width:100% !important;
+}
+
+.half-width {
+    width:50% !important;
+    overflow: hidden;
+}
+
+
+.header-container > .top-header {
+
+
+     .top-nav {
+         padding-top:0px;
+     }
+
+    .menu-button {
+        left: 45px;
+    }
+
+    .logo {
+        text-align: left;
+        /*background-image: url('images/logo_safeaty_white.png');*/
+        background-repeat: no-repeat;
+        background-size: 40px;
+        background-position: 5px 50%;
+
+
+        .logo-text {
+            @media screen and (max-width: $screen-sm-max) {
+                display: none;
+            }
+        }
+
+        img {
+            height: 45px;
+            margin-left: 5px;
+            margin-top: -5px;
+        }
+
+        .nav-profile {
+            .user-avatar {
+                float: right;
+                border: solid 1px #fff;
+                padding: 2px;
+                border-radius: 18px;
+                width: 36px;
+                height: 36px;
+            }
+        }
+    }
+}
+
+.body-auth #content{
+    background-color: white;
+}
+
+.signin-header img{
+    max-width: 200px;
+    padding-bottom: 8px;
+}
+
+.signin-body .container{
+    width: 100%;
+    margin: 0;
+    min-height: 380px;
+    background: url('http://safeaty.it/images/bg.png') 50% 50% no-repeat;
+    background-size: cover;
+
+    .form-container{
+        padding: 20px 40px 10px;
+        background-color: #96BF0D;
+        margin-top: 80px;
+    }
+
+    @media screen and (min-width: 1025px) {
+        min-height: 500px;
+        .form-container{
+            margin-top: 100px;
+        }
+    }
+}
+
+.signin-footer{
+
+    div.logo:nth-child(1){
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    div.logo:nth-child(2){
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+}
+
+.badge {
+    &.badge-danger {
+        background-color: $brand-danger !important;
+    }
+    &.badge-success {
+        background-color: $brand-success !important;
+    }
+    &.badge-info {
+        background-color: $brand-info !important;
+    }
+}
+
+.table-tisk {
+    td {
+        text-align: center;
+        color:#fff;
+
+        &.success {
+            background-color: $brand-success !important;
+        }
+        &.info {
+            background-color: $brand-info !important;
+        }
+        &.warning {
+            background-color: $brand-warning !important;
+        }
+        &.danger {
+            background-color: $brand-danger !important;
+        }
+    }
+}
+
+.list-group-item {
+    &.success {
+        background-color: $alert-success-bg !important;
+    }
+    &.info {
+        background-color: $alert-info-bg !important;
+    }
+    &.warning {
+        background-color: $alert-warning-bg !important;
+    }
+    &.danger {
+        background-color: $alert-danger-bg !important;
+    }
+    &.yellow {
+        background-color: #fffad3 !important;
+    }
+
+    .help-block {
+        margin-bottom: -5px;
+    }
+}
+/*
+.nav.nav-pills {
+    li {
+        border: solid 1px $brand-primary !important;
+        margin-right:10px;
+    }
+}
+*/
+.nav-wrapper {
+    .version-info {
+        color:#fff;
+        text-align: center;
+        font-style: italic;
+        font-size: 0.9em;
+        position: absolute;
+        bottom:10px;
+        width:100%;
+    }
+}
+
+.task-home {
+    .panel .panel-body {
+        overflow: hidden;
+    }
+}
+
+
+.user-role-home {
+    span.active {
+        font-weight: bold;
+    }
+
+}
+
+
+.page.prerequisite {
+    .nav-prerequisite-types {
+        @media screen and (min-width: $screen-lg-min) {
+            li {
+                width: 100%;
+            }
+        }
+
+    }
+}
+
+.print-home {
+
+    .printer-loader {
+
+        position: relative;
+
+        .fa.fa-print {
+            font-size: 7em;
+        }
+        .fa.fa-spin {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-top: -28px;
+            margin-left: -14px;
+            font-size: 1.8em;
+        }
+    }
+
+}

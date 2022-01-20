@@ -1,0 +1,76 @@
+<div>
+
+	<div>
+		<p data-ng-if="loading">Loading...</p>
+	</div>
+
+	<div class="panel panel-default" data-ng-if="!loading">
+		<div class="panel-body">
+
+			<div class="clearfix">
+				<div class="pull-right btn btn-primary" ng-click="add()">
+					Add <i class="fa fa-plus"></i>
+				</div>
+			</div>
+
+			<table class="table table-condensed">
+				<thead>
+				<tr>
+					<th>{{'common.tableAndForm.id.name'|translate}}</th>
+					<th>{{'common.tableAndForm.destinationRole.name'|translate}}</th>
+					<th>{{'common.tableAndForm.procedure.name'|translate}}</th>
+					<th>{{'common.tableAndForm.frequency.name'|translate}}</th>
+					<th>{{'common.tableAndForm.lastMonitoredDate.name'|translate}}</th>
+					<th>{{'common.tableAndForm.lastMonitoredOutcome.name'|translate}}</th>
+					<th>{{'common.tableAndForm.examiner.name'|translate}}</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr data-ng-repeat="item in monitorings"
+				    data-ng-init="prerequisite = (prerequisites | filter : { context : { id : item.context.id } } : true)[0];
+				    role = (userRoles | filter : { id : prerequisite.role.id } : true)[0];
+				    procedure = (procedures | filter : { id : item.procedure.id } : true)[0];
+				    outcome = (outcomes | filter : { monitoring : { id : item.id } } : true | orderBy : '-insertTime')[0]">
+					<!--examiner = ( people | filter : { id : outcome.user.id } : true)[0]">-->
+
+					<td>{{item.id}}</td>
+					<td>{{role.name}}</td>
+					<td>{{procedure.title}}</td>
+					<td>{{item.frequency | frequency}}</td>
+					<td>{{outcome.insertTime | date : 'dd/MM/yyyy HH:mm'}}</td>
+					<td>
+						<div data-ng-if="outcome">
+							<span data-ng-if="outcome.result" class="label label-success">{{'prerequisites.panel.monitorings.outcome.positive'|translate}}</span>
+							<span data-ng-if="!outcome.result" class="label label-danger">{{'prerequisites.panel.monitorings.outcome.negative'|translate}}</span>
+						</div>
+					</td>
+					<td>
+                       <span data-ng-if="outcome">
+                           <span data-ng-if="outcome.user.id == -1">{{'user.role.Administrator'|translate}}</span>
+                           <span data-ng-if="outcome.user.id != -1">{{examiner.getFullName()}}</span>
+                       </span>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+
+
+		<!--
+			<pre>
+			   {{monitorings | json}}
+			   </pre>
+		   <br/>
+
+			   <pre>
+			  {{audits | json}}
+			  </pre>
+		  <br/>
+			  <pre>
+			  {{ items | json }}
+			  </pre>
+	   -->
+
+
+	</div>
+</div>

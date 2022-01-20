@@ -1,0 +1,44 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        <div class="clearfix">
+            <h4>Equipments</h4>
+        </div>
+        <table class="table table-condensed">
+            <thead>
+            <tr>
+                <th>{{'common.tableAndForm.name.name'|translate}}</th>
+                <th>{{'common.tableAndForm.description.name'|translate}}</th>
+                <th>{{'common.tableAndForm.supplier.name'|translate}}</th>
+                <th>{{'common.tableAndForm.maintainer.name'|translate}}</th>
+                <th>{{'common.tableAndForm.frequency.name'|translate}}</th>
+                <th>{{'common.tableAndForm.equipmentType.name'|translate}}</th>
+                <th>{{'common.tableAndForm.action.name'|translate}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="item in items | orderBy: item.name"
+                data-ng-init="frequency = ( item.frequency.justOnce
+                                                ? 'JustOnce'
+                                                : item.frequency.asNeeded
+                                                    ? 'As needed'
+                                                    : 'Every ' + item.frequency.value + ' ' + item.frequency.period )">
+                <td>{{item.name}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.supplier.name}}</td>
+                <td>{{item.maintainer}}</td>
+                <td>{{frequency}}</td>
+                <td>{{item.equipmentType.name}}</td>
+                <td>
+                    <button class="btn btn-sm btn-info" data-ng-click="edit(item)"
+                            title="Edit Equipment">
+						<span class="visible-lg">{{'common.button.form.edit'|translate}} &nbsp;<i
+                                class="fa fa-pencil" aria-hidden="true"></i></span>
+                        <i class="fa fa-pencil hidden-lg" aria-hidden="true"></i>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

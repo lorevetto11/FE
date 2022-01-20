@@ -1,0 +1,49 @@
+<div>
+
+	<div data-ng-if="selectedOrganization && loading">
+		<br/><br/>
+		<h3 class="text-primary text-center">
+			<i class="fa fa-2x fa-circle-o-notch fa-spin"></i><br/>
+			{{'common.tableAndForm.loading.name'|translate}}...
+		</h3>
+	</div>
+
+	<div data-ng-if="!loading">
+		<div class="clearfix" data-ng-repeat="monitoring in monitorings">
+			<hr data-ng-if="!$first"/>
+			<div class="pull-right">
+				<button class="btn btn-sm btn-line-info" data-ng-click="edit(monitoring)">
+					<i class="glyphicon glyphicon-pencil"></i></button>
+				<button class="btn btn-sm btn-line-danger" data-ng-click="delete(monitoring)">
+					<i class="glyphicon glyphicon-trash"></i></button>
+			</div>
+
+			<div data-ng-init="procedure = (procedures | filter : { id: monitoring.procedure.id } : true)[0]">
+				<h4>
+					{{procedure.title}}
+				</h4>
+				<div class="row">
+					<div class="col-sm-6">
+						<label>{{'common.tableAndForm.frequency.name'|translate}}:</label>
+					</div>
+					<div class="col-sm-6">
+                    <span>
+                        {{ monitoring.frequency.justOnce == true ? "Just once" :
+                        monitoring.frequency.asNeeded == true ? "As needed" :
+                        "Every " + monitoring.frequency.value + " " + monitoring.frequency.period}}
+                    </span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<div>
+			<button class="btn btn-block btn-line-primary" data-ng-click="add()"
+			        data-ng-disabled="procedures.length === 0">
+				{{'common.button.form.add'|translate}} &nbsp; <i class="glyphicon glyphicon-plus"></i>
+			</button>
+		</div>
+
+	</div>
+
+</div>

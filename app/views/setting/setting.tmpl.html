@@ -1,0 +1,26 @@
+<div class="page setting">
+    <div class="row">
+        <div class="col col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span>{{'nav.setting.sub.name'|translate}}</span>
+                </div>
+                <div class="panel-body">
+                    <div class="nav-wrapper">
+                        <ul class="nav nav-pills"
+                            data-slim-scroll
+                            data-accordion-nav
+                            data-highlight-active>
+                            <li ui-sref-active="active" data-ui-sref="setting.data">
+                                <a>{{'nav.setting.sub.data'|translate}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-xs-12">
+            <div ui-view ></div>
+        </div>
+    </div>
+</div>

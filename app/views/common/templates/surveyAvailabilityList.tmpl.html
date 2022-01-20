@@ -1,0 +1,85 @@
+
+  <div class="panel panel-default available-surveys">
+    <div class="panel-heading">
+     {{'nav.agenda.name'|translate}}
+    </div>
+    <div class="panel-body">
+
+      <div class="panel- panel-default">
+
+        <div class="panel-body-">
+          <div class="row">
+            <div class="col col-sm-4 form-group">
+              <label>{{'common.tableAndForm.typology.name'|translate}}:</label>
+              <div class="input-group" style="width:100%">
+                  <select class="form-control" ng-model="search.type"
+                      ng-init="search.type = surveyTypeOptions[0].value"
+                      ng-options="type.value as type.label for type in surveyTypeOptions">
+                  </select>
+              </div>
+            </div>
+            <div class="col col-sm-4 form-group">
+                <label>{{'common.tableAndForm.dateFrom.name'|translate}}:</label>
+                <div date-picker min-date=search.today date="search.dateFrom" ></div>
+            </div>
+
+            <div class="col col-sm-4 form-group">
+                <label{{'common.tableAndForm.dateTo.name'|translate}}:</label>
+                <div date-picker min-date=search.today date="search.dateTo" ></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <span class="pull-right">
+        visualizza risultati: {{filteredAvailableSurveys.length}} di {{ availableSurveys.length}}
+        <button ng-if="filteredAvailableSurveys.length < availableSurveys.length"
+          class="btn btn-link btn-sm" ng-click="showAll()">vedi tutti</button>
+      </span>
+      <hr/>
+
+      <div ng-if="filteredAvailableSurveys.length">
+        <table class="table table-striped ">
+              <thead>
+                  <tr>
+                      <th>{{'common.tableAndForm.id.name'|translate}}</th>
+                      <th>{{'common.tableAndForm.name.name'|translate}}</th>
+                      <th>{{'common.tableAndForm.typology.name'|translate}}</th>
+                      <th>{{'common.tableAndForm.dateAndHour.name'|translate}}</th>
+                      <th>{{'common.tableAndForm.duration.name'|translate}}</th>
+                      <th>{{'common.tableAndForm.capacity.name'|translate}}</th>
+                      <th>{{'common.tableAndForm.state.name'|translate}}</th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr ng-repeat="survey in filteredAvailableSurveys">
+
+                      <!--<td>{{$index+1}}</td>-->
+                      <td>{{survey.id}}</td>
+                      <td>{{survey.surveyName}}</td>
+                      <td>{{survey.surveyType}}</td>
+                      <td style="white-space: nowrap">{{survey.startTime | date : 'dd-MM-yyyy   -   HH:mm'}}</td>
+                      <td>{{survey.duration | hours}}</td>
+                      <td>{{survey.capacity}}</td>
+                      <td translate="sur-survey-type-{{survey.status}}"></td>
+
+                      <td>
+                        <div ng-show="survey.status == 'AVAILABLE'">
+                          <button ng-if="permissionService.isConsultant()" class="btn btn-info btn-sm" ng-click="book(survey)">
+                            <i class="fa fa-book"></i> {{'common.button.common.book'|translate}}</button>
+
+                          <button ng-if="permissionService.isOrganizationAdmin() && !permissionService.isConsultant()" class="btn btn-info btn-sm" ng-click="bookRequest(survey)">
+                            <i class="fa fa-book"></i> {{'common.button.common.requestReservation'|translate}}</button>
+                        </div>
+                      <td>
+
+                  </tr>
+              </tbody>
+          </table>
+        </div>
+
+
+    </div>
+  </div>

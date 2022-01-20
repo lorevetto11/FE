@@ -1,0 +1,113 @@
+<div data-ng-if="selectedOrganization && loading">
+	<br/><br/><br/><br/><br/>
+	<h3 class="text-primary text-center">
+		<i class="fa fa-2x fa-circle-o-notch fa-spin"></i><br/>
+		{{ 'loading' | translate }}
+	</h3>
+	<br/><br/><br/><br/><br/>
+</div>
+
+<div class="panel" data-ng-if="!loading">
+
+	<div class="panel-body">
+		<div class="row">
+			<div class="col col-xs-12">
+			    <span class="pull-right">
+	                <button class="btn btn-sm btn-primary" data-ng-click="add()">
+	                    {{'common.button.form.add'|translate}} &nbsp;<i class="glyphicon glyphicon-plus"></i>
+	                </button>
+	            </span>
+			</div>
+		</div>
+		<hr>
+
+		<div class="row">
+			<div class="col col-xs-2">
+				<h4 style="margin-top: 0">{{'common.tableAndForm.filters.name'|translate}}</h4>
+			</div>
+			<div class="col col-xs-10">
+
+				<div class="pull-right">
+
+					<span>{{'common.tableAndForm.type.name'|translate}}</span>
+					<select class="btn btn-sm"
+					        data-ng-options="filterType.value as ('nonCompliance.type.'+filterType.name | translate)  for filterType in filterTypes"
+					        data-ng-model="filter.type"
+					        data-ng-change="changeType()">
+						<option value="">{{'people.panel.details.all'|translate}}</option>
+					</select>
+
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+					<span>{{'common.tableAndForm.status.name'|translate}}</span>
+					<select class="btn btn-sm"
+					        data-ng-options="filterStatus.value as ('nonCompliance.status.'+filterStatus.name | translate) for filterStatus in filterStatuses"
+					        data-ng-model="filter.status"
+					        data-ng-change="changeStatus()">
+						<option value="">{{'people.panel.details.all'|translate}}</option>
+					</select>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<hr style="margin:0;">
+
+	<div class="panel-body">
+
+		<table class="table table-condensed" wt-responsive-table>
+			<thead>
+			<tr>
+				<th>{{'common.tableAndForm.id.name'|translate}}</th>
+				<th>{{'common.tableAndForm.type.name'|translate}}</th>
+				<th>{{'common.tableAndForm.subject.name'|translate}}</th>
+				<th>{{'common.tableAndForm.description.name'|translate}}</th>
+				<th>{{'common.tableAndForm.createdBy.name'|translate}}</th>
+				<th>{{'common.tableAndForm.creationDate.name'|translate}}</th>
+				<th>{{'common.tableAndForm.closedBy.name'|translate}}</th>
+				<th>{{'common.tableAndForm.closedDate.name'|translate}}</th>
+				<th>{{'common.tableAndForm.status.name'|translate}}</th>
+				<th>{{'common.tableAndForm.action.name'|translate}}</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr data-ng-repeat="item in items  | filter: itemsFilter | orderBy:'-startDate'  | limitTo : 10 : 10 * currentPage">
+				<!-- | filter : { 'status' : filter.noncompliance.status }> -->
+				<td>{{ item.id }}</td>
+
+				<td>
+					<span class="label label-warning" data-ng-if="item.processCheck.id != null">{{'nonCompliance.type.processCheck'|translate}}</span>
+					<span class="label label-info" data-ng-if="item.systemCheckRequirement.id != null">{{'nonCompliance.type.systemCheck'|translate}}</span>
+							<span class="label label-primary"
+							      data-ng-if="item.context.id != null && item.context.className != 'DangerBean'">
+								&nbsp;&nbsp;{{'nonCompliance.type.prerequisite'|translate}}&nbsp;&nbsp;</span>
+							<span class="label label-danger"
+							      data-ng-if="item.context.id != null && item.context.className == 'DangerBean'">
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{'nonCompliance.type.haccp'|translate}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				</td>
+				<td data-ng-bind-html="getSubject(item)"></td>
+				<td data-ng-class="{'text-danger' : !item.closeDate}">{{ item.description }}</td>
+				<td class="text-nowrap">{{ item.insertUser }}</td>
+				<td class="text-nowrap">{{ item.startDate | date : 'dd-MMM-yyyy'}}</td>
+				<td class="text-nowrap">{{ item.closeUser.username }}</td>
+				<td class="text-nowrap">{{ item.closeDate | date : 'dd-MMM-yyyy'}}</td>
+				<td>
+					<span class="label label-danger" data-ng-if="!item.closeDate">&nbsp;&nbsp;{{'nonCompliance.status.open'|translate}}&nbsp;&nbsp;</span>
+					<span class="label label-success" data-ng-if="item.closeDate">{{'nonCompliance.status.closed'|translate}}</span>
+				</td>
+				<td>
+					<button class="btn btn-sm btn-line-info" data-ng-click="view(item)">
+						{{'common.button.form.view'|translate}} &nbsp;<i class="glyphicon glyphicon-eye-open"></i>
+					</button>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+
+		<pager data-ng-if="items.length" data-items="filteredItems"
+		       data-on-page-changed="onPageChanged(page)"></pager>
+
+	</div>
+</div>

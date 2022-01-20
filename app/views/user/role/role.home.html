@@ -1,0 +1,190 @@
+
+<div class="user-role-home" data-ng-if="selectedOrganization">
+    <div class="row">
+        <div class="col-md-4" data-ng-class="{'hidden-sm hidden-xs' : selectedItem}">
+            <div class="panel">
+                <div class="panel-heading ng-binding"> {{'nav.people.sub.commonSub.search'|translate}}</div>
+                <div class="panel-body">
+                    <div class="panel-search-section">
+                        <div class="row">
+                            <div class="col-xs-10">
+                                <input type="text" data-ng-model="filter.keyword"
+                                       class="form-control"
+                                       placeholder="{{'people.panel.search.searchPlaceholder'|translate}}">
+                            </div>
+                            <div class="col-xs-2">
+                                <div class="pull-right">
+                                    <div class="pull-right btn btn-primary" ng-click="add()" role="button" tabindex="0">
+                                        <i class="fa fa-plus"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 10px" data-ng-if="organizations.length > 1">
+                            <div class="col-xs-12">
+                                <label class="control-label">{{'common.tableAndForm.organization.name'|translate}}:</label>
+                                <select class="form-control" data-ng-model="filter.organization"
+                                        data-ng-options="organization as ('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' | limitTo: kinshipLevels.get(organization.id)*3)  + organization.name for organization in organizations  track by organization.id">
+                                    <option data-ng-selected="true" value="">{{'people.panel.details.all'|translate}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+
+                    <div class="text-center" data-ng-show="!itemsLoading">
+                        <small>{{ (items | filter : itemsFilter).length }} ruoli trovati</small>
+                    </div>
+
+                    <div style="max-height: 100%">
+                        <div class="slimScrollDiv"
+                             style="position: relative; overflow: hidden; width: auto; height: 100%;">
+                            <div class="filterbox-vertical" data-slim-scroll=""
+                                 style="overflow: hidden; width: auto; height: 100%;">
+                                <p data-ng-if="itemsLoading"><b>Loading...</b></p>
+                                <section data-ng-show="!itemsLoading" class="panel panel-default mail-categories">
+                                    <ul class="list-group">
+                                        <!-- ngRepeat: user in users | filter: filterUsers | orderBy: 'username' -->
+                                        <li class="list-group-item" ng-class="{'active': selectedItem.id == item.id}"
+                                            data-ng-click="edit(item)"
+                                            data-ng-repeat="item in items | filter : itemsFilter | orderBy: 'name'">
+                                            <a class="clearfix">{{item.name}}
+                                                <small data-ng-if="item.description"><br/>{{item.description}}</small>
+
+                                                <small class="pull-right help-block">
+                                                    <small><em>by</em> {{ item.organization.name }}</small>
+                                                </small>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </section>
+                            </div>
+                            <div class="slimScrollBar"
+                                 style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 2287px;">
+
+                            </div>
+                            <div class="slimScrollRail"
+                                 style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col col-md-8" >
+            <div class="panel animate-if" data-ng-if="selectedItem && !itemsLoading">
+                <div class="panel-heading">
+                    <div class="media">
+                        <div class="media-body media-middle">
+                            <div class="media-heading">
+                                <span>{{'nav.people.sub.commonSub.details'|translate}}</span>
+                            </div>
+                            <span style="text-transform: none">{{selectedItem.name}}</span>
+                        </div>
+                        <div class="media-right">
+                            <div class="btn btn-default" data-ng-click="cancel()" role="button" tabindex="0">
+                                <i class="fa fa-times"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="user-role-detail">
+                        <form class="form-valdiation" name="form" novalidate>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col col-sm-3">
+                                        <label>{{'common.tableAndForm.name.name'|translate}}:</label></div>
+                                    <div class="col col-sm-9">
+                                        <input class="form-control" data-ng-model="selectedItem.name" name="name"
+                                               required/>
+                                        <small class="text-danger"
+                                               data-ng-if="form.name.$dirty && form.name.$error.required">
+                                            This is a required field!
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col col-sm-3"><label>{{'common.tableAndForm.description.name'|translate}}:</label>
+                                    </div>
+                                    <div class="col col-sm-9">
+                                        <input class="form-control" data-ng-model="selectedItem.description"
+                                               name="description"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col col-sm-3"><label>{{'common.tableAndForm.organization.name'|translate}}:</label>
+                                    </div>
+
+                                    <div class="col col-sm-9" data-ng-if="itemNotInMyOrganization">
+                                        <span class="form-control">{{ selectedItem.organization.name }}<span>
+                                    </div>
+                                    <div class="col col-sm-9" data-ng-if="!itemNotInMyOrganization">
+                                        <select class="form-control" data-ng-model="selectedItem.organization.id"
+                                                data-ng-options="organization.id as ('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' | limitTo: kinshipLevels.get(organization.id)*3)  + organization.name for organization in organizations"
+                                                name="organization" required>
+                                        </select>
+
+                                        <small class="text-danger"
+                                               data-ng-if="form.organization.$dirty && form.organization.$error.required">
+                                            This is a required field!
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col col-sm-3">
+                                        <label>{{'common.tableAndForm.profiles.name'|translate}}:</label>
+                                    </div>
+                                    <div class="col col-sm-9">
+                                        <ul class="list-group">
+                                            <li class="list-group-item"
+                                                data-ng-repeat="profile in profiles | orderBy: 'name'">
+
+                                                {{profile.name}}
+
+                                                <button data-ng-if="!hasProfile(profile)"
+                                                        data-ng-disabled="itemNotInMyOrganization == true"
+                                                        class="btn btn-small btn-link pull-right"
+                                                        data-ng-click="addProfile(profile)" style="padding: 0">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                                <button data-ng-if="hasProfile(profile)"
+                                                        data-ng-disabled="itemNotInMyOrganization == true"
+                                                        class="btn btn-small btn-link pull-right"
+                                                        data-ng-click="removeProfile(profile)" style="padding: 0">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </button>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div>
+                            <button class="btn btn-primary pull-right" type="button"
+                                    data-ng-click="save(selectedItem, form)"
+                                    data-ng-if="itemNotInMyOrganization != true">
+                                {{'common.button.form.save'|translate}} &nbsp; <i
+                                    class="glyphicon glyphicon-floppy-disk"></i></button>
+                            <button class="btn btn-default" type="button" ng-click="delete(selectedItem)"
+                                    data-ng-if="selectedItem.id != null && itemNotInMyOrganization != true">
+                                {{'common.button.form.delete'|translate}} &nbsp; <i
+                                    class="glyphicon glyphicon-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

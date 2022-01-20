@@ -1,0 +1,88 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        <h4> {{'nav.prerequisites.sub.commonSub.analysisArchive'|translate}}</h4>
+        <br/>
+
+        <!--
+
+        <pre>
+            {{ analysisParameters | json }}
+        </pre>
+
+        <pre>
+            {{ analysisParameterValues | unique : 'prerequisiteId' | json }}
+        </pre>
+
+        <pre>
+            {{ prerequisites  | json }}
+        </pre>
+
+        -->
+
+        <div class="alert alert-info"  data-ng-if="!analysisParameterValues || analysisParameterValues.length == 0">
+            {{'common.message.prerequisites.noAnalysis'|translate}} <strong>{{ prerequisiteType }}</strong>
+        </div>
+
+        <table class="table table-condensed" data-ng-if="analysisParameterValues.length > 0">
+           <thead>
+           <tr>
+
+               <th>{{'common.tableAndForm.samplingPoint.name'|translate}}</th>
+               <th>{{'common.tableAndForm.parameters.name'|translate}}</th>
+               <th>{{'common.tableAndForm.lastSamplingDate.name'|translate}}</th>
+               <th>{{'common.tableAndForm.lastSamplingValue.name'|translate}}</th>
+               <th>{{'common.tableAndForm.compliant.name'|translate}}</th>
+               <th>{{'common.tableAndForm.action.name'|translate}}</th>
+           </tr>
+           </thead>
+           <tbody>
+
+               <tr data-ng-repeat="item in analysisParameterValues | unique : 'context.id' : 'analysisParameter.id'"
+                data-ng-init="prp = (prerequisites | filter : { context : { id : item.context.id } } )[0];
+                              param = (analysisParameters | filter : { id : item.analysisParameter.id })[0]">
+                   
+                   <td>{{prp.name}}</td>
+                   <td>{{param.name}}</td>
+                   <td>{{item.date | date : 'dd/MM/yyyy HH:mm'}}</td>
+
+                   <td>{{item.value}} <em>(thr: {{ param.thresholdValue }})</em></td>
+                   <td><span class="label label-success" data-ng-class="{'label-danger' : item.value > param.thresholdValue}">
+                       {{item.value < param.thresholdValue}}</span></td>
+                   <td>
+                       <div class="btn btn-sm btn-line-info" title="view charts" data-ng-click="viewChart(prp, param)">
+                           <i class="glyphicon glyphicon-stats"></i>
+                       </div>
+                   </td>
+               </tr>
+           </tbody>
+       </table>
+
+
+        <div data-ng-if="chartData.data">
+            <br/>
+            <hr/>
+
+            <div class="pull-right">
+                <div class="btn btn-default" title="cancel" data-ng-click="chartData.data = null" role="button" tabindex="0">
+                    <i class="fa fa-times"></i>
+                </div>
+            </div>
+
+            <h4>
+                <strong style="padding: 20px;">{{ chartData.prp.name }}</strong>
+                <div style="display: inline-block">
+                    {{ chartData.param.name }} <br/>
+                    <small data-ng-if="chartData.param.description"> {{  chartData.param.description  }} </small>
+                </div>
+            </h4>
+            <br/>
+            <div class="row">
+                <div class="col col-sm-10 col-sm-offset-1">
+                    <div analysis-chart data-ng-model="chartData.data" data-threshold="chartData.thresholdValue"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

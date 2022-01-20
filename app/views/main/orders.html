@@ -1,0 +1,8 @@
+<div class="page page-general page-manage-surveys">
+
+	<div>
+		<div ng-if="mode == 'list'" ng-include src="'views/main/orders/orders.html'"/>
+		<div ng-if="mode == 'view'" ng-include src="'views/main/orders/view-order.html'"/>
+		<div ng-if="mode == 'edit'" ng-include src="'views/main/orders/edit-order.html'"/>
+	</div>
+</div>

@@ -1,0 +1,96 @@
+<div data-ng-if="selectedOrganization && loading">
+	<br/><br/><br/><br/><br/>
+	<h3 class="text-primary text-center">
+		<i class="fa fa-2x fa-circle-o-notch fa-spin"></i><br/>
+		{{'common.tableAndForm.loading.name'|translate}}...
+	</h3>
+	<br/><br/><br/><br/><br/>
+</div>
+
+<div class="training-lesson" data-ng-if="!loading">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="row">
+				<div class="col col-xs-12">
+			    <span class="pull-right">
+	                <button class="btn btn-sm btn-primary" data-ng-click="add()">
+	                    {{'common.button.form.add'|translate}} &nbsp;<i class="glyphicon glyphicon-plus"></i>
+	                </button>
+	            </span>
+				</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col col-xs-2">
+					<h4 style="margin-top: 0">Filters</h4>
+				</div>
+				<div class="col col-xs-10">
+
+					<div class="pull-right">
+
+						<div class="form-group">
+
+							<label class="ui-checkbox">
+								<input type="checkbox" data-ng-change="setFilter()" data-ng-model="filter.archived"/>
+								<span>{{'common.tableAndForm.archived.name'|translate}}</span>
+							</label>
+
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<hr style="margin:0;">
+
+		<div class="panel-body">
+			<table class="table table-condensed" wt-responsive-table>
+				<thead>
+				<tr>
+					<th>{{'common.tableAndForm.name.name'|translate}}</th>
+					<th>{{'common.tableAndForm.date.name'|translate}}</th>
+					<th>{{'common.tableAndForm.course.name'|translate}}</th>
+					<th>{{'common.tableAndForm.trainer.name'|translate}}</th>
+					<th>{{'common.tableAndForm.participants.name'|translate}}</th>
+					<th></th>
+					<th></th>
+					<th>{{'common.tableAndForm.action.name'|translate}}</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr data-ng-repeat="item in items | filter: itemsFilter | orderBy : 'insertTime' | limitTo : 10 : 10 * currentPage"
+					data-ng-init="course = (courses | filter : { id : item.course.id }: true)[0];
+									role = (userRoles | filter : { id : item.userRole.id }: true)[0];
+									participants = (item.participants || []);
+									participantNumber = (participants.length);
+									passedNumber = (participants | filter : {passed : true} ).length">
+
+					<td>{{item.name}}</td>
+					<td>{{item.date ? ( item.date | date : 'dd/MM/yyyy') : null }}</td>
+					<td>{{course.name}}</td>
+					<td>{{course.trainer}}</td>
+					<td>{{role.name}}</td>
+					<td>{{ participantNumber }} {{ participantNumber == 1 ? ' '+'training.panel.lesson.choice.user' : ' '+'training.panel.lesson.choice.users' | translate }}  </td>
+					<td><em> {{ passedNumber }} {{ passedNumber == 1 ? ' '+'training.panel.lesson.choice.user' : ' '+'training.panel.lesson.choice.have' | translate }} {{'training.panel.lesson.passedExam'|translate}} </em></td>
+					<td>
+						<button class="btn btn-sm btn-line-info" title="{{'common.button.training.courseDetail'|translate}}" data-ng-click="showCourseDetail(course)">
+							<span class="visible-lg visible-sm visible-xs">{{'common.button.training.courseDetail'|translate}} &nbsp;<i class="fa fa-eye" aria-hidden="true"></i></span>
+							<i class="fa fa-eye hidden-lg hidden-sm hidden-xs" aria-hidden="true"></i>
+						</button>
+						<button class="btn btn-sm btn-line-primary" title="{{'common.button.training.markParticipants'|translate}}" data-ng-click="edit(item, true)">
+							<span class="visible-lg visible-sm visible-xs">{{'common.button.training.markParticipants'|translate}} &nbsp;<i class="glyphicon glyphicon-ok" aria-hidden="true"></i></span>
+							<i class="glyphicon glyphicon-ok hidden-lg hidden-sm hidden-xs"></i>
+						</button>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+
+			<pager data-ng-if="items.length" data-items="filteredItems"
+			       data-on-page-changed="onPageChanged(page)"></pager>
+
+		</div>
+	</div>
+</div>

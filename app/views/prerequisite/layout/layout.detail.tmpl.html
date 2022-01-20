@@ -1,0 +1,27 @@
+<div data-ng-show="PrerequisiteType.isLayout(element)">
+
+    <label>{{'common.tableAndForm.riskClass.name'|translate}}:</label>
+
+    <div class="alert alert-danger" data-ng-if="riskOptions && riskOptions.length == 0">
+        E' necessario provvedere alla <a data-ui-sref="data.riskClasses">definizione delle classi di rischio</a> per l'organizzazione corrente
+    </div>
+
+    <div data-ng-if="!riskOptions || riskOptions.length > 0">
+        <div class="btn-group btn-block dropdown" uib-dropdown="" is-open="status.isopen1">
+                <button type="button" class="btn btn-default btn-block dropdown-toggle"
+                        uib-dropdown-toggle="" ng-disable="disabled" aria-haspopup="true" aria-expanded="false">
+                <div data-ng-if="item.riskClass" class="pull-right risk-class-color" style="width:20px; height: 20px; background-color: {{item.riskClass.color}}"></div>
+                {{ element.riskClass.name }}
+                <span class="caret"></span>
+                    <div class="pull-right risk-class-color" data-ng-style="{'background-color': element.riskClass.color}"></div>
+            </button>
+            <ul class="dropdown-menu btn-block"  role="menu">
+                <li data-ng-repeat="opt in riskOptions | orderBy: 'order' " data-ng-click="element.riskClass = opt;">
+                    <a>
+                        <div class="pull-right risk-class-color" data-ng-style="{'background-color': opt.color}"></div> {{ opt.name }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

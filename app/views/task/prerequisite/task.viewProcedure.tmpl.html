@@ -1,0 +1,58 @@
+<div class="task-perform-modal">
+    <div class="modal-header">
+        <h3 class="modal-title">{{currentProcedure.title}}</h3>
+    </div>
+    <div class="modal-body">
+        <div class="row" data-ng-if="currentProcedure.purpose">
+            <div class="col col-xs-3">
+                <label>{{'common.tableAndForm.purpose.name'|translate}}:</label>
+            </div>
+            <div class="col col-xs-9">
+                <p>{{currentProcedure.purpose}}</p>
+            </div>
+        </div>
+        <div class="row" data-ng-if="currentProcedure.equipments">
+            <div class="col col-xs-3">
+                <label>{{'common.tableAndForm.equipments.name'|translate}}:</label>
+            </div>
+            <div class="col col-xs-9">
+                <p>{{currentProcedure.equipments}}</p>
+            </div>
+        </div>
+        <div class="row" data-ng-if="currentProcedure.activities">
+            <div class="col col-xs-3">
+                <label>{{'common.tableAndForm.activities.name'|translate}}:</label>
+            </div>
+            <div class="col col-xs-9">
+                <p>{{currentProcedure.activities}}</p>
+            </div>
+        </div>
+        <div class="row" data-ng-if="currentProcedure.process_check">
+            <div class="col col-xs-3">
+                <label>{{'common.tableAndForm.processCheck.name'|translate}}:</label>
+            </div>
+            <div class="col col-xs-9">
+                <p>{{currentProcedure.process_check}}</p>
+            </div>
+        </div>
+        <div class="row" data-ng-if="currentProcedure.results_check">
+            <div class="col col-xs-3">
+                <label>{{'common.tableAndForm.resultsCheck.name'|translate}}:</label>
+            </div>
+            <div class="col col-xs-9">
+                <p>{{currentProcedure.results_check}}</p>
+            </div>
+        </div>
+        <div class="row" data-ng-if="currentProcedure.revision">
+            <div class="col col-xs-3">
+                <label>{{'common.tableAndForm.revision.name'|translate}}:</label>
+            </div>
+            <div class="col col-xs-9">
+                <p>{{currentProcedure.revision}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default  pull-left" type="button" ng-click="cancel()">{{'common.button.form.close'|translate}}</button>
+    </div>
+</div>

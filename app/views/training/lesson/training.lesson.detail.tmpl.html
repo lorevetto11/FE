@@ -1,0 +1,173 @@
+<div class="prerequisites-audits-detail-modal">
+	<div class="modal-header">
+		<h3 class="modal-title" data-ng-if="editMode">{{ originalItem.id != null ?
+			'nav.training.sub.lessons.sub.markParticipants' : 'nav.training.sub.lessons.sub.addLesson' |
+			translate}}</h3>
+	</div>
+	<div class="modal-body">
+		<form name="form" novalidate>
+			<div class="form-group">
+				<div class="row">
+					<div class="col col-sm-2">
+						<label>{{'common.tableAndForm.name.name'|translate}}:</label>
+					</div>
+					<div class="col col-sm-10">
+						<input type="text" name="name" class="form-control" data-ng-model="item.name" required>
+						<small class="text-danger" data-ng-if="form.name.$dirty && form.name.$error.required">
+							{{'common.tableAndForm.requiredField.name'|translate}}
+						</small>
+					</div>
+				</div>
+				<br/>
+				<div class="row" data-ng-if="item.name != null && item.name != ''">
+					<div class="col col-sm-2"><label>{{'common.tableAndForm.trainingCourse.name'|translate}}:</label>
+					</div>
+					<div class="col col-sm-10">
+						<select data-ng-if="item.id == null" class="form-control" data-ng-model="item.course.id"
+						        data-ng-options="course.id as course.name for course in courses" name="trainingCourse"
+						        required>
+						</select>
+						<span data-ng-if="item.id != null"
+						      data-ng-init="course = (courses | filter : { id : item.course.id } : true)[0]">
+							{{course.name}}
+						</span>
+						<small class="text-danger"
+						       data-ng-if="form.trainingCourse.$dirty && form.trainingCourse.$error.required">
+							{{'common.tableAndForm.requiredField.name'|translate}}
+						</small>
+					</div>
+				</div>
+				<br/>
+				<div data-ng-if="item.course.id != null"
+				     data-ng-init="course = (courses | filter : { id : item.course.id } : true)[0]">
+					<div class="form-group">
+						<div class="row">
+							<div class="col col-sm-2">
+								<label>{{'common.tableAndForm.participants.name'|translate}}:</label></div>
+							<div class="col col-sm-10" data-ng-if="originalItem.id == null">
+								<select class="form-control" data-ng-change="item.participants = []"
+								        data-ng-model="item.userRole.id"
+								        data-ng-options="userRole.id as userRole.name + ' - ' + userRole.description for userRole in userRoles"
+								        name="userRole" required>
+								</select>
+								<small class="text-danger"
+								       data-ng-if="form.userRole.$dirty && form.userRole.$error.required">
+									{{'common.tableAndForm.requiredField.name'|translate}}
+								</small>
+							</div>
+							<div class="col col-sm-10" data-ng-if="originalItem.id != null">
+								<span data-ng-init="userRole = (userRoles | filter : { id : item.userRole.id } : true)[0]">
+									<strong>{{userRole.name}}</strong> - {{userRole.description}}
+								</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group" data-ng-if="item.userRole.id != null">
+						<div class="row">
+							<div class="col col-sm-2"><label>{{'common.tableAndForm.date.name'|translate}}:</label>
+							</div>
+							<div class="col col-sm-10" data-ng-if="!readonly">
+								<p class="input-group">
+									<input type="text" class="form-control" name="date"
+									       uib-datepicker-popup="dd-MMM-yyyy"
+									       datepicker-mode="item.date == null ? 'year': 'day'"
+									       data-ng-model="item.date"
+									       is-open="startDateOpened"
+									       close-text="Close" required
+									/>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default"
+                                                data-ng-click="startDateOpened = true;">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </span>
+								</p>
+								<small class="text-danger"
+								       data-ng-if="form.date.$dirty && form.date.$error.required">
+									{{'common.tableAndForm.requiredField.name'|translate}}
+								</small>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col col-sm-2"></div>
+							<div class="col col-sm-10">
+								<table class="table table-condensed">
+									<thead>
+									<tr>
+										<th>{{'common.tableAndForm.fullName.name'|translate}}</th>
+										<th>{{'common.tableAndForm.examPassed.name'|translate}}</th>
+										<th>{{'common.tableAndForm.additionalInformation.name'|translate}}</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr data-ng-repeat="user in users | filter : { role : { id : item.userRole.id } } : true">
+										<td>
+											<label class="ui-checkbox">
+												<input type="checkbox"
+												       name="participants"
+												       ng-value="user.id"
+												       ng-checked="isParticipant(user)"
+												       ng-click="checkParticipant(user)"/>
+												<span>{{user.getFullName()}}</span>
+											</label>
+										</td>
+										<td>
+											<label class="ui-checkbox" data-ng-if="isParticipant(user)">
+												<input type="checkbox"
+												       name="passes"
+												       ng-value="true"
+												       ng-checked="isPassedExam(user)"
+												       ng-click="checkPassedExam(user)"/>
+												<span></span>
+											</label>
+										</td>
+										<td data-ng-if="isParticipant(user)" data-ng-click="additionalInformationModal(user)">
+												<small class="text-info text-center" style="display: block">
+													<i data-ng-if="editMode" class="fa fa-plus"></i>
+													<i data-ng-if="!editMode" class="fa fa-eye"></i>
+													&nbsp;
+													{{'common.tableAndForm.editInformation.name' | translate}}
+												</small>
+											<!--<textarea class="form-control" rows="1" data-ng-if="isParticipant(user)"-->
+											<!--data-ng-model="getPartecipant(user).note"></textarea>-->
+										</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col col-sm-2"></div>
+							<div class="col col-sm-10" data-ng-if="item.id != null && item.archived == false">
+								<label class="ui-checkbox">
+									<input type="checkbox" data-ng-click="archiveTraining(item)" data-nd-model="item.archived"/>
+									<span>{{'common.tableAndForm.archiveTraining.name'|translate}}</span>
+								</label>
+							</div>
+							<div class="col col-sm-10" data-ng-if="item.id != null && item.archived == true">
+								<span>{{'common.tableAndForm.archived.name'|translate}}</span>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<div data-ng-if="editMode">
+			<button class="btn btn-primary pull-right" type="button" ng-click="save(form)"
+			        data-ng-disabled="item == null || item.course.id == null">{{'common.button.form.save'|translate}}
+			</button>
+			<button class="btn btn-default" type="button" ng-click="cancel()">
+				{{'common.button.form.cancel'|translate}}
+			</button>
+		</div>
+		<div data-ng-if="!editMode">
+			<button class="btn btn-default" type="button" ng-click="cancel()">{{'common.button.form.close'|translate}}
+			</button>
+		</div>
+	</div>
+</div>

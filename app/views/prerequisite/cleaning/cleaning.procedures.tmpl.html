@@ -1,0 +1,58 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        <h4> {{'nav.prerequisites.sub.commonSub.procedures'|translate}} </h4>
+
+        <table class="table table-condensed">
+            <thead>
+            <tr>
+                <th>{{'common.tableAndForm.riskClass.name'|translate}}</th>
+                <th>{{'common.tableAndForm.phase1.name'|translate}}</th>
+                <th>{{'common.tableAndForm.phase2.name'|translate}}</th>
+                <th>{{'common.tableAndForm.phase3.name'|translate}}</th>
+                <th>{{'common.tableAndForm.phase4.name'|translate}}</th>
+                <th>{{'common.tableAndForm.phase5.name'|translate}}</th>
+                <th>{{'common.tableAndForm.frequency.name'|translate}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="item in items">
+                <td data-ng-style="{'background-color': item.riskClass.color, 'color' : '#ffffff'}">
+                    {{item.riskClass.name}}
+                </td>
+                <td>{{item.phase1}}</td>
+                <td>{{item.phase2}}</td>
+                <td>{{item.phase3}}</td>
+                <td>{{item.phase4}}</td>
+                <td>{{item.phase5}}</td>
+                <td>{{item.frequency}}</td>
+            </tr>
+
+            </tbody>
+        </table>
+        <br/>
+        <hr/>
+        <br/>
+        <table class="table table-condensed">
+            <thead>
+            <tr>
+                <th>{{'common.tableAndForm.nProcedures.name'|translate}}</th>
+                <th>{{'common.tableAndForm.title.name'|translate}}</th>
+                <th>{{'common.tableAndForm.revision.name'|translate}}</th>
+                <th>{{'common.tableAndForm.personInCharge.name'|translate}}</th>
+                <th>{{'common.tableAndForm.attachment.name'|translate}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="item in details">
+                <td>{{item.code}}</td>
+                <td>{{item.title}}</td>
+                <td>{{item.revision}}</td>
+                <td>{{item.personInCharge}}</td>
+                <td>{{item.attachment}}</td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>

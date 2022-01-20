@@ -1,0 +1,22 @@
+<div class="page noncompliance">
+
+    <organization-selector data-page="'nav.haccp.sub.name'"></organization-selector>
+
+    <div class="alert alert-info" data-ng-if="!selectedOrganization">
+        {{'common.tableAndForm.selectAnOrganizationToManageDataOnIt.name'|translate}}
+    </div>
+
+    <div class="row" data-ng-if="selectedOrganization">
+        <div class="col col-xs-12">
+            <div class="panel panel-default" style="margin-top: -20px">
+
+                <!--<div class="panel-heading">-->
+                    <!--<span>{{'nav.haccp.sub.name'|translate}}</span>-->
+                <!--</div>-->
+            </div>
+        </div>
+        <div class="col col-xs-12">
+            <div ui-view></div>
+        </div>
+    </div>
+</div>

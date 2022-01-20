@@ -1,0 +1,23 @@
+
+
+
+  <div class="list-item">
+
+  <button class="btn btn-link" type="button" data-toggle="collapse" data-target=".collapse_{{area.id}}" aria-expanded="false">
+    |_
+  </button>
+
+  <!--  {{area.id}} --> <span editable-field inline="true" value="area.name" style="width:200px"></span>
+
+    <div class="pull-right">
+
+      <button ng-if="!isLeaf" class="btn btn-xs btn-gap-v btn-line-success" title="Aggiungi sotto-area" class=" text-success" ng-click="addTo(area)">
+        <i class="fa fa-plus text-success"></i> nuova sotto area
+      </button>
+
+      <button class="btn btn-xs btn-gap-v btn-line-danger" title="Rimuovi" ng-click="remove(area)">
+        <i class="fa fa-trash text-danger"></i>
+      </button>
+
+    </div>
+  </div>

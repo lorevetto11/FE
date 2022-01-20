@@ -1,0 +1,44 @@
+<div class="page monitoring">
+    <organization-selector data-page="'nav.nonCompliance.name'"></organization-selector>
+
+    <div class="alert alert-info" data-ng-if="!selectedOrganization">
+        Seleziona una organizzazione per gestire i dati su di essa
+    </div>
+
+    <div class="row" data-ng-if="selectedOrganization">
+        <div class="col col-xs-12">
+            <div class="panel panel-default" style="margin-top: -20px">
+                <!--<div class="panel-heading">-->
+                <!--<span>{{'nav.nonCompliance.name'|translate}}</span>-->
+                <!--</div>-->
+                <div class="panel-body">
+
+                    <div class="nav-wrapper" style="margin-right:100px">
+                        <ul class="nav nav-pills"
+                            data-slim-scroll
+                            data-accordion-nav
+                            data-highlight-active>
+
+                            <li>
+                                <a>
+                                    <span>
+                                        {{'nav.nonCompliance.sub.open'|translate}}: <div class="badge badge-danger"> {{ count.opened }} </div>
+                                    </span>
+                                    &nbsp;&nbsp;
+                                    <span>
+                                        {{'nav.nonCompliance.sub.closed'|translate}}: <div class="badge badge-success"> {{ count.closed }} </div>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col col-xs-12">
+            <div ui-view></div>
+        </div>
+    </div>
+</div>

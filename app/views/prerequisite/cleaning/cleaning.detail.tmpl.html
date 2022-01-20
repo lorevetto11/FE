@@ -1,0 +1,7 @@
+<div data-ng-show="PrerequisiteType.isCleaning(element)">
+    <label>{{'common.tableAndForm.constrainedTo.name'|translate}}:</label>  <br/>
+    <span>{{element.constrainedTo.name}}</span><br/>
+    <span>{{element.constrainedTo.description}}</span>
+    <br/>
+    {{'common.tableAndForm.risk.name'|translate}}:<strong> {{element.constrainedTo.riskClass.name | uppercase}}</strong>
+</div>

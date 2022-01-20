@@ -1,0 +1,110 @@
+<div class="setting-prerequisite">
+    <div class="row">
+        <div class="col-md-6 col-lg-4">
+            <div class="panel">
+                <div class="panel-heading"> {{'nav.data.sub.prerequisiteRelatedFrequency' | translate}}</div>
+                <div class="panel-body">
+                    <div style="max-height: 100%">
+                        <div class="slimScrollDiv"
+                             style="position: relative; overflow: hidden; width: auto; height: 100%;">
+                            <div class="filterbox-vertical" data-slim-scroll=""
+                                 style="overflow: hidden; width: auto; height: 100%;">
+                                <p data-ng-show="!itemsLoading" data-ng-if="itemsLoading"><b>Loading...</b></p>
+                                <section class="panel panel-default mail-categories">
+                                    <ul class="list-group">
+                                        <li class="list-group-item" data-ng-repeat="item in relatedFrequencies"
+                                            data-ng-click="edit(item)">
+                                            <a><span>{{item.prerequisiteType.name}}</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </section>
+                            </div>
+                            <div class="slimScrollBar"
+                                 style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 2287px;">
+                            </div>
+                            <div class="slimScrollRail"
+                                 style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col col-md-6 col-lg-8" data-ng-if="selectedItem">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="media">
+                        <div class="media-body media-middle">
+                            <div class="media-heading">
+                                <span>{{'nav.data.sub.commonSub.details'|translate}}</span>
+                            </div>
+                            <span style="text-transform: none">{{selectedItem.prerequisiteType.name}}</span>
+                        </div>
+                        <div class="media-right">
+                            <div class="btn btn-default" title="{{'common.button.form.cancel' | translate}}"
+                                 data-ng-click="cancel()" role="button" tabindex="0">
+                                <i class="fa fa-times"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="">
+                        <form novalidate>
+                            <div class="form-group" data-ng-repeat="freq in selectedItem.frequencies">
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">{{ freq.riskClass.name }}</div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col col-sm-2">
+                                                <label class="ui-checkbox">
+                                                    <input type="checkbox" data-ng-model="freq.asNeeded"
+                                                           data-ng-value="true" data-ng-disabled="freq.justOnce"/>
+                                                    <span>{{'common.tableAndForm.asNeeded.name'|translate}}</span>
+                                                </label>
+                                            </div>
+                                            <div class="col col-sm-2">
+                                                <label class="ui-checkbox">
+                                                    <input type="checkbox" data-ng-model="freq.justOnce"
+                                                           data-ng-value="true" data-ng-disabled="freq.asNeeded"/>
+                                                    <span>{{'common.tableAndForm.justOnce.name'|translate}}</span>
+                                                </label>
+                                            </div>
+                                            <div class="col col-sm-2 text-right">
+                                                {{'common.tableAndForm.every.name'|translate}}:
+                                            </div>
+                                            <div class="col col-sm-2">
+                                                <input type="number" placeholder="Quantity" class="form-control"
+                                                       data-ng-disabled="freq.asNeeded || freq.justOnce"
+                                                       data-ng-model="freq.value"/>
+                                            </div>
+                                            <div class="col col-sm-2">
+                                                <select class="form-control" data-ng-model="freq.period"
+                                                        data-ng-disabled="freq.asNeeded || freq.justOnce"
+                                                        data-ng-options="period as period for period in frequencyPeriods">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <small class="text-danger" data-ng-if="isRequired(freq)">
+                                    Once created, a default frequency can't be deleted!
+                                </small>
+                            </div>
+                        </form>
+                        <div>
+                            <button data-ng-if="somethingChanged(selectedItem)" class="btn btn-primary pull-right"
+                                    type="button" ng-click="save(selectedItem)">
+                                {{'common.button.form.save' | translate}} &nbsp; <i
+                                    class="glyphicon glyphicon-floppy-disk"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

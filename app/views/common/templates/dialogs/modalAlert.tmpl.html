@@ -1,0 +1,30 @@
+
+<!--
+ <div class="modal-header">
+   <div class="clearfix">
+    <button type="button" class="close" ng-click="ok()">&times;</button>
+  </div>
+     <div class="alert alert-success" data-translate="{{message}}"></div>
+ </div>
+-->
+
+
+<div>
+    <div class="modal-header">
+        <button type="button" class="close"  ng-click="cancel()">&times;</button>
+        <h3 class="modal-title" data-translate="{{title}}"></h3>
+    </div>
+    <div class="modal-body">
+
+        <div ng-if="!loading">
+            <div data-translate="{{message}}"></div>
+            <br/>
+            <div class="text-right">
+                <button class="btn btn-default" ng-click="ok()" data-translate="{{'alertMessage.cancel'}}"></button>
+            </div>
+        </div>
+        <div ng-if="loading"
+             data-translate="{{'common.tableAndForm.loading.name'}}">
+        </div>
+    </div>
+</div>

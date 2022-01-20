@@ -1,0 +1,16 @@
+
+
+ <div class="modal-header">
+    <h3 class="modal-title" data-translate="{{title}}"></h3>
+  </div>
+  <div class="modal-body">
+   
+  <div ng-if="!loading">
+    <div data-translate="{{message}}"></div>
+  </div>
+
+  <div ng-if="loading"
+       data-translate="{{'common.tableAndForm.loading.name'}}">
+  </div>
+
+</div>

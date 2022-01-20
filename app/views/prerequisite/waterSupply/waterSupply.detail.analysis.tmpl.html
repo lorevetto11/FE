@@ -1,0 +1,21 @@
+<div data-ng-show="Prerequisite.isWaterSupply(element)">
+    <br/>
+    <small>
+       <table class="table table-condensed">
+           <thead>
+               <tr>
+                   <th>{{'common.tableAndForm.date.name'|translate}}</th>
+                   <th>{{'common.tableAndForm.document.name'|translate}}</th>
+                   <th>{{'common.tableAndForm.compliant.name'|translate}}</th>
+               </tr>
+           </thead>
+           <tbody>
+               <tr data-ng-repeat="item in items">
+                   <td>{{item.date}}</td>
+                   <td>{{item.document}}</td>
+                   <td>{{item.complies}}</td>
+               </tr>
+           </tbody>
+       </table>
+    </small>
+</div>

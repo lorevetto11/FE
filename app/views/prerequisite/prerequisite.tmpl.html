@@ -1,0 +1,71 @@
+<div class="page prerequisite">
+    <organization-selector data-page="'nav.prerequisites.sub.name'"></organization-selector>
+
+    <div class="alert alert-info" data-ng-if="!selected.organization">
+        Seleziona una organizzazione per gestire i dati su di essa
+    </div>
+
+    <div class="row" data-ng-if="selected.organization">
+        <div class="col col-lg-2">
+            <div class="panel panel-default" style="margin-top: -20px">
+                <!--<div class="panel-heading">-->
+                    <!--<span>{{'nav.prerequisites.sub.name'|translate}}</span>-->
+                <!--</div>-->
+                <div class="panel-body">
+                    <div class="nav-wrapper">
+                        <ul class="nav nav-pills nav-prerequisite-types"
+                            data-slim-scroll
+                            data-accordion-nav
+                            data-highlight-active>
+
+                            <li ui-sref-active="active" data-ui-sref="prerequisite.layout">
+                                <a>{{'nav.prerequisites.sub.layouts'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="prerequisite.water-supply">
+                                <a>{{'nav.prerequisites.sub.waterSupply'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="prerequisite.air-conditioning">
+                                <a>{{'nav.prerequisites.sub.airConditioning'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="prerequisite.waste-disposal">
+                                <a>{{'nav.prerequisites.sub.wasteDisposal'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="prerequisite.equipment">
+                                <a>{{'nav.prerequisites.sub.equipmentMaintenance'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="prerequisite.cleaning">
+                                <a>{{'nav.prerequisites.sub.cleaningAndSanitizing'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="prerequisite.pestControl">
+                                <a>{{'nav.prerequisites.sub.pestControl'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="prerequisite.staffHygiene">
+                                <a>{{'nav.prerequisites.sub.staffHygiene'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="prerequisite.packaging">
+                                <a>{{'nav.prerequisites.sub.packaging.name'|translate}}</a>
+                            </li>
+                            <li class="separator full-width">
+                                <hr/>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="prerequisite.flows">
+                                <a>{{'nav.prerequisites.sub.flows'|translate}}</a>
+                            </li>
+                            <li class="separator full-width">
+                                <hr/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col col-lg-10" >
+            <div class="alert alert-info" data-ng-if="!selected.organization">
+                Seleziona una organizzazione per gestire il piano dei Prerequisiti
+            </div>
+
+            <div ui-view data-ng-if="selected.organization"></div>
+        </div>
+    </div>
+</div>

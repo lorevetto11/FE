@@ -1,0 +1,115 @@
+@media print {
+   .no-print{
+        display:none;
+    }
+}
+
+@for $i from 0 through 10 {
+  .progeny-#{$i} {
+    padding-left: 15px+15px*$i !important;
+    @if $i > 0{
+      &:before {
+        $string : "";
+        @for $n from 1 through $i{
+          $string: $string + "\f105";
+        }
+        font-family: FontAwesome;
+        content: $string+"\00a0";
+      }
+    }
+  }
+}
+
+.textarea {
+  overflow: hidden;
+}
+
+.procedureParagraph {
+  white-space: pre-line;
+}
+
+#drawingField {
+  width: 100%;
+
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+
+  cursor: pointer;
+}
+
+.zoom-icons {
+  position: absolute;
+  top: 0;
+  div {
+    position: absolute;
+    cursor: pointer;
+  }
+  div:nth-child(1){
+    top: 10px;
+    left: 10px;
+  }
+  div:nth-child(2){
+    top: 50px;
+    left: 10px;
+  }
+}
+
+.risk-map th{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.phaseCCP{
+  background-color: rgba(255,0,0,0.10);
+}
+
+.bottom {
+  position: absolute;
+  bottom: 1px;
+  left: 1px;
+}
+
+.top {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+}
+
+.split-cell {
+  width: 100px;
+  height: 50px;
+  padding: 0!important;
+  margin: 0;
+  overflow: hidden;
+}
+
+.split-cell>div {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.line {
+
+  width: 0;
+  height: 0;
+  border-right: 103.5px solid #F2FCF9;
+
+  border-bottom: 51.5px solid #de935f;
+
+}
+
+.panel-yellow {
+  border-color: #fffad3;
+}
+.panel-yellow > .panel-heading {
+  color: #e6e41c;
+  background-color: #fffaf0;
+  border-color: #fffad3;
+}
+
+.bg-yellow {
+  background-color: yellow;
+}

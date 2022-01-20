@@ -1,0 +1,14 @@
+<div class="editable-field">
+	<div  ng-if="mode == 'view'">
+
+    <span ng-click="edit()">
+      <span ng-if="prefix" style="padding-left:0px">{{prefix}}</span>
+      {{value}}
+    </span>
+	</div>
+
+	<div ng-if="mode == 'edit'">
+			<input type="text" placeholder="{{placeholder}}" class="form-control" ng-class="inline ? 'inline': ''" ng-model="value" ng-blur="save(value)"/>
+	<!--	<button class="btn btn-link" ng-click="save(value)"><i class="fa fa-floppy-o"></i></button>-->
+	</div>
+</div>

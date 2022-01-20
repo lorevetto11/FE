@@ -1,0 +1,98 @@
+
+    <div>
+
+        <div data-ng-if="loader">
+            <br/><br/><br/>
+            <h3 class="text-primary text-center">
+                <i class="fa fa-2x fa-circle-o-notch fa-spin"></i><br/>
+            </h3>
+            <br/><br/><br/>
+        </div>
+
+        <div data-ng-if="!loader">
+
+            <div data-ng-if="(prerequisiteTypes.concat(haccps) | filter : gt('ncCount', 0)).length == 0">
+                <div>
+                    <br/><br/><br/><br/>
+                    <div class="text-success text-center">
+                        <i class="fa fa-5x fa-thumbs-o-up" aria-hidden="true" style="font-size: 12em"></i>
+                        <h1 style="font-size: 6em">{{'dashboard.message.good'|translate}}</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" data-ng-if="(prerequisiteTypes.concat(haccps) | filter : gt('ncCount', 0)).length > 0">
+                <div class="col col-md-12" style="overflow:hidden;">
+                    <center>
+                        <highchart id="noncomplianceChar" config="noncomplianceChartOptions" width="100"></highchart>
+                    </center>
+                </div>
+
+                <div class="col col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <span>{{'dashboard.table.prerequisites'|translate}}</span>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-condensed">
+                               <!-- <thead>
+                                <th title="{{'common.tableAndForm.name.title'|translate}}">{{'common.tableAndForm.name.name'|translate}}</th>
+                                <th title="{{'common.tableAndForm.nonCompliance.title'|translate}}">{{'common.tableAndForm.nonCompliance.name'|translate}}</th>
+                                </thead>-->
+                                <tbody>
+
+                                <tr data-ng-repeat="item in prerequisiteTypes" data-ng-if="item.ncCount > 0">
+                                    <td data-ng-class="{'text-danger' : item.ncCount}">
+                                        <strong>{{ 'dashboard.preRequisites.' + item.name | translate }}</strong>
+                                    </td>
+                                    <td>
+                                        <div data-ng-if="item.ncCount > 0" class="btn badge badge-danger"
+                                             data-ui-sref="noncompliance.home" title="view non compliances">
+                                            {{ item.ncCount }}
+                                        </div>
+                                        <div data-ng-if="item.ncCount == 0">
+                                            <i class="text-success glyphicon glyphicon-ok"></i>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <span>{{'dashboard.table.haccp'|translate}}</span>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-condensed">
+                              <!--  <thead>
+                                <th title="{{'common.tableAndForm.name.title'|translate}}">{{'common.tableAndForm.name.name'|translate}}</th>
+                                <th title="{{'common.tableAndForm.nonCompliance.title'|translate}}">{{'common.tableAndForm.nonCompliance.name'|translate}}</th>
+                                </thead>
+                                -->
+                                <tbody>
+                                <tr data-ng-repeat="item in haccps" data-ng-if="item.ncCount > 0">
+                                    <td data-ng-class="{'text-danger' : item.ncCount}">
+                                        {{ item.name }}
+                                    </td>
+                                    <td>
+                                        <div data-ng-if="item.ncCount > 0" class="btn badge badge-danger"
+                                             data-ui-sref="noncompliance.home" title="view non compliances">
+                                            {{ item.ncCount }}
+                                        </div>
+                                        <div data-ng-if="item.ncCount == 0">
+                                            <i class="text-success glyphicon glyphicon-ok"></i>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</div>
+

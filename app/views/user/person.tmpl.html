@@ -1,0 +1,47 @@
+<div class="page person">
+
+    <organization-selector data-page="'nav.people.name'"></organization-selector>
+
+    <div class="alert alert-info" data-ng-if="!selectedOrganization">
+        Seleziona una organizzazione per gestire i dati su di essa
+    </div>
+
+    <div class="row" data-ng-if="selectedOrganization">
+        <div class="col col-xs-12">
+            <div class="panel panel-default" style="margin-top: -20px">
+                <!-- div class="panel-heading">
+                    <span>{{'nav.people.sub.name'|translate}}</span>
+                </div -->
+                <div class="panel-body">
+                    <div class="nav-wrapper">
+                        <ul class="nav nav-pills"
+                            data-slim-scroll
+                            data-accordion-nav
+                            data-highlight-active>
+
+                            <li ui-sref-active="active" data-ui-sref="user.organization" auth="USER_ORGANIZATION_LIST">
+                                <a>{{'nav.people.sub.organization'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="user.home" auth="USER_USER_LIST">
+                                <a>{{'nav.people.sub.users'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="user.role" auth="USER_ROLE_LIST">
+                                <a>{{'nav.people.sub.usersRoles'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="user.profile" auth="USER_PROFILE_LIST">
+                                <a>{{'nav.people.sub.profile'|translate}}</a>
+                            </li>
+                            <li ui-sref-active="active" data-ui-sref="user.supplier" ><!-- TODO auth="USER_SUPPLIER_LIST"-->
+                                <a>{{'nav.prerequisites.sub.packaging.sub.supplier'|translate}}</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-xs-12">
+            <div ui-view></div>
+        </div>
+    </div>
+</div>

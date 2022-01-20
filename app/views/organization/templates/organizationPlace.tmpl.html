@@ -1,0 +1,49 @@
+<div class="organization-place" xmlns="http://www.w3.org/1999/html">
+
+
+    <ng-form name="placeForm">
+        <div class="form-group">
+            <div class="row">
+                <div class="col col-sm-3">
+                    <label>{{'common.tableAndForm.place.name'|translate}}:</label>
+                </div>
+                <div class="col col-sm-9" data-ng-if="readonly">
+                    {{ place.name }}
+                </div>
+                <div class="col col-sm-9" data-ng-if="!readonly">
+                    <input class="form-control" type="text" data-ng-model="place.name"
+                           name="name" required/>
+                    <small class="text-danger" data-ng-if="placeForm.name.$dirty && placeForm.name.$error.required" >
+                        {{'common.tableAndForm.requiredField.name'|translate}}
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col col-sm-3">
+                    <label>{{'common.tableAndForm.address.name'|translate}}:</label>
+                </div>
+                <div class="col col-sm-9" data-ng-if="readonly">
+                    {{ place.address }}
+                </div>
+                <div class="col col-sm-9" data-ng-if="!readonly">
+                <textarea class="form-control" rows="2" data-ng-model="place.address"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col col-sm-3">
+                    <label>{{'common.tableAndForm.activity.name'|translate}}:</label>
+                </div>
+                <div class="col col-sm-9" data-ng-if="readonly">
+                   <span data-ng-bind-html="place.description"></span>
+                </div>
+                <div class="col col-sm-9" data-ng-if="!readonly">
+                <textarea class="form-control" rows="4" data-ng-model="place.description"></textarea>
+                </div>
+            </div>
+        </div>
+    </ng-form>
+</div>

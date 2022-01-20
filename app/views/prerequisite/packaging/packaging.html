@@ -1,0 +1,60 @@
+<div class="prerequisite-packaging full-width">
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div>
+				{{'nav.prerequisites.sub.packaging.name'|translate}}
+
+				<div class="inline" style="margin-left:20px">
+					<button class="btn btn-default" data-ng-class="{'btn-primary' : mode == MODE.SHOW_MONITORINGS}"
+					        data-ng-click="showMonitorings()">{{'common.button.prerequisites.monitorings'|translate}}&nbsp;&nbsp;
+						<i class="glyphicon glyphicon-duplicate"></i>
+					</button>
+				</div>
+
+			</div>
+		</div>
+		<div class="panel-body">
+
+			<packaging-materials  data-ng-if="mode == MODE.SHOW_MATERIALS"></packaging-materials>
+
+			<packaging-monitorings  data-ng-if="mode == MODE.SHOW_MONITORINGS"></packaging-monitorings>
+
+		</div>
+
+		<!--<div class="panel-heading">-->
+			<!--{{'nav.prerequisites.sub.packaging.name'|translate}}-->
+		<!--</div>-->
+		<!--<div class="panel-body">-->
+			<!--<div class="nav-wrapper">-->
+				<!--<ul class="nav nav-pills"-->
+					<!--data-slim-scroll-->
+					<!--data-accordion-nav-->
+					<!--data-highlight-active>-->
+
+					<!--<li ui-sref-active="active" data-ui-sref="prerequisite.packaging.material">-->
+						<!--<a>{{'nav.prerequisites.sub.packaging.sub.material'|translate}}</a>-->
+					<!--</li>   -->
+				<!--</ul>-->
+			<!--</div>-->
+		<!--</div>-->
+	<!--</div>-->
+
+	<!--<div class="panel panel-default">-->
+
+				<!--<div class="inline" style="margin-left:20px">-->
+					<!--<button class="btn btn-default" data-ng-class="{'btn-primary' : mode == MODE.SHOW_MONITORINGS}"-->
+							<!--data-ng-click="showMonitorings()">Monitorings&nbsp;&nbsp;-->
+						<!--<i class="glyphicon glyphicon-duplicate"></i>-->
+					<!--</button>-->
+				<!--</div>-->
+		<!--<div class="panel-body">-->
+
+			<!--&lt;!&ndash;-->
+			<!--<staff-hygiene-users  data-ng-if="mode == MODE.SHOW_USERS"></staff-hygiene-users>-->
+
+			<!--<staff-hygiene-monitorings  data-ng-if="mode == MODE.SHOW_MONITORINGS"></staff-hygiene-monitorings>-->
+			<!--&ndash;&gt;-->
+		<!--</div>-->
+	<!--</div>-->
+</div>

@@ -1,0 +1,107 @@
+<header class="top-header clearfix"
+        data-ng-controller="HeaderCtrl">
+
+    <!-- Logo -->
+    <div class="logo"
+         ng-class="{ 'bg-dark': ['11','31'].indexOf(main.skin) >= 0,
+                     'bg-white': main.skin === '21',
+                     'bg-primary': ['12','22','32'].indexOf(main.skin) >= 0,
+                     'bg-success': ['13','23','33'].indexOf(main.skin) >= 0,
+                     'bg-info-alt': ['14','24','34'].indexOf(main.skin) >= 0,
+                     'bg-warning': ['15','25','35'].indexOf(main.skin) >= 0,
+                     'bg-danger': ['16','26','36'].indexOf(main.skin) >= 0,
+                    }">
+        <a>
+            <img ng-src="../images/logo_safeaty_white.png" />
+           <!-- <span class="logo-icon glyphicon glyphicon-th-large"></span> -->
+            <span class="logo-text">{{main.brand}}</span>
+        </a>
+    </div>
+
+    <!-- needs to be put after logo to make it work -->
+    <div class="menu-button" data-ng-click="toggleMenu()">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </div>
+
+    <div class="top-nav">
+        <ul class="nav-left list-unstyled">
+            <li>
+                <a href="#/" data-toggle-nav-collapsed-min
+                             class="toggle-min"
+                             ><i class="fa fa-bars"></i></a>
+            </li>
+<!--
+            <li class="search-box visible-md visible-lg">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text" class="form-control" placeholder="{{ 'SEARCH' | translate }}">
+                </div>
+            </li>
+-->
+        </ul> 
+
+        <ul class="nav-right pull-right list-unstyled">
+
+            <!--
+
+            <li class="dropdown langs text-normal" uib-dropdown is-open="status.isopenLang" data-ng-controller="LangCtrl">
+                <a href="javascript:;" class="active-flag" uib-dropdown-toggle ng-disabled="disabled">
+                    <div class="flag {{ getFlag() }}"></div>
+                </a>
+                <ul class="dropdown-menu with-arrow list-langs pull-right dropdown-menu-scaleIn" role="menu" uib-dropdown-menu>
+                    <li data-ng-show="lang !== 'English' ">
+                        <a href="javascript:;" data-ng-click="setLang('English')"><div class="flag flags-american"></div> English</a></li>
+                    <li data-ng-show="lang !== 'Español' ">
+                        <a href="javascript:;" data-ng-click="setLang('Español')"><div class="flag flags-spain"></div> Español</a></li>
+                    <li data-ng-show="lang !== 'Portugal' ">
+                        <a href="javascript:;" data-ng-click="setLang('Portugal')"><div class="flag flags-portugal"></div> Portugal</a></li>
+                    <li data-ng-show="lang !== '中文' ">
+                        <a href="javascript:;" data-ng-click="setLang('中文')"><div class="flag flags-china"></div> 中文</a></li>
+                    <li data-ng-show="lang !== '日本語' ">
+                        <a href="javascript:;" data-ng-click="setLang('日本語')"><div class="flag flags-japan"></div> 日本語</a></li>
+                    <li data-ng-show="lang !== 'Русский язык' ">
+                        <a href="javascript:;" data-ng-click="setLang('Русский язык')"><div class="flag flags-russia"></div> Русский язык</a></li>
+                    <li data-ng-show="lang !== 'Italiano' ">
+                        <a href="javascript:;" data-ng-click="setLang('Italiano')"><div class="flag flags-italy"></div> Italiano</a></li>
+                </ul>
+            </li>
+
+            -->
+
+
+
+            <li class="dropdown text-normal nav-profile" uib-dropdown is-open="status.isopenProfile">
+
+               <a href="javascript:;" uib-dropdown-toggle ng-disabled="disabled">
+                    <div class="clearfix" >
+                         <span>{{currentUser.firstname}} {{currentUser.lastname}} - {{ currentUser.role.name }} </span>
+                         <!--
+                         <br/><small>{{ currentOrganization.id }} - {{ currentOrganization.name }}</small>-->
+                        <i class="fa fa-3x fa-user user-avatar">
+                        </i>
+                    </div>
+                </a>
+                <ul class="dropdown-menu with-arrow pull-right dropdown-menu-scaleIn" uib-dropdown-menu>
+                    <!--
+                    <li>
+                        <a href="#/profile">
+                            <i class="fa fa-user"></i>
+                            <span data-translate="header.profile.options.myProfile"></span>
+                        </a>
+                    </li>
+                    -->
+                    <li>
+                        <a href="#/page/signin">
+                            <i class="fa fa-sign-out"></i>
+                            <span data-translate="header.profile.options.logOut"></span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+
+</header>
